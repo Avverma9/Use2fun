@@ -24,3 +24,8 @@ div {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
+
+.app_body {
+  margin-left: 18%;
+  width: 82%;
+}
