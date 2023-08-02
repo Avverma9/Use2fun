@@ -4,6 +4,8 @@ import AddSubAdmin from "./Components/Admin/SubAdmin/AddSubAdmin";
 import AddAgency from "./Components/Agency/AddAgency";
 import ViewAgency from "./Components/Agency/ViewAgency";
 import ManageSubAdmin from "./Components/Admin/SubAdmin/ManageSubAdmin"
+import AppEntry from "./Components/AppEntry/AppEntry";
+import ViewAppEntry from "./Components/AppEntry/ViewAppEntry";
 
 
 function App() {
@@ -14,7 +16,9 @@ function App() {
       {/* <ManageAdmin/> */}
       {/* <AddAdmin/> */}
       {/* <AddSubAdmin/> */}
-      <ManageSubAdmin/>
+      {/* <ManageSubAdmin/> */}
+      {/* <AppEntry/> */}
+      <ViewAppEntry/>
     </div>
   );
 }
