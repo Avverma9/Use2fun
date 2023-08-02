@@ -34,11 +34,13 @@
     background-color: #058D9E;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .submitbtn{
     background-color: #BF00ED;
     color: white;
     border: none;
+    cursor: pointer;
 
 }

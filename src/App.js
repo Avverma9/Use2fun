@@ -1,9 +1,11 @@
 import AddAgency from "./Components/Agency/AddAgency";
+import ViewAgency from "./Components/Agency/ViewAgency";
 
 function App() {
   return (
     <div className="app">
-      <AddAgency/>
+      {/* <AddAgency/> */}
+      <ViewAgency/>
     </div>
   );
 }
