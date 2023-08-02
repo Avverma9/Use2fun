@@ -1,11 +1,12 @@
 import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import "./Dashboard.css";
+import Title from "../common/Title";
 
 const Dashboard = () => {
   return (
     <>
-      <h5 className="_title">Dashboard</h5>
+      <Title title="Dashboard" />
       <div className="row">
         <div className="col-sm-3 mb-3 mb-sm-0">
           <div className="card card-1">
