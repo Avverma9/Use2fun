@@ -29,7 +29,7 @@ const ViewAppEntry = () => {
             <tr key={index}>
               <td>{item.id}</td>
               <td>
-                <img src={item.image} alt={`Image ${item.id}`} width="100" />
+                <img src={item.image} alt='image' />
               </td>
               <td>
                 <select className={style.selectbar}>

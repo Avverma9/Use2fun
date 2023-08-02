@@ -6,6 +6,7 @@ import ViewAgency from "./Components/Agency/ViewAgency";
 import ManageSubAdmin from "./Components/Admin/SubAdmin/ManageSubAdmin"
 import AppEntry from "./Components/AppEntry/AppEntry";
 import ViewAppEntry from "./Components/AppEntry/ViewAppEntry";
+import AddRoomWallpaper from "./Components/RoomWallpaper/AddRoomWallpaper";
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
       {/* <AddSubAdmin/> */}
       {/* <ManageSubAdmin/> */}
       {/* <AppEntry/> */}
-      <ViewAppEntry/>
+      {/* <ViewAppEntry/> */}
+      <AddRoomWallpaper/>
     </div>
   );
 }
