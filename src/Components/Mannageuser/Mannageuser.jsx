@@ -1,9 +1,10 @@
 import React from "react";
-import { BiChevronDown } from "react-icons/bi";
 import "./Mannageuser.css";
 import Title from "../common/Title";
+import { useNavigate } from "react-router-dom";
 
 const Mannageuser = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Title title="Mannage Users" />
@@ -61,13 +62,56 @@ const Mannageuser = () => {
             <td>43</td>
             <td>21</td>
             <td>
-              <div>Approved</div>
+              <div className="user-status">Approved</div>
             </td>
             <td>
-              <button>
+              {/* <button className="action-btn">
                 <span>Action</span>
                 <BiChevronDown />
-              </button>
+              </button> */}
+              <div className="dropdown">
+                <button
+                  className="action-btn dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span>Action</span>
+                </button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => navigate("/view-user")}
+                    >
+                      View
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Edit</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Delete</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">
+                      Recieve Gift History
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Send Gift History</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Coin History</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Live History</button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Decline</button>
+                  </li>
+                </ul>
+              </div>
             </td>
           </tr>
         </tbody>
