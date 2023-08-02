@@ -1,5 +1,6 @@
 import React,{useState}from "react";
 import "./Sidebar.css"
+import Mannageuser from "../Mannageuser/Mannageuser";
 
 const Sidebar=()=>{
     const [selected,setSelected]=useState("User")
@@ -11,7 +12,7 @@ const Sidebar=()=>{
     <li onClick={()=>setSelected("User")}>User</li>
 </ul>
             </div>
-            {selected === "User" ? (<User/>):null}
+            {selected === "User" ? (<Mannageuser/>):null}
         </div>
     )
 }
