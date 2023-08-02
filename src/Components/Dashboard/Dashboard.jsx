@@ -5,7 +5,7 @@ import "./Dashboard.css";
 const Dashboard = () => {
   return (
     <>
-      <h3 className="_title">Dashboard</h3>
+      <h5 className="_title">Dashboard</h5>
       <div className="row">
         <div className="col-sm-3 mb-3 mb-sm-0">
           <div className="card card-1">
