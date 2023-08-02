@@ -61,10 +61,10 @@ const Mannageuser = () => {
             <td>43</td>
             <td>21</td>
             <td>
-              <div>Approved</div>
+              <div className="user-status">Approved</div>
             </td>
             <td>
-              <button>
+              <button className="action-btn">
                 <span>Action</span>
                 <BiChevronDown />
               </button>
