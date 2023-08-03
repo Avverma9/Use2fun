@@ -19,6 +19,11 @@ const Sidebar = () => {
               <p>User</p>
             </Link>
           </li>
+          <li>
+            <Link to="/signout">
+              <p>Signout</p>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

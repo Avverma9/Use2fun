@@ -1,10 +1,19 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import "./Mannageuser.css";
 import Title from "../common/Title";
-import { useNavigate } from "react-router-dom";
+
 
 const Mannageuser = () => {
   const navigate = useNavigate();
+  const signedIn= localStorage.getItem("signedIn") 
+
+
+  useEffect(()=>{
+    if(signedIn !== "true"){
+      navigate("/signin")
+    }
+  },[signedIn,navigate])
   return (
     <>
       <Title title="Mannage Users" />

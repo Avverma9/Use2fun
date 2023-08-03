@@ -3,6 +3,8 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Header from "./Components/Header/Header";
 import Mannageuser from "./Components/Mannageuser/Mannageuser";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import SignIn from "./Components/SignIn/SignIn";
+import SignOut from "./Components/SignOut.jsx/Signout";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
          
         >
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+          <Route path="/signout" element={<SignOut/>}/>
+            <Route path="/" element={<SignIn/>}/>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/user" element={<Mannageuser />} />
             <Route path="/view-user" element={<>View</>} />
           </Routes>
