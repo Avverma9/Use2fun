@@ -1,9 +1,7 @@
-
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700;800&family=Public+Sans:wght@300;400&display=swap");
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
 }
 p,
 h1,
@@ -27,3 +25,7 @@ div {
   font-weight: 500;
 }
 
+.app_body {
+  margin-left: 18%;
+  width: 82%;
+}
