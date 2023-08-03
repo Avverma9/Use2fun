@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="side_nav_body">
         <ul>
           <li>
-            <Link to="/">
+            <Link to="/user">
               <p>dashboard</p>
             </Link>
           </li>
