@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import style from './ManageSubAdmin.module.css';
+import style from './ViewAdmin.module.css';
 
-const ManageAdmin = () => {
+const ViewAdmin = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [checkboxes, setCheckboxes] = useState({
@@ -75,7 +75,7 @@ const ManageAdmin = () => {
 
   return (
     <div className={style.main}>
-      <h3>Manage SubAdmin</h3>
+      <h3>Manage Admin</h3>
       <div className={style.filter}>
         <label>Search</label>
         <input type="text" />
@@ -95,12 +95,12 @@ const ManageAdmin = () => {
             <th>Sr.</th>
             <th>Image</th>
             <th>Name</th>
-            <th>UniqueId</th>
-            <th>Email</th>
-            <th> Mobile</th>
-            <th>Total Coins</th>
-            <th>Role</th>
-            <th>Status</th>
+            <th>Ban/Unban</th>
+            <th>Kick</th>
+            <th>Agency Ban</th>
+            <th>Mute</th>
+            <th>Screenshot/Screenrecording</th>
+            <th>DP Approve</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -182,4 +182,4 @@ const ManageAdmin = () => {
   );
 };
 
-export default ManageAdmin;
+export default ViewAdmin;

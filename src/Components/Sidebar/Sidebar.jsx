@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import { hostIcon, userIcon } from "../../assets";
+import agencyIcon from "../../assets/icons/agency.png"
+import adminIcon from "../../assets/icons/admin.png"
+import subAdminIcon from "../../assets/icons/subadmin.png"
+import appEntryIcon from "../../assets/icons/appentey.png"
+import roomWallpaperIcon from "../../assets/icons/coinHistory.png"
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -75,6 +80,231 @@ const User = () => {
   );
 };
 
+//Agency
+const Agency = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={agencyIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Manage Agency</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-agency">
+              {" "}
+              <img src={agencyIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-agency">
+              <p>Add Agency</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-agency">
+              {" "}
+              <img src={agencyIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-agency">
+              <p>View Agency</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Admin
+const Admin = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={adminIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Admin</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-admin">
+              {" "}
+              <img src={adminIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-admin">
+              <p>Add Admin</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-admin">
+              {" "}
+              <img src={adminIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-admin">
+              <p>View Admin</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//SubAdmin
+const SubAdmin = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={subAdminIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Sub Admin</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-subadmin">
+              {" "}
+              <img src={subAdminIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-subadmin">
+              <p>Add Admin</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-subadmin">
+              {" "}
+              <img src={subAdminIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-subadmin">
+              <p>View Admin</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//AppEntry
+const AppEntry = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={appEntryIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>App Entry</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-appentry">
+              {" "}
+              <img src={appEntryIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-appentry">
+              <p>Add App Entry</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-appentry">
+              {" "}
+              <img src={appEntryIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-appentry">
+              <p>View App Entry</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//RoomWallpaper
+const RoomWallpaper = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={roomWallpaperIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Room Wallpaper</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-room-wallpaper">
+              {" "}
+              <img src={roomWallpaperIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-room-wallpaper">
+              <p>Add Room Wallpaper</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-room-wallpaper">
+              {" "}
+              <img src={roomWallpaperIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-room-wallpaper">
+              <p>View Room Wallpaper</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 const Home = () => {
   return (
     <>
@@ -101,6 +331,11 @@ const Sidebar = () => {
         <ul>
           <Home />
           <User />
+          <Agency/>
+          <Admin/>
+          <SubAdmin/>
+          <AppEntry/>
+          <RoomWallpaper/>
         </ul>
       </div>
     </div>

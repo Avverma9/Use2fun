@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./AppEntry.module.css"
+import styles from "./AddAppEntry.module.css"
 
 const AppEntry = () => {
   return (
