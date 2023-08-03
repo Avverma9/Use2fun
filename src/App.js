@@ -12,14 +12,14 @@ import AddRoomWallpaper from "./Components/RoomWallpaper/AddRoomWallpaper";
 function App() {
   return (
     <div className="app">
-      {/* <AddAgency/> */}
-      {/* <ViewAgency/> */}
-      {/* <ManageAdmin/> */}
-      {/* <AddAdmin/> */}
-      {/* <AddSubAdmin/> */}
-      {/* <ManageSubAdmin/> */}
-      {/* <AppEntry/> */}
-      {/* <ViewAppEntry/> */}
+      {/* <AddAgency/>
+      <ViewAgency/>
+      <ManageAdmin/>
+      <AddAdmin/>
+      <AddSubAdmin/>
+      <ManageSubAdmin/>
+      <AppEntry/>
+      <ViewAppEntry/> */}
       <AddRoomWallpaper/>
     </div>
   );
