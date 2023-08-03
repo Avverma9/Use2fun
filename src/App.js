@@ -5,6 +5,9 @@ import Mannageuser from "./Components/Mannageuser/Mannageuser";
 import Viewuser from "./Components/Viewuser/Viewuser";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Edituser from "./Components/Edituser/Edituser";
+import Receivedgifts from "./Components/Receivedgifts/Receivedgifts";
+import Sendgifts from "./Components/Sendgifts/Sendgifts";
+import Coinhistory from "./Components/Coinhistory/Coinhistory";
 
 function App() {
   return (
@@ -21,6 +24,12 @@ function App() {
             <Route path="/view-users" element={<Mannageuser />} />
             <Route path="/view-user" element={<Viewuser />} />
             <Route path="/edit-user" element={<Edituser />} />
+            <Route path="/recieved-gift-history" element={<Receivedgifts />} />
+            <Route path="/send-gift-history" element={<Sendgifts />} />
+            <Route
+              path="/mannage-purchased-coin-history"
+              element={<Coinhistory />}
+            />
           </Routes>
         </div>
       </Router>
