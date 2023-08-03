@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from "./AddAgency.module.css";
 
 const AddAgency = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     userID: '',
     agencyName: '',
@@ -11,6 +13,10 @@ const AddAgency = () => {
     aadharFront: '',
     aadharBack: '',
   });
+
+  // const [signedIn, setSignedIn] = useState(
+  //   localStorage.getItem("signedIn") === "true"
+  // );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +30,12 @@ const AddAgency = () => {
     e.preventDefault();
     console.log(formData); 
   };
+
+  // useEffect(() => {
+  //   if (!signedIn) {
+  //     navigate("/signin");
+  //   }
+  // }, [signedIn]);
 
   return (
     <div className={styles.main}>
