@@ -1,26 +1,26 @@
-import AddAdmin from "./Components/Admin/AddAdmin";
-import ManageAdmin from "./Components/Admin/ManageAdmin";
-import AddSubAdmin from "./Components/Admin/SubAdmin/AddSubAdmin";
-import AddAgency from "./Components/Agency/AddAgency";
-import ViewAgency from "./Components/Agency/ViewAgency";
-import ManageSubAdmin from "./Components/Admin/SubAdmin/ManageSubAdmin"
-import AppEntry from "./Components/AppEntry/AppEntry";
-import ViewAppEntry from "./Components/AppEntry/ViewAppEntry";
-import AddRoomWallpaper from "./Components/RoomWallpaper/AddRoomWallpaper";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Header from "./Components/Header/Header";
+import Mannageuser from "./Components/Mannageuser/Mannageuser";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 function App() {
   return (
     <div className="app">
-      {/* <AddAgency/>
-      <ViewAgency/>
-      <ManageAdmin/>
-      <AddAdmin/>
-      <AddSubAdmin/>
-      <ManageSubAdmin/>
-      <AppEntry/>
-      <ViewAppEntry/> */}
-      <AddRoomWallpaper/>
+      <Router>
+        <Header />
+        <Sidebar />
+        <div
+          className="app_body p-5"
+          // contain routes and side navigation
+        >
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/view-users" element={<Mannageuser />} />
+            <Route path="/view-user" element={<>View</>} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
