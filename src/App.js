@@ -27,12 +27,6 @@ import ViewHostInfo from "./Components/Host/ViewHostInfo"
 import AddFrames from "./Components/Frames/AddFrames"
 import ViewFrames from "./Components/Frames/ViewFrames"
 
-import Edituser from "./Components/Edituser/Edituser";
-import Receivedgifts from "./Components/Receivedgifts/Receivedgifts";
-import Sendgifts from "./Components/Sendgifts/Sendgifts";
-import Coinhistory from "./Components/Coinhistory/Coinhistory";
-import Liveuserhistory from "./Components/Liveuserhistory/Liveuserhistory";
-import Topusers from "./Components/Topusers/Topusers";
 
 function App() {
   return (
@@ -79,20 +73,6 @@ function App() {
             <Route path="/view-host-info" element={<ViewHostInfo/>}/>
             <Route path="/add-frames" element={<AddFrames/>}/>
             <Route path="/view-frames" element={<ViewFrames/>}/>
-            <Route path="/recieved-gift-history" element={<Receivedgifts />} />
-            <Route path="/send-gift-history" element={<Sendgifts />} />
-            <Route
-              path="/mannage-purchased-coin-history"
-              element={<Coinhistory />}
-            />
-            <Route
-              path="/mannage-live-user-history"
-              element={<Liveuserhistory />}
-            />
-            <Route
-              path="/top-users"
-              element={<Topusers />}
-            />
           </Routes>
         </div>
       </Router>
@@ -100,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;

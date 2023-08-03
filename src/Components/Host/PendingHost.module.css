@@ -32,3 +32,12 @@
 .images{
     width: 40px;
 }
+.filter button{
+  border: none;
+  padding: 10px;
+  background:rgb(0, 147, 127);
+  color: white;
+  font-weight: 501;
+  width: 150px;
+  font-size: 14;
+}

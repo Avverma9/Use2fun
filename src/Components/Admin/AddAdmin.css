@@ -1,9 +1,17 @@
-.hot-button{
+button{
     border: none;
     padding: 10px;
     background:rgb(0, 147, 127);
     color: white;
     font-weight: 501;
     width: 150px;
-    font-size: 14px;
+    
+}
+.butt-container{
+    display: flex;
+gap: 20%;
+margin-top: 20px;
+}
+.add-admin input {
+    padding: 5px;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './AddAdmin.css';
 
 const AddAdmin = () => {
 
@@ -20,7 +21,7 @@ const AddAdmin = () => {
   };
 
   return (
-    <div>
+    <div className='add-admin'>
       <h2>AddAdmin</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -33,9 +34,9 @@ const AddAdmin = () => {
           value={formData.userName}
           onChange={handleChange}
         />
-        <div>
-          <button type="button">Cancel</button>
-          <button type="submit">Submit</button>
+        <div className='butt-container'>
+          <button type="button" className='cancel-button'>Cancel</button>
+          <button type="submit" className='submit-button'>Submit</button>
         </div>
       </form>
     </div>

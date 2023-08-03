@@ -6,7 +6,7 @@ const Topusers = () => {
   return (
     <>
           <Title title="Hotlist User" />
-          <button>Add Hot List User</button>
+          <button className="hot-button">Add Hot List User</button>
     </>
   );
 };
