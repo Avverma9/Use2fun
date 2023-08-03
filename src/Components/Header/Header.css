@@ -1,4 +1,4 @@
 .header {
-  background-color: #bf00ed !important;
+  background-color: var(--purple) !important;
   font-family: "Poppins", sans-serif;
 }

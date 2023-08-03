@@ -6,26 +6,22 @@ import { useNavigate } from "react-router-dom";
 const Mannageuser = () => {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="container">
       <Title title="Mannage Users" />
-      <div className="d-flex align-items-center gap-3">
-        <div className="d-flex align-items-center gap-3">
+      <div className="d-flex align-items-center gap-1 input-fields">
+        <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Search</p>
-          <input type="text" name="search" id="search" className="py-1 px-3" />
+          <input type="text" name="search" id="search" className="p-1" />
         </div>
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Start Date</p>
-          <input type="text" name="search" id="search" className="py-1 px-3" />
+          <input type="text" name="search" id="search" className="p-1" />
         </div>
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">End Date</p>
-          <input type="text" name="search" id="search" className="py-1 px-3" />
+          <input type="text" name="search" id="search" className="p-1" />
         </div>
-        <input
-          type="button"
-          value="Search"
-          className="py-1 px-3 text-white search-btn"
-        />
+        <button className="py-1 px-3 text-white search-btn">Search</button>
       </div>
       <table className="table table-borderless mt-3">
         <thead>
@@ -116,7 +112,7 @@ const Mannageuser = () => {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

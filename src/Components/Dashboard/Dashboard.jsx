@@ -8,7 +8,7 @@ const Dashboard = () => {
     <>
       <Title title="Dashboard" />
       <div className="row">
-        <div className="col-sm-3 mb-3 mb-sm-0">
+        <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
           <div className="card card-1">
             <div className="card-body d-flex align-items-start gap-4">
               <h5>
@@ -21,7 +21,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="col-sm-3 mb-3 mb-sm-0">
+        <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
           <div className="card card-2">
             <div className="card-body d-flex align-items-start gap-4">
               <h5>
@@ -35,7 +35,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="col-sm-3 mb-3 mb-sm-0">
+        <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
           <div className="card card-3">
             <div className="card-body d-flex align-items-start gap-4">
               <h5>
@@ -48,7 +48,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="col-sm-3 mb-3 mb-sm-0">
+        <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
           <div className="card card-3">
             <div className="card-body d-flex align-items-start gap-4">
               <h5>
