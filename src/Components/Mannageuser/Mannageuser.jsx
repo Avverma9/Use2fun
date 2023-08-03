@@ -84,24 +84,51 @@ const Mannageuser = () => {
                     </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">Edit</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => navigate("/edit-user")}
+                    >
+                      Edit
+                    </button>
                   </li>
                   <li>
                     <button className="dropdown-item">Delete</button>
                   </li>
                   <li>
-                    <button className="dropdown-item">
-                      Recieve Gift History
+                    <button
+                      className="dropdown-item"
+                      onClick={() => navigate("/recieved-gift-history")}
+                    >
+                      Recieved Gift History
                     </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">Send Gift History</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => navigate("/send-gift-history")}
+                    >
+                      Send Gift History
+                    </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">Coin History</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() =>
+                        navigate("/mannage-purchased-coin-history")
+                      }
+                    >
+                      Coin History
+                    </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">Live History</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() =>
+                        navigate("/mannage-live-user-history")
+                      }
+                    >
+                      Live History
+                    </button>
                   </li>
                   <li>
                     <button className="dropdown-item">Decline</button>
