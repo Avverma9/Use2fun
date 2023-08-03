@@ -8,6 +8,9 @@ const AddRoomWallpaper = () => {
     <form className={styles.container}>
        <label>Images*</label>
        <input type="file" name="" id="" />
+       <label>Price*</label>
+       <input type="number" name="" id="" />
+
        <div className="btn">
         <button>Cancel</button>
         <button>Submit</button>

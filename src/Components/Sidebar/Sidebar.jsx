@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
-import { hostIcon, userIcon } from "../../assets";
+import { hostIcon, userIcon } from "../../assets"
+// import hostIcon from "../../assets/icons/host.png"
 import agencyIcon from "../../assets/icons/agency.png"
 import adminIcon from "../../assets/icons/admin.png"
 import subAdminIcon from "../../assets/icons/subadmin.png"
 import appEntryIcon from "../../assets/icons/appentey.png"
 import roomWallpaperIcon from "../../assets/icons/coinHistory.png"
+import framesIcon from "../../assets/icons/frames.png"
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -72,6 +74,60 @@ const User = () => {
             </Link>
             <Link to="/user-list">
               <p>Push Message</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Host
+const Host = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={hostIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Host</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/pending-host-request">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/pending-host-request">
+              <p>Pending Host Request</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/approved-host-request">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/approved-host-request">
+              <p>Approved Host Request</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/rejected-host-request">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/rejected-host-request">
+              <p>Rejected Host Request</p>
             </Link>
           </li>
         </ul>
@@ -305,6 +361,51 @@ const RoomWallpaper = () => {
   );
 };
 
+//Frames
+const Frames = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={framesIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Frames</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-frames">
+              {" "}
+              <img src={framesIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-frames">
+              <p>Add  Frames</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-frames">
+              {" "}
+              <img src={framesIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-frames">
+              <p>View Frames</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 const Home = () => {
   return (
     <>
@@ -331,11 +432,13 @@ const Sidebar = () => {
         <ul>
           <Home />
           <User />
+          <Host/>
           <Agency/>
           <Admin/>
           <SubAdmin/>
           <AppEntry/>
           <RoomWallpaper/>
+          <Frames/>
         </ul>
       </div>
     </div>
