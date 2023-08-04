@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Mannageuser = () => {
   const navigate = useNavigate();
   return (
-    <div className="container">
+    <>
       <Title title="Mannage Users" />
       <div className="d-flex align-items-center gap-1 input-fields">
         <div className="d-flex align-items-center gap-1">
@@ -123,9 +123,7 @@ const Mannageuser = () => {
                   <li>
                     <button
                       className="dropdown-item"
-                      onClick={() =>
-                        navigate("/mannage-live-user-history")
-                      }
+                      onClick={() => navigate("/mannage-live-user-history")}
                     >
                       Live History
                     </button>
@@ -139,7 +137,7 @@ const Mannageuser = () => {
           </tr>
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

@@ -2,6 +2,10 @@
   --purple: #bf00ed;
   --white: #ffffff;
   --black: #000000;
+  --green: #058d9e;
+  --darkborder: #9f9f9f;
+  --primarytext: #101010;
+  --secondarytext: #7d7d7d;
 }
 
 * {
