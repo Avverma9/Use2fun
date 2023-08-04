@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .heading {
+    color: #000;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 181.523%;
+    margin-top: 0;
+    margin-left: 18px;
+    margin-right: 32.674px;
+  }
+  
+  .transactionrow {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 44px;
+    margin-right: 60px;
+  }
+  
+  .transactionitem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 44px;
+    margin-right: 60px;
+  }
+  
+  .imagecontainer {
+    width: 35px;
+    height: 30px;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  
+  .transactiondata {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .transactiondata p {
+    margin: 0;
+  }

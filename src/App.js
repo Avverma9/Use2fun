@@ -31,6 +31,10 @@ import Userslist from "./Components/Userlist/Userslist";
 import Pushmessage from "./Components/Pushmessage/Pushmessage";
 import UserProfile from "./Components/Account/UserProfile";
 import ChangePassword from "./Components/Account/ChangePassword";
+import TransactionHistory from "./Components/TransactionHistory/TransactionHistory";
+import SendCoins from "./Components/TransactionHistory/SendCoins";
+import OfflineRechargeHistory from "./Components/Recharge/OfflineRechargeHistory";
+import ManageLogo from "./Components/Account/Managelogo";
 
 
 function App() {
@@ -84,6 +88,10 @@ function App() {
             <Route path="/view-frames" element={<ViewFrames />} />
             <Route path="/user-profile" element={<UserProfile/>}/>
             <Route path="/change-password" element={<ChangePassword/>}/> 
+            <Route path="/manage-logo" element={<ManageLogo/>}/>
+            <Route path="/transaction-history" element={<TransactionHistory/>}/>
+            <Route path="/send-coins" element={<SendCoins/>}/>
+            <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/> 
           </Routes>
         </div>
       </Router>
