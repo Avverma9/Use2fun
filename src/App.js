@@ -26,6 +26,8 @@ import RejectedHost from "./Components/Host/RejectedHost"
 import ViewHostInfo from "./Components/Host/ViewHostInfo"
 import AddFrames from "./Components/Frames/AddFrames"
 import ViewFrames from "./Components/Frames/ViewFrames"
+import UserProfile from "./Components/Account/UserProfile";
+import ChangePassword from "./Components/Account/ChangePassword";
 
 
 function App() {
@@ -73,6 +75,8 @@ function App() {
             <Route path="/view-host-info" element={<ViewHostInfo/>}/>
             <Route path="/add-frames" element={<AddFrames/>}/>
             <Route path="/view-frames" element={<ViewFrames/>}/>
+            <Route path="/user-profile" element={<UserProfile/>}/>
+            <Route path="/change-password" element={<ChangePassword/>}/> 
           </Routes>
         </div>
       </Router>
