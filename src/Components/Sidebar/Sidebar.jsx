@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
-import { hostIcon, userIcon } from "../../assets"
+import { hostIcon, userIcon } from "../../assets";
 // import hostIcon from "../../assets/icons/host.png"
-import agencyIcon from "../../assets/icons/agency.png"
-import adminIcon from "../../assets/icons/admin.png"
-import subAdminIcon from "../../assets/icons/subadmin.png"
-import appEntryIcon from "../../assets/icons/appentey.png"
-import roomWallpaperIcon from "../../assets/icons/coinHistory.png"
-import framesIcon from "../../assets/icons/frames.png"
+import agencyIcon from "../../assets/icons/agency.png";
+import adminIcon from "../../assets/icons/admin.png";
+import subAdminIcon from "../../assets/icons/subadmin.png";
+import appEntryIcon from "../../assets/icons/appentey.png";
+import roomWallpaperIcon from "../../assets/icons/coinHistory.png";
+import framesIcon from "../../assets/icons/frames.png";
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -50,20 +50,20 @@ const User = () => {
             </Link>
           </li>
           <li>
-            <Link to="/live-user">
+            <Link to="/live-users">
               {" "}
               <img src={userIcon} alt="icon" srcset="" />
             </Link>
-            <Link to="/live-user">
+            <Link to="/live-users">
               <p>Live Users</p>
             </Link>
           </li>
           <li>
-            <Link to="/user-list">
+            <Link to="/users-list">
               {" "}
               <img src={userIcon} alt="icon" srcset="" />
             </Link>
-            <Link to="/push-message">
+            <Link to="/users-list">
               <p>Users List</p>
             </Link>
           </li>
@@ -72,7 +72,7 @@ const User = () => {
               {" "}
               <img src={userIcon} alt="icon" srcset="" />
             </Link>
-            <Link to="/user-list">
+            <Link to="/push-message">
               <p>Push Message</p>
             </Link>
           </li>
@@ -388,7 +388,7 @@ const Frames = () => {
               <img src={framesIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/add-frames">
-              <p>Add  Frames</p>
+              <p>Add Frames</p>
             </Link>
           </li>
           <li>
@@ -406,39 +406,40 @@ const Frames = () => {
   );
 };
 
-const Home = () => {
-  return (
-    <>
-      <li>
-        <Link to="/">
-          {" "}
-          <img src={hostIcon} alt="icon" srcset="" />
-        </Link>
-        <Link to="/">
-          <p>Home</p>
-        </Link>
-      </li>
-    </>
-  );
-};
+// const Home = () => {
+//   return (
+//     <>
+//       <li>
+//         <Link to="/">
+//           {" "}
+//           <img src={hostIcon} alt="icon" srcset="" />
+//         </Link>
+//         <Link to="/">
+//           <p>Home</p>
+//         </Link>
+//       </li>
+//     </>
+//   );
+// };
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <div className="container-sidebar">
-      <div className="side_nav_header">
+      <div className="side_nav_header" onClick={() => navigate("/")}>
         <h5>Dashboard</h5>
       </div>
       <div className="side_nav_body">
         <ul>
-          <Home />
+          {/* <Home /> */}
           <User />
-          <Host/>
-          <Agency/>
-          <Admin/>
-          <SubAdmin/>
-          <AppEntry/>
-          <RoomWallpaper/>
-          <Frames/>
+          <Host />
+          <Agency />
+          <Admin />
+          <SubAdmin />
+          <AppEntry />
+          <RoomWallpaper />
+          <Frames />
         </ul>
       </div>
     </div>
