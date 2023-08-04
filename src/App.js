@@ -56,7 +56,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/view-users" element={<Mannageuser />} />
-            <Route path="/view-user" element={<>View</>} />
+            <Route path="/view-user" element={<Viewuser/>} />
+            <Route path="/edit-user" element={<Edituser/>}/>
+            <Route path="/recieved-gift-history" element={<Receivedgifts />} />
+            <Route path="/send-gift-history" element={<Sendgifts />} />
+            <Route path="/top-users" element={<Topusers />} />
+            <Route path="/live-users" element={<Liveusers />} />
+            <Route path="/users-list" element={<Userslist />} />
+            <Route path="/push-message" element={<Pushmessage />} />
+            <Route
+              path="/mannage-purchased-coin-history"
+              element={<Coinhistory />}
+            />
+            <Route
+              path="/mannage-live-user-history"
+              element={<Liveuserhistory />}
+            />
             <Route path="/add-agency" element={<AddAgency/>} />
             <Route path="/view-agency" element={<ViewAgency/>} />
             <Route path="/add-admin" element={<AddAdmin/>} />
