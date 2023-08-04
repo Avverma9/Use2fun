@@ -34,4 +34,6 @@
 }
 select{
     width: 130px;
+    background: transparent;
+    border: 1px solid grey;
 }

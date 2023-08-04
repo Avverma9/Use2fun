@@ -86,7 +86,7 @@ const UserReport = () => {
         <label>End Date</label>
         <input type="date" />
 
-        <button>Search</button>
+        <button className={style.searchbtn}>Search</button>
       </div>
 
       <table className={style.table}>

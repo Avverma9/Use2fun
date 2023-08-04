@@ -37,3 +37,11 @@
     width: 40px;
     
 }
+.searchbtn{
+  border: none;
+padding: 10px;
+background: purple;
+color: white;
+font-weight: 501;
+width: 150px;
+}
