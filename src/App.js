@@ -29,6 +29,9 @@ import ViewFrames from "./Components/Frames/ViewFrames";
 import Liveusers from "./Components/Liveuser/Liveusers";
 import Userslist from "./Components/Userlist/Userslist";
 import Pushmessage from "./Components/Pushmessage/Pushmessage";
+import UserProfile from "./Components/Account/UserProfile";
+import ChangePassword from "./Components/Account/ChangePassword";
+
 
 function App() {
   return (
