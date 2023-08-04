@@ -8,6 +8,11 @@ import subAdminIcon from "../../assets/icons/subadmin.png"
 import appEntryIcon from "../../assets/icons/appentey.png"
 import roomWallpaperIcon from "../../assets/icons/coinHistory.png"
 import framesIcon from "../../assets/icons/frames.png"
+import shopIcon from "../../assets/icons/shop.png"
+import mylevel from "../../assets/icons/mylevel.png"
+import talentIcon from "../../assets/icons/talent.png"
+import reportIcon from "../../assets/icons/report.png"
+import rechargeIcon from "../../assets/icons/Recharge.png"
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -317,7 +322,7 @@ const AppEntry = () => {
 };
 
 //RoomWallpaper
-const RoomWallpaper = () => {
+const Shop = () => {
   const [isExpanded, setExpanded] = useState(false);
   const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
   return (
@@ -329,10 +334,10 @@ const RoomWallpaper = () => {
       >
         <Link>
           {" "}
-          <img src={roomWallpaperIcon} alt="icon" srcset="" />
+          <img src={shopIcon} alt="icon" srcset="" />
         </Link>
         <Link>
-          <p>Room Wallpaper</p>
+          <p>Shop</p>
         </Link>
       </li>
       <div {...getCollapseProps()}>
@@ -406,6 +411,236 @@ const Frames = () => {
   );
 };
 
+//Master Admin Coin history
+const MasterAdmin = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={roomWallpaperIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Master Admin Coin History</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/admin-coin-history">
+              {" "}
+              <img src={roomWallpaperIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/admin-coin-history">
+              <p>Admin Coin History</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin-recharge-history">
+              {" "}
+              <img src={roomWallpaperIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/admin-recharge-history">
+              <p>Manage Admin Recharge History</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//My Level
+const MyLevel = () => {
+  return (
+    <>
+      <li>
+        <Link to="/manage-mylevel">
+          {" "}
+          <img src={mylevel} alt="icon" srcset="" />
+        </Link>
+        <Link to="/manage-mylevel">
+          <p> My Level</p>
+        </Link>
+      </li>
+    </>
+  );
+};
+
+//The Talent
+const TheTalent = () => {
+  return (
+    <>
+      <li>
+        <Link to="/manage-talent">
+          {" "}
+          <img src={talentIcon} alt="icon" srcset="" />
+        </Link>
+        <Link to="/manage-talent">
+          <p> The Talent</p>
+        </Link>
+      </li>
+    </>
+  );
+};
+
+//Report
+const Report = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={reportIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Report</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/mange-report">
+              {" "}
+              <img src={reportIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/mange-report">
+              <p>Manage report</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/user-report">
+              {" "}
+              <img src={reportIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/user-report">
+              <p>User report</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Transaction History
+const TransactionHistory = () => {
+  return (
+    <>
+      <li>
+        <Link to="/transaction-history">
+          {" "}
+          <img src={hostIcon} alt="icon" srcset="" />
+        </Link>
+        <Link to="/transaction-history">
+          <p>Transaction History</p>
+        </Link>
+      </li>
+    </>
+  );
+};
+
+//recharge
+const Recharge = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={rechargeIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Recharge</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/admin-recharge-history">
+              {" "}
+              <img src={rechargeIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/admin-recharge-history">
+              <p>Admin recharge history</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/offline-recharge-history">
+              {" "}
+              <img src={rechargeIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/offline-recharge-history">
+              <p>Offline recharge history</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+//Account
+const Account = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={userIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Account</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/user-profile">
+              {" "}
+              <img src={userIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/user-profile">
+              <p>User Profile</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/change-password">
+              {" "}
+              <img src={userIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/change-password">
+              <p>Change password</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 const Home = () => {
   return (
     <>
@@ -437,8 +672,15 @@ const Sidebar = () => {
           <Admin/>
           <SubAdmin/>
           <AppEntry/>
-          <RoomWallpaper/>
+          <Shop/>
           <Frames/>
+          <MasterAdmin/>
+          <MyLevel/>
+          <TheTalent/>
+          <Report/>
+          <TransactionHistory/>
+          <Recharge/>
+          <Account/>
         </ul>
       </div>
     </div>

@@ -25,6 +25,12 @@ import TransactionHistory from "./Components/TransactionHistory/TransactionHisto
 import SendCoins from "./Components/TransactionHistory/SendCoins";
 import OfflineRechargeHistory from "./Components/Recharge/OfflineRechargeHistory";
 import ManageLogo from "./Components/Account/Managelogo";
+import AdminCoinHistory from "./Components/AdminHistory/AdminCoinHistory";
+import AdminRechargeHistory from "./Components/AdminHistory/AdminRechargeHistory";
+import ManageMyLevel from "./Components/MyLevel/ManageMyLevel";
+import ManageTalentLevel from "./Components/Talent/ManageTalentLevel";
+import ManageReport from "./Components/Report/ManageReport";
+import UserReport from "./Components/Report/UserReport";
 
 
 function App() {
@@ -57,6 +63,14 @@ function App() {
             <Route path="/view-host-info" element={<ViewHostInfo/>}/>
             <Route path="/add-frames" element={<AddFrames/>}/>
             <Route path="/view-frames" element={<ViewFrames/>}/>
+            <Route path="/admin-coin-history" element={<AdminCoinHistory/>}/>
+            <Route path="/admin-recharge-history" element={<AdminRechargeHistory/>}/>
+            <Route path="/manage-mylevel" element={<ManageMyLevel/>}/>
+            <Route path="/manage-talent" element={<ManageTalentLevel/>}/>
+            <Route path="/mange-report" element={<ManageReport/>}/>
+            <Route path="/user-report" element={<UserReport/>}/> 
+
+
             <Route path="/user-profile" element={<UserProfile/>}/>
             <Route path="/change-password" element={<ChangePassword/>}/> 
             <Route path="/manage-logo" element={<ManageLogo/>}/>
