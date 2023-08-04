@@ -28,10 +28,19 @@
     padding: 8px;
     text-align: left;
   }
+  .table select{
+    border: 1px solid gray;
+background: transparent;
+  }
   
 .images{
     width: 40px;
 }
-select{
-    width: 130px;
+.agency-search-button{
+  border: none;
+  padding: 10px;
+  background:#058D9E;
+  color: white;
+  font-weight: 501;
+  width: 150px;
 }

@@ -12,6 +12,11 @@
     flex-direction: column;
    
 }
+.form select{
+    border: 1px solid rgb(196, 196, 196);
+    background: transparent;
+    width: 35%;
+}
 .form label {
     margin-top: 15px;
     margin-bottom: 8px; 
@@ -26,15 +31,13 @@
     border-radius: 4px; 
 }
 
-.btn button{
-    padding: 12px 45px;
-    margin-top: 30px;
-}
+
 .cancelbtn{
     background-color: #058D9E;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 10px;
 }
 
 .submitbtn{
@@ -42,7 +45,12 @@
     color: white;
     border: none;
     cursor: pointer;
+    padding: 10px;
 
+}
+.subadmin-btn{
+    display: flex;
+    gap: 20%;
 }
 
 select{

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "./AddSubAdmin.module.css";
+import "./AddSubAdmin.css";
 
 const AddSubAdmin = () => {
   const [formData, setFormData] = useState({
@@ -25,9 +25,9 @@ const AddSubAdmin = () => {
   };
 
   return (
-    <div className={styles.main}>
+    <div className="main">
       <h3>Add Sub Admin</h3>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label>UserID*</label>
         <input
           type="text"
@@ -80,9 +80,9 @@ const AddSubAdmin = () => {
           onChange={handleInputChange}
         />
 
-        <div className={styles.btn}>
-          <button type="button" className={styles.cancelbtn}>Cancel</button>
-          <button type="submit" className={styles.submitbtn}>Submit</button>
+        <div className="subadmin-btn">
+          <button type="button" className="cancelbtn">Cancel</button>
+          <button type="submit" className="submitbtn">Submit</button>
         </div>
       </form>
     </div>

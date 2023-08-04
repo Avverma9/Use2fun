@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import style from './ViewAdmin.module.css';
+import  './ViewAdmin.css';
 
 const ViewAdmin = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +51,7 @@ const ViewAdmin = () => {
     return tableData.map((row) => (
       <tr key={row.id}>
         <td>{row.id}</td>
-        <td><img className={style.images} src={row.image} alt='images' /></td>
+        <td><img className="images" src={row.image} alt='images' /></td>
         <td>{row.Name}</td>
         <td>{row.banUnban}</td>
         <td>{row.kick}</td>
@@ -74,9 +74,9 @@ const ViewAdmin = () => {
   };
 
   return (
-    <div className={style.main}>
+    <div className="main">
       <h3>Manage Admin</h3>
-      <div className={style.filter}>
+      <div className="filter">
         <label>Search</label>
         <input type="text" />
 
@@ -86,10 +86,10 @@ const ViewAdmin = () => {
         <label>End Date</label>
         <input type="date" />
 
-        <button>Search</button>
+        <button className='view-admin-search'>Search</button>
       </div>
 
-      <table className={style.table}>
+      <table className="table">
         <thead>
           <tr>
             <th>Sr.</th>

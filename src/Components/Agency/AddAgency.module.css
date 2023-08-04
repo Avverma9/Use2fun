@@ -29,12 +29,15 @@
 .btn button{
     padding: 12px 45px;
     margin-top: 30px;
+
+    
 }
 .cancelbtn{
     background-color: #058D9E;
     color: white;
     border: none;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .submitbtn{

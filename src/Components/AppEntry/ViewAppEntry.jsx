@@ -1,5 +1,5 @@
 import React from 'react';
-import style from "./ViewAppEntry.module.css"
+import "./ViewAppEntry.css"
 
 const ViewAppEntry = () => {
   const tableData = [
@@ -14,11 +14,11 @@ const ViewAppEntry = () => {
   ];
 
   return (
-    <div>
+    <div className='viewappentry'>
       <h2>ViewAppEntry</h2>
       <table>
         <thead>
-          <tr>
+          <tr className='viewappentry-row1'>
             <th>Sr.</th>
             <th>Image</th>
             <th>Action</th>
@@ -26,13 +26,13 @@ const ViewAppEntry = () => {
         </thead>
         <tbody>
           {tableData.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} className='viewappentry-row2'>
               <td>{item.id}</td>
               <td>
                 <img src={item.image} alt='image' />
               </td>
               <td>
-                <select className={style.selectbar}>
+                <select className="selectbar">
                   <option value="action">Action</option>
                   <option value="update">Update</option>
                   <option value="remove">Remove</option>

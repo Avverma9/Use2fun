@@ -37,3 +37,13 @@
     width: 40px;
     
 }
+.search-button{
+  background-color: #BF00ED;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.select-viewsubadmin{
+  width: 100%;
+}

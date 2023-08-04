@@ -1,5 +1,5 @@
-import React from 'react'
-import style from "./ViewRoomWallpaper.module.css"
+import React from 'react';
+import "./ViewRoomWallpaper.css";
 
 const ViewRoomWallpaper = () => {
 
@@ -17,7 +17,7 @@ const ViewRoomWallpaper = () => {
         return tableData.map((row) => (
           <tr key={row.id}>
             <td>{row.id}</td>
-            <td>{<img className={style.images} src={row.image} alt='images'/>}</td>
+            <td>{<img className="images" src={row.image} alt='images'/>}</td>
             <td>{row.price}</td>
             <td>{row.duration}</td>
             <td>{<select>
@@ -28,11 +28,11 @@ const ViewRoomWallpaper = () => {
       };
 
   return (
-    <div>
+    <div className='view-roomwallpaper'>
         <h3>ViewRoomWallpaper</h3>
-        <button>Add App Entry</button>
+        <button className='add-app-btn'>Add App Entry</button>
 
-        <table className={style.table}>
+        <table className="table">
         <thead>
           <tr>
             <th>Sr.</th>

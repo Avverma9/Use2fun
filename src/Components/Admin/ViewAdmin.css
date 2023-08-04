@@ -13,6 +13,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
   }
   
 
@@ -21,17 +22,26 @@
     padding: 8px;
     font-weight: bold;
     text-align: left;
+   
   }
   
   .table td {
     /* border: 1px solid #ccc; */
     padding: 8px;
     text-align: left;
+    text-align: center;
+    
   }
   
 .images{
     width: 40px;
+    
 }
-select{
-    width: 130px;
+.view-admin-search{
+  border: none;
+    padding: 10px;
+    background:#058D9E;
+    color: white;
+    font-weight: 501;
+    width: 150px;
 }

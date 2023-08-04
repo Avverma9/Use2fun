@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import style from './ViewSubAdmin.module.css';
+import './ViewSubAdmin.css';
 
 const ViewSubAdmin = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +51,7 @@ const ViewSubAdmin = () => {
     return tableData.map((row) => (
       <tr key={row.id}>
         <td>{row.id}</td>
-        <td><img className={style.images} src={row.image} alt='images' /></td>
+        <td><img className="images" src={row.image} alt='images' /></td>
         <td>{row.Name}</td>
         <td>{row.banUnban}</td>
         <td>{row.kick}</td>
@@ -60,7 +60,7 @@ const ViewSubAdmin = () => {
         <td>{row.screenshot}</td>
         <td>{row.dpApprove}</td>
         <td>
-          <select
+          <select className='select-viewsubadmin'
             onChange={() => handleUpdateClick(row)}
             value={selectedUser === row ? 'update' : 'action'}
           >
@@ -74,9 +74,9 @@ const ViewSubAdmin = () => {
   };
 
   return (
-    <div className={style.main}>
+    <div className="main">
       <h3>Manage SubAdmin</h3>
-      <div className={style.filter}>
+      <div className="filter">
         <label>Search</label>
         <input type="text" />
 
@@ -86,10 +86,10 @@ const ViewSubAdmin = () => {
         <label>End Date</label>
         <input type="date" />
 
-        <button>Search</button>
+        <button className='search-button'>Search</button>
       </div>
 
-      <table className={style.table}>
+      <table className="table">
         <thead>
           <tr>
             <th>Sr.</th>

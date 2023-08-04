@@ -1,5 +1,5 @@
-import React from 'react'
-import style from "./ViewFrames.module.css"
+import React from 'react';
+import style from "./ViewFrames.css";
 
 const ViewFrames = () => {
 
@@ -21,7 +21,7 @@ const ViewFrames = () => {
             <td>{row.price}</td>
             <td>{row.level}</td>
             <td>{row.validity}</td>
-            <td>{<select>
+            <td>{<select className='viewframe-select'>
                 <option value="action">Action</option>
                 </select>}</td>
           </tr>
@@ -29,12 +29,12 @@ const ViewFrames = () => {
       };
 
   return (
-    <div>
+    <div className='viewframe-main'>
         <h3>View Frames</h3>
-        <button>Add Frame</button>
+        <button className='add-frame-btn'>Add Frame</button>
 
 
-        <table className={style.table}>
+        <table className="table">
         <thead>
           <tr>
             <th>Sr.</th>

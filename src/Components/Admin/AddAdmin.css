@@ -1,11 +1,19 @@
-button{
+.butt-container .cancel-button{
     border: none;
     padding: 10px;
-    background:rgb(0, 147, 127);
+    background:#058D9E;
     color: white;
     font-weight: 501;
     width: 150px;
     
+}
+.butt-container .submit-button{
+    border: none;
+    padding: 10px;
+    background:#BF00ED;
+    color: white;
+    font-weight: 501;
+    width: 150px;
 }
 .butt-container{
     display: flex;

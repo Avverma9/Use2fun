@@ -1,16 +1,16 @@
-import React from 'react'
-import styles from "./AddAppEntry.module.css"
+import React from 'react';
+import "./AddAppEntry.css";
 
 const AppEntry = () => {
   return (
-    <div>
+    <div className='app-entry'>
         <h2>AppEntry</h2>
-        <form className={styles.container}>
+        <form className="container">
            <label>Images*</label>
            <input type="file" name="" id="" />
            <div className="btn">
-            <button>Cancel</button>
-            <button>Submit</button>
+            <button className='cancel-button'>Cancel</button>
+            <button className='submit-button'>Submit</button>
            </div>
         </form>
     </div>

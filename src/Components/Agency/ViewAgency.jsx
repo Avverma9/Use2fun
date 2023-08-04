@@ -1,5 +1,5 @@
-import React from 'react'
-import style from "./ViewAgency.module.css"
+import React from 'react';
+import  "./ViewAgency.css";
 
 const ViewAgency = () => {
 
@@ -12,7 +12,7 @@ const ViewAgency = () => {
         return tableData.map((row) => (
           <tr key={row.id}>
             <td>{row.id}</td>
-            <td>{<img className={style.images} src={row.image} alt='images'/>}</td>
+            <td>{<img className="images" src={row.image} alt='images'/>}</td>
             <td>{row.agencyName}</td>
             <td>{row.userName}</td>
             <td>{row.agencyCode}</td>
@@ -26,9 +26,9 @@ const ViewAgency = () => {
 
 
   return (
-    <div className={style.main}>
+    <div className="main">
         <h3>View Agency</h3>
-        <div className={style.filter}>
+        <div className="filter">
            <label>Search</label>
            <input type="text" />
 
@@ -38,11 +38,11 @@ const ViewAgency = () => {
            <label>End Date</label>
            <input type="date" />
 
-           <button>Search</button>
+           <button className='agency-search-button'>Search</button>
         </div>
 
         {/* ----------------------table---------------------- */}
-        <table className={style.table}>
+        <table className="table">
         <thead>
           <tr>
             <th>Sr.</th>
