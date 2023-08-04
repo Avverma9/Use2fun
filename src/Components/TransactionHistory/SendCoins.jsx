@@ -30,9 +30,9 @@ const SendCoins = () => {
           className={styles.inputfield}
         />
       </div>
-      <div className={styles.buttonscontainer}>
-        <button className={styles.cancelbutton} onClick={handleCancel}>Cancel</button>
-        <button className={styles.submitbutton} onClick={handleSubmit}>Submit</button>
+      <div className={styles.buttonscontainer1}>
+        <button className={styles.cancelbuttoncoin} onClick={handleCancel}>Cancel</button>
+        <button className={styles.submitbuttoncoin} onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );

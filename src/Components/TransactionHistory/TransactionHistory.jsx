@@ -33,12 +33,12 @@ const TransactionHistory = () => {
         <p>Status</p>
       </div>
       {transactions.map((transaction, index) => (
-        <div className={styles.transactionrow} key={index}>
+        <div className={styles.transactionrow1} key={index}>
           <p>{transaction.sr}</p>
           
-            <img src={transaction.image} alt="Profile-pic" />
+            <img className={styles.profile_img} src={transaction.image} alt="Profile-pic" />
           
-          <div className={styles.transactiondata}>
+          
             <p>{transaction.name}</p>
             <p>{transaction.username}</p>
             <p>{transaction.email}</p>
@@ -47,7 +47,7 @@ const TransactionHistory = () => {
             <p>{transaction.orderId}</p>
             <p>{transaction.status}</p>
           </div>
-        </div>
+        
       ))}
     </div>
   );

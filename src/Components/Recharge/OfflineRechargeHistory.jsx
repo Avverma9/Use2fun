@@ -48,7 +48,7 @@ const OfflineRechargeHistory = () => {
         <td>{row.coin}</td>
         <td>{row.datetime}</td>
         <td>
-        <button>Undo</button>
+        <button className={style.undo_btn}>Undo</button>
         </td>
       </tr>
     ));
@@ -67,7 +67,7 @@ const OfflineRechargeHistory = () => {
         <label>End Date</label>
         <input type="date" />
 
-        <button>Search</button>
+        <button className={style.search_button}>Search</button>
       </div>
 
       <table className={style.table}>

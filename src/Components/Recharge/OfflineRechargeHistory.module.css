@@ -37,3 +37,16 @@
     width: 40px;
     
 }
+.search_button{
+  border: none;
+  padding: 10px;
+  background: purple;
+  color: white;
+  font-weight: 501;
+  width: 150px;
+}
+.undo_btn{
+  background: transparent;
+  border: 1px solid grey;
+  padding: 5px;
+}

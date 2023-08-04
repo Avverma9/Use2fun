@@ -1,7 +1,5 @@
 
-.container {
-    margin-left: 167px;
-  }
+
   
   .heading {
     color: #000;
@@ -17,8 +15,8 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 200px;
-    height: 58px;
+    width: 100%;
+    height: 100%;
     margin-bottom: 10px;
   }
   
@@ -36,14 +34,17 @@
   .inputfield {
     border: 1px solid #ccc;
     padding: 5px;
+    width: 32%;
+    height: 40px;
   }
   
-  .buttonscontainer {
-    display: flex;
-    flex-direction: row;
+  .buttonscontainer1 {
+  display: flex;
+    margin-top: 40px;
+    gap: 20px;
   }
   
-  .cancelbutton {
+  .cancelbuttoncoin {
     background: #058D9E;
     color: white;
     height: 60px;
@@ -53,7 +54,7 @@
     cursor: pointer;
   }
   
-  .submitbutton {
+  .submitbuttoncoin {
     background: #BF00ED;
     color: white;
     height: 60px;
@@ -61,8 +62,8 @@
     border: 1px solid white;
     border-radius: 0px;
     cursor: pointer;
-    margin-left: 700px;
-    margin-right: 200px;
+    
+    
     text-align: center;
   }
   

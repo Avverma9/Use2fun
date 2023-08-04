@@ -91,7 +91,7 @@ function App() {
             <Route path="/manage-logo" element={<ManageLogo/>}/>
             <Route path="/transaction-history" element={<TransactionHistory/>}/>
             <Route path="/send-coins" element={<SendCoins/>}/>
-            <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/> 
+            <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/>
           </Routes>
         </div>
       </Router>
