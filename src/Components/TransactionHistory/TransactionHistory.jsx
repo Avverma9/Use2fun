@@ -35,9 +35,9 @@ const TransactionHistory = () => {
       {transactions.map((transaction, index) => (
         <div className={styles.transactionrow} key={index}>
           <p>{transaction.sr}</p>
-          <div className={styles.imagecontainer}>
+          
             <img src={transaction.image} alt="Profile-pic" />
-          </div>
+          
           <div className={styles.transactiondata}>
             <p>{transaction.name}</p>
             <p>{transaction.username}</p>

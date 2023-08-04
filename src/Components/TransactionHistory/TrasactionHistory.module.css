@@ -1,4 +1,4 @@
-.container {
+/* .container {
     display: flex;
     flex-direction: column;
   }
@@ -45,4 +45,11 @@
   
   .transactiondata p {
     margin: 0;
+  } */
+  .transactionrow {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 44px;
+    margin-right: 60px;
   }
+  
