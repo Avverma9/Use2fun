@@ -42,7 +42,7 @@ const ChangePassword = () => {
   return (
     <div className={styles.container}>
       <Profile />
-      <div style={{ marginTop: "234px", marginBottom: "1137px" }}>
+      <div className={styles.changepass_container}>
         <div className={styles.settings}>
           <p className={styles.heading}>Settings</p>
           <p className={styles.heading}>Change password</p>
