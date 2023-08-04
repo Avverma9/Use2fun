@@ -15,13 +15,13 @@ const Profile = () => {
         alt="Profile-pic"
         className={styles.profilepic}
       />
-      <div>
+      <div className={styles.profiletext}>
         <h4 className={styles.masterpanel}>Master Panel</h4>
         <p className={styles.masterpanel}>PHP</p>
       </div>
       <p className={styles.aboutmebtn}>About Me</p>
       <div className={styles.infocontainer}>
-        <p>
+        <p className={styles.infohead}>
           <img
             className={styles.icon}
             src={phone_icon}
@@ -32,7 +32,7 @@ const Profile = () => {
         <p>7087772970</p>
       </div>
       <div className={styles.infocontainer}>
-        <p>
+        <p className={styles.infohead}>
           <img
             className={styles.icon}
             src={Email_icon}
@@ -43,7 +43,7 @@ const Profile = () => {
         <p>admin@gmail.com</p>
       </div>
       <div className={styles.infocontainer}>
-        <p>
+        <p className={styles.infohead}>
           <img
             className={styles.icon}
             src={Education_icon}
@@ -54,7 +54,7 @@ const Profile = () => {
         <p>MCA</p>
       </div>
       <div className={styles.infocontainer}>
-        <p>
+        <p className={styles.infohead}>
           <img
             className={styles.icon}
             src={Location_icon}

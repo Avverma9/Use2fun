@@ -6,6 +6,8 @@
   .settings {
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
+    gap: 100px;
   }
   
   .label {
@@ -45,6 +47,7 @@
     margin-top: 0px;
     margin-left: 18px;
     margin-right: 32.674px;
+    width: 22%;
   }
   
   .inputfield {
@@ -56,12 +59,12 @@
   .editbtn {
     background: #BF00ED;
     color: white;
-    padding: 20px 30px;
+    padding: 10px;
     border: 1px solid white;
     border-radius: 0px;
     cursor: pointer;
     margin-left: 24px;
-    width: 250px;
-    height: 15px;
+    width: 175px;
+    height: 55px;
   }
   
