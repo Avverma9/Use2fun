@@ -19,6 +19,10 @@ import chatbubbleIcon from "../../assets/icons/chatbubble.png"
 import relationshipIcon from "../../assets/icons/relationship.png"
 import specialIdIcon from "../../assets/icons/specialid.png"
 import extraSeatIcon from "../../assets/icons/extraseat.png"
+import VipIcon from "../../assets/icons/vip.png"
+import BannerIcon from "../../assets/icons/banner.png"
+import GiftIcon from "../../assets/icons/gift.png"
+
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -546,6 +550,195 @@ const ExtraSeat = () => {
   );
 };
 
+//SVIP
+const Svip = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={mylevel} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Svip</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-svip">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-svip">
+              <p>Add Svip</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-svip">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-svip">
+              <p>View Svip</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//VIP
+const Vip = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={VipIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Vip</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-vip">
+              {" "}
+              <img src={VipIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-vip">
+              <p>Add Vip</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-vip">
+              {" "}
+              <img src={VipIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-vip">
+              <p>View Vip</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Banner
+const Banner = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={BannerIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Banner</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/add-banner">
+              {" "}
+              <img src={BannerIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-banner">
+              <p>Add Banner</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-banner">
+              {" "}
+              <img src={BannerIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-banner">
+              <p>View Banner</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Gifts
+const Gift = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={GiftIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Gifts</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/manage-gift-category">
+              {" "}
+              <img src={GiftIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/manage-gift-category">
+              <p>Manage Gift Category</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/add-live-gifts">
+              {" "}
+              <img src={GiftIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-live-gifts">
+              <p>Add Live Gift</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/manage-gifts">
+              {" "}
+              <img src={GiftIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/manage-gifts">
+              <p>Manage Gift</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 //Master Admin Coin history
 const MasterAdmin = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -821,21 +1014,21 @@ const Account = () => {
   );
 };
 
-const Home = () => {
-  return (
-    <>
-      <li>
-        <Link to="/">
-          {" "}
-          <img src={hostIcon} alt="icon" srcset="" />
-        </Link>
-        <Link to="/">
-          <p>Home</p>
-        </Link>
-      </li>
-    </>
-  );
-};
+// const Home = () => {
+//   return (
+//     <>
+//       <li>
+//         <Link to="/">
+//           {" "}
+//           <img src={hostIcon} alt="icon" srcset="" />
+//         </Link>
+//         <Link to="/">
+//           <p>Home</p>
+//         </Link>
+//       </li>
+//     </>
+//   );
+// };
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -861,6 +1054,10 @@ const Sidebar = () => {
           <Relationship/>
           <SpecialId/>
           <ExtraSeat/>
+          <Svip/>
+          <Vip/>
+          <Banner/>
+          <Gift/>
           <MasterAdmin/>
           <MyLevel/>
           <TheTalent/>
