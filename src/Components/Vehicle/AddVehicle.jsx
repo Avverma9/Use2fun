@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from "./AddFrames.module.css";
+import styles from "./AddVehicle.module.css";
 
-const AddFrames = () => {
+const AddVehicle = () => {
   const [formData, setFormData] = useState({
     userID: '',
     email: '',
@@ -26,7 +26,7 @@ const AddFrames = () => {
 
   return (
     <div className={styles.main}>
-      <h3>Add Frames</h3>
+      <h3>Add Vehicle</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
       <label>Image*</label>
         <input
@@ -80,4 +80,4 @@ const AddFrames = () => {
   );
 };
 
-export default AddFrames;
+export default AddVehicle;
