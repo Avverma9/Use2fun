@@ -1,4 +1,5 @@
 import React from "react";
+import './ViewBanner.css';
 
 function ViewBanner() {
   return (
