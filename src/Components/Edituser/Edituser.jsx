@@ -4,6 +4,9 @@ import './Edituser.css';
 import {GiRoundStar} from 'react-icons/gi';
 
 const Edituser = () => {
+  const userId = localStorage.getItem("userId")
+
+
   return (
     <>
       <Title title="Edit User" />

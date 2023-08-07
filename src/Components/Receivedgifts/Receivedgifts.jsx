@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Receivedgifts.css";
 import Title from "../common/Title";
 
 const Receivedgifts = () => {
+  const [data,setData]=useState([])
+  const userId = localStorage.getItem("userId"); 
+  console.log(userId)
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://use2fun.onrender.com/user/receive/gift/get", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: userId }),
+        });
+        const jsonData = await response.json();
+        setData(jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+  console.log(data);
+
+
   return (
     <>
       <Title title="Received Gift History" />
