@@ -1,31 +1,105 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./PendingHost.module.css"
+import { useNavigate } from 'react-router-dom'
 
 const PendingHost = () => {
+  const [data,setData]=useState(null)
+  const navigate = useNavigate()
 
-    const tableData = [
-        { id: 1, userName: 'User 1', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Pending" },
-        { id: 2, userName: 'User 2', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Pending" },
-        { id: 3, userName: 'User 3', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Pending" },
-        { id: 4, userName: 'User 4', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Pending" },
-      ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://use2fun.onrender.com/host/getPending");
+        const jsonData = await response.json();
+        setData(jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data)
+
+  const handleNavigate = () => {
+    navigate('/view-host-info')
+  }
+
+
+  //Accept Request
+  const handleStatusChange = async (itemId, newStatus) => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/admin/host/changeStatus", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: itemId,
+          status: newStatus
+        })
+      });
+
+      if (response.ok) {
+         console.log(itemId,"Data Changed")
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error("Error changing status:", error);
+    }
+  }
+
+
+ 
     
-      const renderTableRows = () => {
-        return tableData.map((row) => (
-          <tr key={row.id}>
-            <td>{row.id}</td>
-            <td>{row.userName}</td>
-            <td>{row.name}</td>
-            <td>{row.email}</td>
-            <td>{row.phone}</td>
-            <td>{row.agencyCode}</td>
-            <td>{row.status}</td>
-            <td>{<select>
-                <option value="action">Action</option>
-                </select>}</td>
-          </tr>
-        ));
-      };
+  const renderTableRows = () => {
+    if (data) {
+      const dataArray = Array.isArray(data) ? data : [data];
+  
+      return (
+        <>
+          {dataArray.map((item, index) => (
+            <tr key={item._id}>
+              <td>{index + 1}</td>
+              <td>{item.userId.name}</td>
+              <td>{item.userId.name}</td>
+              <td>{item.userId.email || "testing@gmail.com"}</td>
+              <td>{item.userId.mobile}</td>
+              <td>{item.agency_code}</td>
+              <td>{item.status}</td>
+              <td>
+              <select onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  if(selectedValue==='view'){
+                    handleNavigate()
+                  }
+                  if (selectedValue === 'accept') {
+                    handleStatusChange(item._id, 'Approved');
+                  }
+                }}>
+                  <option value="">Action</option>
+                  <option value="view">View</option>
+                  <option value="accept">Accept</option>
+                  <option value="reject">Reject</option>
+                </select>
+              </td>
+            </tr>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <tr>
+          <td colSpan="8">
+            <h2>No data available</h2>
+          </td>
+        </tr>
+      );
+    }
+  };
+  
 
 
   return (

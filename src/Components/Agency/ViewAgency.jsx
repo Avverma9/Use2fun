@@ -1,28 +1,61 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import  "./ViewAgency.css";
 
 const ViewAgency = () => {
+  const [data,setData]=useState(null)
 
-    const tableData = [
-        { id: 1, agencyName: 'Agency 1', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", userName: 'User 1', agencyCode: 'Code 1', email: 'testing1@example.com' },
-        { id: 2, agencyName: 'Agency 2', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", userName: 'User 2', agencyCode: 'Code 2', email: 'testing2@example.com' },
-      ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://use2fun.onrender.com/admin/agency/getall`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+          setData(jsonData.data); 
+          console.log("Fetched Data:", jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+  
+    fetchData();
+  }, []);
+
+  console.log(data, "data")
     
       const renderTableRows = () => {
-        return tableData.map((row) => (
-          <tr key={row.id}>
-            <td>{row.id}</td>
-            <td>{<img className="images" src={row.image} alt='images'/>}</td>
-            <td>{row.agencyName}</td>
-            <td>{row.userName}</td>
-            <td>{row.agencyCode}</td>
-            <td>{row.email}</td>
+        if (data) {
+          const dataArray = Array.isArray(data) ? data : [data];
+          return (
+            <>
+              {dataArray.map((item, index) => (
+          <tr key={item.id}>
+            <td>{index + 1}</td>
+            <td>{<img className="images" src={item.image} alt='images'/>}</td>
+            <td>{item.userId.name}</td>
+            <td>{item.userId.name}</td>
+            <td>{item.userId.userId}</td>
+            <td>{item.email}</td>
             <td>{<select>
                 <option value="action">Action</option>
                 </select>}</td>
           </tr>
-        ));
-      };
+        ))}
+         </>
+      );
+    } else {
+      return (
+        <tr>
+          <td colSpan="8">
+            <h2>No data available</h2>
+          </td>
+        </tr>
+      );
+    }
+  };
+  
 
 
   return (

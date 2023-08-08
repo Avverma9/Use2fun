@@ -2,40 +2,39 @@ import React, { useState, useEffect } from "react";
 import "./Viewuser.css";
 import Title from "../common/Title";
 
+
 const Viewuser = () => {
 
-  const [data, setData] = useState([])
-  const userId = localStorage.getItem("userId"); 
-  console.log(userId)
+  const [data, setData] = useState(null)
+  const id = localStorage.getItem("userId").trim()
+  console.log(id)
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://use2fun.onrender.com/user/getbyid", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: userId }),
-          
-        });
-        console.log(userId, "233333333333333333")
+        const response = await fetch(`https://use2fun.onrender.com/user/getbyid/64ce184525c05f3a90c3e379`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const jsonData = await response.json();
-        setData(jsonData.data);
+          setData(jsonData.data); 
+          console.log("Fetched Data:", jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+    
+  
     fetchData();
-  }, [userId]);
+  }, [id]);
 
-  console.log(data);
+  console.log(data, "data")
   return (
     <>
       <Title title="View User" />
       <div className="view-user">
+      {data  ? (
         <div className="view-user1">
           <div className="user-keys">
             <div className="user-name">
@@ -99,36 +98,40 @@ const Viewuser = () => {
               </label>
             </div>
           </div>
-          {data.map((user, index) => (
-            <div key={index} className="user-values">
+          {data && (
+            <div key={data._id} className="user-values">
             <div className="user-name">
-              <p>{user.name}</p>
+              <p>{data.name}</p>
             </div>
             <div className="user-email">
-              <p>{user.name}</p>
+              <p>{data.name}</p>
             </div>
             <div className="user-number">
-              <p>{user.mobile}</p>
+              <p>{data.mobile}</p>
             </div>
             <div className="user-status1">
-              <p>{user.status}</p>
+              <p>{data.status}</p>
             </div>
             <div className="user-varify-email">
-              <p>{user.status}</p>
+              <p>{data.status}</p>
             </div>
             <div className="user-type">
-              <p>{user.user_type}</p>
+              <p>{data.user_type}</p>
             </div>
             <div className="user-device-id">
-              <p>{user._id}</p>
+              <p>{data._id}</p>
             </div>
             <div className="user-device-type">
               <p>Android</p>
             </div>
           </div>
-           ))}
+           )}
 
         </div>
+         ) : (
+          <p>No data available</p>
+        )}
+         {data ? (
         <div className="view-user2">
           <div className="user-keys">
             <div className="user-follower">
@@ -178,32 +181,35 @@ const Viewuser = () => {
             </div>
             <button className="remove-button">Remove DP</button>
           </div>
-           {data.map((user, index) => (
-            <div key={index} className="user-values">
+           {data && (
+            <div key={data._id} className="user-values">
             <div className="user-follower">
-              <p>{user.followers}</p>
+              <p>{data.followers || 0}</p>
             </div>
             <div className="user-following">
-              <p>{user.following}</p>
+              <p>{data.following || 0}</p>
             </div>
             <div className="user-likes">
-              <p>{user.likes}</p>
+              <p>{data.likes}</p>
             </div>
             <div className="user-comment">
-              <p>{user.comments}</p>
+              <p>{data.comments}</p>
             </div>
             <div className="user-viewsno">
-              <p>{user.views}</p>
+              <p>{data.views}</p>
             </div>
             <div className="user-blocklist">
-              <p>{user.block_users}</p>
+              <p>{data.block_users}</p>
             </div>
             <div className="user-account">
-              <p>{user.accounts}</p>
+              <p>{data.accounts}</p>
             </div>
           </div>
-            ))}
+            )}
         </div>
+          ) : (
+            <p>No data available</p>
+          )}
       </div>
     </>
   );

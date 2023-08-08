@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import './ViewSubAdmin.css';
 
 const ViewSubAdmin = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [data,setData]=useState(null)
   const [checkboxes, setCheckboxes] = useState({
     banUnban: false,
     mute: false,
@@ -14,10 +15,27 @@ const ViewSubAdmin = () => {
     dpApprove: false,
   });
 
-  const tableData = [
-    { id: 1, agencyName: 'Agency 1', image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", Name: 'User 1', banUnban: "Allowed", kick: 'Allowed', agencyBan: 'Allowed', mute: "Allowed", screenshot: "Allowed", dpApprove: "Allowed" },
-    { id: 2, agencyName: 'Agency 1', image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", Name: 'User 1', banUnban: "Allowed", kick: 'Allowed', agencyBan: 'Allowed', mute: "Allowed", screenshot: "Allowed", dpApprove: "Allowed" },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://use2fun.onrender.com/admin/subAdminUser/getall`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+          setData(jsonData.data); 
+          console.log("Fetched Data:", jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+  
+    fetchData();
+  }, []);
+
+  console.log(data, "data")
+
 
   const handleUpdateClick = (user) => {
     setShowModal(true);
@@ -48,21 +66,25 @@ const ViewSubAdmin = () => {
   };
 
   const renderTableRows = () => {
-    return tableData.map((row) => (
-      <tr key={row.id}>
-        <td>{row.id}</td>
-        <td><img className="images" src={row.image} alt='images' /></td>
-        <td>{row.Name}</td>
-        <td>{row.banUnban}</td>
-        <td>{row.kick}</td>
-        <td>{row.agencyBan}</td>
-        <td>{row.mute}</td>
-        <td>{row.screenshot}</td>
-        <td>{row.dpApprove}</td>
+    if (data) {
+      const dataArray = Array.isArray(data) ? data : [data];
+      return (
+        <>
+          {dataArray.map((item, index) => (
+      <tr key={index}>
+        <td>{index+1}</td>
+        <td><img className="images" src={item.userId.image_url} alt='images' /></td>
+        <td>{item.userId.name}</td>
+        <td>{item.userId.userId}</td>
+        <td>{item.email}</td>
+        <td>{item.userId.mobile}</td>
+        <td>{item.userId.coins}</td>
+        <td>{item.role}</td>
+        <td>{item.userId.status}</td>
         <td>
           <select className='select-viewsubadmin'
-            onChange={() => handleUpdateClick(row)}
-            value={selectedUser === row ? 'update' : 'action'}
+            onChange={() => handleUpdateClick(item)}
+            value={selectedUser === item ? 'update' : 'action'}
           >
             <option value="action">Action</option>
             <option value="update">Update</option>
@@ -70,7 +92,18 @@ const ViewSubAdmin = () => {
           </select>
         </td>
       </tr>
-    ));
+     ))}
+     </>
+      );
+    } else {
+      return (
+        <tr>
+          <td colSpan="8">
+            <h2>No data available</h2>
+          </td>
+        </tr>
+      );
+    }
   };
 
   return (
