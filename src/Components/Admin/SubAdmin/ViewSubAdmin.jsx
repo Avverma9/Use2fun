@@ -70,30 +70,33 @@ const ViewSubAdmin = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       return (
         <>
-          {dataArray.map((item, index) => (
-      <tr key={index}>
-        <td>{index+1}</td>
-        <td><img className="images" src={item.userId.image_url} alt='images' /></td>
-        <td>{item.userId.name}</td>
-        <td>{item.userId.userId}</td>
-        <td>{item.email}</td>
-        <td>{item.userId.mobile}</td>
-        <td>{item.userId.coins}</td>
-        <td>{item.role}</td>
-        <td>{item.userId.status}</td>
-        <td>
-          <select className='select-viewsubadmin'
-            onChange={() => handleUpdateClick(item)}
-            value={selectedUser === item ? 'update' : 'action'}
-          >
-            <option value="action">Action</option>
-            <option value="update">Update</option>
-            <option value="remove">Remove</option>
-          </select>
-        </td>
-      </tr>
-     ))}
-     </>
+        {data.map((item, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>
+              {item.userId && <img className="images" src={item.userId.image_url} alt='images' />}
+            </td>
+            <td>{item.userId ? item.userId.name : 'N/A'}</td>
+            <td>{item.userId ? item.userId.userId : 'N/A'}</td>
+            <td>{item.email}</td>
+            <td>{item.userId ? item.userId.mobile : 'N/A'}</td>
+            <td>{item.userId ? item.userId.coins : 'N/A'}</td>
+            <td>{item.role}</td>
+            <td>{item.userId ? item.userId.status : 'N/A'}</td>
+            <td>
+              <select
+                className='select-viewsubadmin'
+                onChange={() => handleUpdateClick(item)}
+                value={selectedUser === item ? 'update' : 'action'}
+              >
+                <option value="action">Action</option>
+                <option value="update">Update</option>
+                <option value="remove">Remove</option>
+              </select>
+            </td>
+          </tr>
+        ))}
+      </>
       );
     } else {
       return (
