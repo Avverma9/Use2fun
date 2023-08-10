@@ -2,7 +2,7 @@ import React from "react";
 import './AddLiveGifts.css';
 
 
-function Manage_Gift_category() {
+function ManageGiftcategory() {
   return (
     <div id="gift_main">
       <div className="gift_header">
@@ -77,4 +77,4 @@ function Manage_Gift_category() {
   );
 }
 
-export default Manage_Gift_category;
+export default ManageGiftcategory;

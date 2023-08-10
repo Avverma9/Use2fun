@@ -1,35 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./PendingHost.module.css"
+import { useNavigate } from 'react-router-dom'
 
 const RejectedHost = () => {
+  const [data,setData]=useState(null)
+  const navigate =useNavigate()
 
-    const tableData = [
-        { id: 1, userName: 'User 1', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Rejected" },
-        { id: 2, userName: 'User 2', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Rejected" },
-        { id: 3, userName: 'User 3', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Rejected" },
-        { id: 4, userName: 'User 4', name: 'testing1', email: 'testing1@example.com', phone:"12345", agencyCode:"122",status:"Rejected" },
-      ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://use2fun.onrender.com/host/getRejected");
+        const jsonData = await response.json();
+        setData(jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data)
+
+  const handleNavigate = () => {
+    navigate('/view-host-info')
+  }
+ 
     
-      const renderTableRows = () => {
-        return tableData.map((row) => (
-          <tr key={row.id}>
-            <td>{row.id}</td>
-            <td>{row.userName}</td>
-            <td>{row.name}</td>
-            <td>{row.email}</td>
-            <td>{row.phone}</td>
-            <td>{row.agencyCode}</td>
-            <td>{row.status}</td>
-            <td>{<select>
-                <option value="">Action</option>
-                <option value="action">View</option>
-                <option value="action">Accept</option>
-                <option value="action">Reject</option>
-                </select>}</td>
-          </tr>
-        ));
-      };
-
+  const renderTableRows = () => {
+    if (data) {
+      const dataArray = Array.isArray(data) ? data : [data];
+  
+      return (
+        <>
+          {dataArray.map((item, index) => (
+            <tr key={item._id}>
+              <td>{index + 1}</td>
+              <td>{item.userId.name}</td>
+              <td>{item.userId.name}</td>
+              <td>{item.userId.email || "testing@gmail.com"}</td>
+              <td>{item.userId.mobile}</td>
+              <td>{item.agency_code}</td>
+              <td>{item.status}</td>
+              <td>
+                <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
+                  <option value="">Action</option>
+                  <option value="view">View</option>
+                  <option value="accept">Accept</option>
+                  <option value="reject">Reject</option>
+                </select>
+              </td>
+            </tr>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <tr>
+          <td colSpan="8">
+            <h2>No data available</h2>
+          </td>
+        </tr>
+      );
+    }
+  };
+  
 
   return (
     <div className={style.main}>

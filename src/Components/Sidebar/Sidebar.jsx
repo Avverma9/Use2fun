@@ -268,7 +268,7 @@ const SubAdmin = () => {
               <img src={subAdminIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/add-subadmin">
-              <p>Add Admin</p>
+              <p>Add Sub Admin</p>
             </Link>
           </li>
           <li>
@@ -277,7 +277,7 @@ const SubAdmin = () => {
               <img src={subAdminIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/view-subadmin">
-              <p>View Admin</p>
+              <p>View Sub Admin</p>
             </Link>
           </li>
         </ul>

@@ -59,8 +59,11 @@ import ViewVip from "./Components/Vip/ViewVip";
 import AddSvip from "./Components/Svip/AddSvip";
 import ViewSvip from "./Components/Svip/ViewSvip";
 import AddLiveGifts from "./Components/Gift/AddLiveGifts";
-import Manage_Gift_category from "./Components/Gift/ManageGiftCategory";
+import ManageGiftcategory from "./Components/Gift/ManageGiftCategory";
 import ManageGift from "./Components/Gift/ManageGifts";
+import SignIn from "./Components/SignIn/SignIn";
+// import SignOutComp from "./Components/SignOut/SignOutComp";
+
 
 
 function App() {
@@ -74,6 +77,8 @@ function App() {
           // contain routes and side navigation
         >
           <Routes>
+            <Route path="/signIn" element={<SignIn/>}/>
+          {/* <Route path="/signout" element={<SignOutComp/>}/> */}
             <Route path="/" element={<Dashboard />} />
             <Route path="/view-users" element={<Mannageuser />} />
             <Route path="/view-user" element={<Viewuser/>} />
@@ -92,6 +97,20 @@ function App() {
               path="/mannage-live-user-history"
               element={<Liveuserhistory />}
             />
+            {/* <Route path="/view-user" element={<>View</>} /> */}
+
+                  {/* //Commented routes starts   */}
+            <Route path="/view-user" element={<Viewuser/>}/>
+            <Route path="/edit-user" element={<Edituser/>}/>
+            <Route path="/recieved-gift-history" element={<Receivedgifts/>}/>
+            <Route path="/send-gift-history" element={<Sendgifts/>}/>
+
+
+             {/* //Commented routes ends  */}
+
+
+
+
             <Route path="/add-agency" element={<AddAgency/>} />
             <Route path="/view-agency" element={<ViewAgency/>} />
             <Route path="/add-admin" element={<AddAdmin/>} />
@@ -120,7 +139,7 @@ function App() {
             <Route path="/add-svip" element={<AddSvip/>}/>
             <Route path="/view-svip" element={<ViewSvip/>}/>
             <Route path="/add-live-gifts" element={<AddLiveGifts/>}/>
-            <Route path="/manage-gift-category" element={<Manage_Gift_category/>}/>
+            <Route path="/manage-gift-category" element={<ManageGiftcategory/>}/>
             <Route path="/manage-gifts" element={<ManageGift/>}/>
 
 

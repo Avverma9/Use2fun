@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from "./AddAgency.module.css";
 
 const AddAgency = () => {
-  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     userID: '',
     agencyName: '',
