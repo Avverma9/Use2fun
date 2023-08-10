@@ -1,0 +1,27 @@
+
+
+td img{
+    width: 40px;
+}
+
+.selectbar{
+    width: 160px;
+}
+.viewappentry .selectbar{
+    border: 1px solid grey;
+    width: 100%;
+    background: transparent;
+}
+.viewappentry-row1{
+    display: flex;
+    gap:200px;
+    margin-bottom: 20px;
+}
+.viewappentry-row2{
+    display: flex;
+    gap: 200px;
+    margin-bottom: 10px;
+}
+.viewappentry h2{
+    margin-bottom: 20px;
+}
