@@ -1,36 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./ViewRoomWallpaper.css";
+import { useNavigate } from 'react-router-dom';
 
 const ViewRoomWallpaper = () => {
+  const [data,setData]=useState(null)
+  const navigate= useNavigate()
 
-    const tableData = [
-        { id: 1, agencyName: 'Agency 1', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week' },
-        { id: 2, agencyName: 'Agency 2', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week'  },
-        { id: 3, agencyName: 'Agency 1', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week' },
-        { id: 4, agencyName: 'Agency 2', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week'  },
-        { id: 5, agencyName: 'Agency 1', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week' },
-        { id: 6, agencyName: 'Agency 2', image:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", price: '0', duration: '1 Week'  },
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://use2fun.onrender.com/admin/wallpaper/getall`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+          setData(jsonData.data); 
+          console.log("Fetched Data:", jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+  
+    fetchData();
+  }, []);
 
-      ];
+  console.log(data, "data")
 
-      const renderTableRows = () => {
-        return tableData.map((row) => (
-          <tr key={row.id}>
-            <td>{row.id}</td>
-            <td>{<img className="images" src={row.image} alt='images'/>}</td>
-            <td>{row.price}</td>
-            <td>{row.duration}</td>
-            <td>{<select>
-                <option value="action">Action</option>
-                </select>}</td>
-          </tr>
-        ));
-      };
+  const handlePost = ()=>{
+     navigate('/add-room-wallpaper')
+  }
+
+  const renderTableRows = () => {
+    if (data) {
+      const dataArray = Array.isArray(data) ? data : [data];
+      return (
+        <>
+          {dataArray.map((item, index) => (
+      <tr key={index}>
+        <td>{index+1}</td>
+        <td><img className="images" src={item.image_url} alt='images' /></td>
+        <td>{item.price}</td>
+        <td>{item.day}</td>
+        <td>
+          <select>
+            <option value="action">Action</option>
+            <option value="update">Update</option>
+            <option value="remove">Remove</option>
+          </select>
+        </td>
+      </tr>
+    ))}
+     </>
+      );
+    } else {
+      return (
+        <tr>
+          <td colSpan="8">
+            <h2>No data available</h2>
+          </td>
+        </tr>
+      );
+    }
+  };
 
   return (
     <div className='view-roomwallpaper'>
         <h3>ViewRoomWallpaper</h3>
-        <button className='add-app-btn'>Add App Entry</button>
+        <button className='add-app-btn'onClick={handlePost}>Add App Entry</button>
 
         <table className="table">
         <thead>
@@ -38,7 +75,7 @@ const ViewRoomWallpaper = () => {
             <th>Sr.</th>
             <th> Frame Image</th>
             <th>Price</th>
-            <th>Dueation</th>
+            <th>Duration</th>
             <th>Action</th>
           </tr>
         </thead>
