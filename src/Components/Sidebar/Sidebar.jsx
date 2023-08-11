@@ -484,20 +484,49 @@ const LockRoom = () => {
 
 //ChatBubble
 const ChatBubble = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
   return (
     <>
-      <li>
-        <Link to="/chat-bubble">
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
           {" "}
-          <img src={chatbubbleIcon} alt="icon" srcset="" />
+          <img src={agencyIcon} alt="icon" srcset="" />
         </Link>
-        <Link to="/chat-bubble">
+        <Link>
           <p>Chat Bubble</p>
         </Link>
       </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/addbubble">
+              {" "}
+              <img src={agencyIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/addbubble">
+              <p>Add Bubble</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/chat-bubble">
+              {" "}
+              <img src={agencyIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/chat-bubble">
+              <p>View Chat Bubble</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
+
 
 //Relationship
 const Relationship = () => {

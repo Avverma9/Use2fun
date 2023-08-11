@@ -21,7 +21,7 @@ const ViewAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://use2fun.onrender.com/user/getbyid/64ce184525c05f3a90c3e379`);
+        const response = await fetch(`https://use2fun.onrender.com/admin/adminUser/getall`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -96,51 +96,54 @@ const ViewAdmin = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       return (
         <>
-          {dataArray.map((item, index) => (
-      <tr key={index}>
-        <td>{index+1}</td>
-        <td><img className="images" src={item.image_url} alt='images' /></td>
-        <td>{item.name}</td>
-        <td>{item.is_ban_unban ? 'Allowed' : 'Not Allowed'}</td>
-        <td>{item.kick ? 'Allowed' : 'Not Allowed'}</td>
-        <td>{item.agencyban ? 'Allowed' : 'Not Allowed'}</td>
-        <td>{item.mute ? 'Allowed' : 'Not Allowed'}</td>
-        <td>{item.screenshot ? 'Allowed' : 'Not Allowed'}</td>
-        <td>{item.dpapprove ? 'Allowed' : 'Not Allowed'}</td>
-        <td>
-          <select onChange={(e) => {
+          {dataArray.map((item, index) => {
+            console.log("Item:", item);
+            return (
+              <tr key={index}>
+              <td>{index + 1}</td>
+              <td><img className="images" src={item.image_url} alt='images' /></td>
+              <td>{item.name || "N/A"}</td>
+              <td>{item.is_ban_unban ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.kick ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.agencyban ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.mute ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.screenshot ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.dpapprove ? 'Allowed' : 'Not Allowed'}</td>
+              <td>
+                <select onChange={(e) => {
                   const selectedValue = e.target.value;
-                  if(selectedValue==='update'){
-                    handleUpdateClick()
+                  if (selectedValue === 'update') {
+                    handleUpdateClick(item); // Pass 'item' to handleUpdateClick
                   }
                   if (selectedValue === 'remove') {
-                   handleDeleteUser(item.userId)
+                    handleDeleteUser(item); // Pass 'item' to handleDeleteUser
                   }
                 }}>
-            <option value="action">Action</option>
-            <option value="update">Update</option>
-            <option value="remove">Remove</option>
-          </select>
+                  <option value="action">Action</option>
+                  <option value="update">Update</option>
+                  <option value="remove">Remove</option>
+                </select>
+              </td>
+             </tr>
+          );
+        })}
+      </>
+    );
+  } else {
+    return (
+      <tr>
+        <td colSpan="8">
+          <h2>No data available</h2>
         </td>
       </tr>
-    ))}
-     </>
-      );
-    } else {
-      return (
-        <tr>
-          <td colSpan="8">
-            <h2>No data available</h2>
-          </td>
-        </tr>
-      );
-    }
-  };
+    );
+  }
+};
   
 
   return (
     <div className="main">
-      <h3>Manage Admin</h3>
+      <h3>View Admin</h3>
       <div className="filter">
         <label>Search</label>
         <input type="text" />
