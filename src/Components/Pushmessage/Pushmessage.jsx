@@ -1,5 +1,5 @@
-import React from 'react'
-import "./Pushmessage.css"
+import React, { useEffect, useState } from "react";
+import "./Pushmessage.css";
 import { GiRoundStar } from "react-icons/gi";
 import Title from "../common/Title";
 
