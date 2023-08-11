@@ -1,40 +1,33 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import style from "./ViewVehicle.module.css";
 import vehicleImg from "../../assets/icons/vehicle.png"
 
-const ViewFrames = () => {
+const ViewVehicle = () => {
+  const [data,setData]=useState(null);
+  const [selectedDay,setSelectedDay]=useState("")
+  useEffect(()=>{
+    const fetchData=async()=>{
+       try{
+        const response = await fetch("https://use2fun.onrender.com/admin/vehicle/getall");
+        if (!response.ok){
+          throw new Error("Fetching issue")
+        }
+        const responsedata = await response.json();
+        setData(responsedata.data);
+        setSelectedDay(data.day.toString());
+        console.log("answer",responsedata.data);
+       } catch (error) {
+        console.error("network issue",error);
+       }
+    }
+    fetchData();
+  },[])
 
-    const tableData = [
-        { id: 1, image:vehicleImg, price: '0', level: '23',  },
-        { id: 2, image:vehicleImg, price: '0', level: '23',  },
-        { id: 3, image:vehicleImg, price: '0', level: '23',  },
+    
 
-      ];
+    
 
-      const renderTableRows = () => {
-        return tableData.map((row) => (
-          <tr key={row.id}>
-            <td>{row.id}</td>
-            <td>{<img className={style.images} src={row.image} alt='images'/>}</td>
-            <td>{row.price}</td>
-            <td>{row.level}</td>
-            <td>{<select className='viewframe-select'>
-                <option value="action">1 Day</option>
-                <option value="action">2 Day</option>
-                <option value="action">3 Day</option>
-                <option value="action">4 Day</option>
-                <option value="action">5 Day</option>
-                <option value="action">6 Day</option>
-                <option value="action">7 Day</option>
-                </select>}</td>
-            <td>{<select className='viewframe-select'>
-                <option value="action">Action</option>
-                <option value="update">Update</option>
-                <option value="remove">Remove</option>
-                </select>}</td>
-          </tr>
-        ));
-      };
+     
 
   return (
     <div className='viewframe-main'>
@@ -52,8 +45,30 @@ const ViewFrames = () => {
             <th>Validity</th>
             <th>Action</th>
           </tr>
+           {data&&data.map((item,index)=>(
+            <tr key={index}>
+              <td>{index+1}</td>
+              <td><img src={item.img_url} alt='image'/></td>
+              <td>{item.price}</td>
+              <td>{item.level}</td>
+              <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
+        {Array.from({ length: parseInt(data.day) }, (_, index) => (
+          <option key={index + 1} value={index + 1}>{index + 1} Day</option>
+        ))}
+      </select>
+              <td>{<select className='viewframe-select'>            <option value="action">1 Day</option>
+<option value="action">2 Day</option>
+            <option value="action">3 Day</option>
+              <option value="action">4 Day</option>
+              <option value="action">5 Day</option>
+               <option value="action">6 Day</option>
+                <option value="action">7 Day</option>
+               </select>}</td>
+            </tr>
+           ))}
+          
         </thead>
-        <tbody>{renderTableRows()}</tbody>
+        
       </table>
 
 
@@ -61,4 +76,4 @@ const ViewFrames = () => {
   )
 }
 
-export default ViewFrames
+export default ViewVehicle
