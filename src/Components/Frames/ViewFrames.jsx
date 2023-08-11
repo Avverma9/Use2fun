@@ -42,10 +42,13 @@ const ViewFrames = () => {
           {frame&&frame.map((item,index)=>(
             <tr key={index}>
             <td>{index+1}</td>
-            <td><img src='{item.img_url}'/></td>
+            <td><img src={item.img_url} alt='image'/></td>
             <td>{item.price}</td>
             <td>{item.level}</td>
             <td>{item.day}</td>
+            <td>{<select className='viewframe-select'>
+                <option value="action">Action</option>
+                </select>}</td>
             
 
             </tr>

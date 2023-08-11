@@ -34,7 +34,7 @@ fetchData()
         <tbody>
           {data&& data.map((item, index) => (
             <tr key={index} className='viewappentry-row2'>
-              <td>{item._id}</td>
+              <td>{index+1}</td>
               <td>
                 <img src={item.img_url} alt='image' />
               </td>
