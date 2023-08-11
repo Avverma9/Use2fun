@@ -27,7 +27,7 @@ const AddAdmin = () => {
 
       if (response.ok) {
         console.log('POST request successful');
-        toast.success('User added successfully');
+        toast.success('User is Admin now ');
       } else {
         console.error('POST request failed');
       }

@@ -67,7 +67,7 @@ const ViewRoomWallpaper = () => {
   return (
     <div className='view-roomwallpaper'>
         <h3>ViewRoomWallpaper</h3>
-        <button className='add-app-btn'onClick={handlePost}>Add App Entry</button>
+        <button className='add-app-btn'onClick={handlePost}>Add Room Wallpaper</button>
 
         <table className="table">
         <thead>
