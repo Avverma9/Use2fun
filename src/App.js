@@ -62,6 +62,7 @@ import AddLiveGifts from "./Components/Gift/AddLiveGifts";
 import ManageGiftcategory from "./Components/Gift/ManageGiftCategory";
 import ManageGift from "./Components/Gift/ManageGifts";
 import SignIn from "./Components/SignIn/SignIn";
+import AddBubble from "./Components/ChatBubble/AddBubble";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 
@@ -130,6 +131,7 @@ function App() {
 
 
             <Route path="/relationship" element={<RelationShip/>}/>
+            <Route path="/addbubble" element={<AddBubble/>}/>
             <Route path="/chat-bubble" element={<ChatBubble/>}/>
             <Route path="/admin-coin-history" element={<AdminCoinHistory/>}/>
             <Route path="/admin-recharge-history" element={<AdminRechargeHistory/>}/>
