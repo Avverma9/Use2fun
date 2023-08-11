@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './managegift.css';
 
 function ManageGift() {
+  const [viewgift,setViewgift] = useState(null)
+  const [status,setStatus] = useState(null);
+  useEffect(()=>{
+    const fetchData= async()=>{
+      try{ const response = await fetch("https://use2fun.onrender.com/admin/gift/getall");
+      if (!response.ok){
+        throw new Error("network issue")
+      }
+      const jsonData=  await response.json();
+      setViewgift(jsonData.data);
+      setStatus(jsonData.status)
+      console.log("gifts",jsonData.data)
+      console.log("status",jsonData.status)
+
+    } catch (error){
+      console.error("error fetch",error)
+    }
+  }
+  fetchData();
+  },[])
   return (
     <div>
       <div id="gift_main">
@@ -20,102 +40,16 @@ function ManageGift() {
             <th>Status</th>
             <th>Action</th>
           </tr>
+        {viewgift&&viewgift.map((item,index)=>(
           <tr>
-            <td>1</td>
-            <td>couple Ring</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
+            <td>{index+1}</td>
+            <td>{item.name}</td>
+            <td><img src={item.img_url} alt="image" /></td>
+            <td>{item.category_name}</td>
+            <td>{item.coin}</td>
+            <td>{status}</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Petal</td>
-            <td>Pending</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Money</td>
-            <td>Approved</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Tomato</td>
-            <td>Approved</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Love Car</td>
-            <td>Approved</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Fireworks</td>
-            <td>Approved</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td>
-              <select>
-                <option value="Action">Action</option>
-                <option value="saab">Reaction</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Beast</td>
-            <td>Approved</td>
-            <td></td>
-            <td></td>
-            <td>Approved</td>
-            <td><select >
-              <option value="Action">Action</option>
-              <option value="saab">Reaction</option>
-            </select></td>
-          </tr>
+        ))}
         </table>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import "./AddRoomWallpaper.css";
 
-toast.configure();
+// toast.configure();
 
 const AddRoomWallpaper = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ const AddRoomWallpaper = () => {
     e.preventDefault();
 
     if (formData.price < 0 || formData.day < 0) {
-      toast.error('Price and validity cannot be negative');
+      // toast.error('Price and validity cannot be negative');
       return;
     }
 
@@ -34,18 +34,18 @@ const AddRoomWallpaper = () => {
       const responseData = await response.json();
 
       if (response.ok && responseData.success) {
-        toast.success('Data submitted successfully');
+        // toast.success('Data submitted successfully');
         setFormData({
           day: '',
           price: '',
           wallpaper: null,
         });
       } else {
-        toast.error('Error submitting data');
+        // toast.error('Error submitting data');
       }
     } catch (error) {
       console.error('Error posting data:', error);
-      toast.error('Error submitting data');
+      // toast.error('Error submitting data');
     }
   };
 

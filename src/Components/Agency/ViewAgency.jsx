@@ -25,25 +25,30 @@ const ViewAgency = () => {
 
   console.log(data, "data")
     
-      const renderTableRows = () => {
-        if (data) {
-          const dataArray = Array.isArray(data) ? data : [data];
-          return (
-            <>
-              {dataArray.map((item, index) => (
-          <tr key={item.id}>
-            <td>{index + 1}</td>
-            <td>{<img className="images" src={item.image} alt='images'/>}</td>
-            <td>{item.userId.name}</td>
-            <td>{item.userId.name}</td>
-            <td>{item.userId.userId}</td>
-            <td>{item.email}</td>
-            <td>{<select>
-                <option value="action">Action</option>
-                </select>}</td>
-          </tr>
-        ))}
-         </>
+  
+  const renderTableRows = () => {
+    if (data) {
+      const dataArray = Array.isArray(data) ? data : [data];
+      return (
+        <>
+          {dataArray.map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
+              <td>
+                <img className="images" src={item.image} alt="images" />
+              </td>
+              <td>{item.userId && item.userId.name}</td>
+              <td>{item.userId && item.userId.name}</td>
+              <td>{item.userId && item.userId.userId}</td>
+              <td>{item.email}</td>
+              <td>
+                <select>
+                  <option value="action">Action</option>
+                </select>
+              </td>
+            </tr>
+          ))}
+        </>
       );
     } else {
       return (
@@ -55,7 +60,6 @@ const ViewAgency = () => {
       );
     }
   };
-  
 
 
   return (
