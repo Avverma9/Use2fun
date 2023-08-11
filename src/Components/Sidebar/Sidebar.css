@@ -1,13 +1,12 @@
 .container-sidebar {
   background-color: #000;
   width: 18%;
-  padding: 18px 16px;
-  position: fixed;
   height: 100%;
-  top: 66px;
+  padding: 18px 16px;
+  margin-top: 66px;
+  position: fixed;
+  top: 0;
   left: 0;
-  z-index: 1;
-  overflow-y: scroll;
 }
 
 .side_nav_header {
@@ -28,6 +27,11 @@
   text-align: center;
   color: #fff;
   font-weight: 600;
+}
+
+.side_nav_body {
+  overflow-y: scroll;
+  height: calc(100% - 130px);
 }
 
 .side_nav_body ul {

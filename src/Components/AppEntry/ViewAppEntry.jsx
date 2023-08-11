@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./ViewAppEntry.css"
+import { useNavigate } from 'react-router-dom';
 
 const ViewAppEntry = () => {
-  const[data,setData] =useState(null)
-  useEffect(()=>{
-    const fetchData=async()=>{
-      try{
-        const response = await fetch("https://use2fun.onrender.com/admin/appEntry/getall");
-        if(!response.ok){
-          throw new Error("Network problem");
-        };
-        const jsonData=await response.json();
-        setData(jsonData.data)
-        console.log("Fetched Data:", jsonData.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-fetchData()
-  },[])
+  const tableData = [
+    {
+      id: 1,
+      image: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+    },
+    {
+      id: 2,
+      image: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+    },
+  ];
 
   return (
     <div className='viewappentry'>
