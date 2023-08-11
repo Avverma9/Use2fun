@@ -5,9 +5,23 @@ import styles from "./TrasactionHistory.module.css";
 
 
 const TransactionHistory = () => {
+  const [transaction,setTransaction] = useState(null);
   useEffect(()=>{
-    const fetchData = async()
-  })
+    const fetchData = async()=>{
+      try{
+        const response = await fetch("https://use2fun.onrender.com/admin/wallet/transaction/getall");
+        if (!response.ok){
+          throw new Error("error occupied");
+        }
+        const responsedata=await response.json();
+        setTransaction(responsedata.data)
+        console.log("result",responsedata.data)
+      } catch (error){
+        console.error("error",error)
+      }
+    }
+    fetchData();
+  },[])
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>Transaction History</h3>
@@ -24,7 +38,12 @@ const TransactionHistory = () => {
         <th>OrderId</th>
         <th>Status</th>
         </tr>
-        {}
+        {transaction&&transaction.map((item,index)=>{
+          <tr>
+            <td>{index+1}</td>
+            <td><img src={item.img_url} alt='image'/></td>
+          </tr>
+        })}
         </table>
       </div>
      
