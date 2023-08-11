@@ -1,5 +1,4 @@
-import React from 'react';
-import './Specialid.css';
+import React from 'react'
 
 const SpecialIdComp = () => {
   return (
@@ -8,10 +7,10 @@ const SpecialIdComp = () => {
         <div>
             <p>Special Id</p>
             <input type="text" />
-            <button className='add-btn-k'>ADD</button>
+            <button>ADD</button>
         </div>
-        <button className='cancel-btn-a'>CANCEL</button>
-        <button className='submit-btn-b'>SUBMIT</button>
+        <button>CANCEL</button>
+        <button>SUBMIT</button>
     </div>
   )
 }

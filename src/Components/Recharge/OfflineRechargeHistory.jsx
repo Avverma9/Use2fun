@@ -1,4 +1,4 @@
- import React, { useState,useEffect } from 'react';
+// import React, { useState } from 'react';
 // import { Modal, Button } from 'react-bootstrap';
 import style from './OfflineRechargeHistory.module.css';
 
@@ -14,11 +14,11 @@ const OfflineRechargeHistory = () => {
 //     dpApprove: false,
 //   });
 
-  // const tableData = [
-  //   { id: 1, image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", username: 'User 1', sender: "Master Admin", Name: 'James', PaymentId: 'qwetr6544fg', price: "45", coin: "344444", datetime: "2023-03-28 05-08-18" },
-  //   { id: 1, image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", username: 'User 1', sender: "Master Admin", Name: 'James', PaymentId: 'qwetr6544fg', price: "45", coin: "344444", datetime: "2023-03-28 05-08-18" },
+  const tableData = [
+    { id: 1, image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", username: 'User 1', sender: "Master Admin", Name: 'James', PaymentId: 'qwetr6544fg', price: "45", coin: "344444", datetime: "2023-03-28 05-08-18" },
+    { id: 1, image: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png", username: 'User 1', sender: "Master Admin", Name: 'James', PaymentId: 'qwetr6544fg', price: "45", coin: "344444", datetime: "2023-03-28 05-08-18" },
 
-  // ];
+  ];
 
 //   const handleUpdateClick = (user) => {
 //     setShowModal(true);
@@ -32,36 +32,21 @@ const OfflineRechargeHistory = () => {
 //       dpApprove: user.dpApprove === 'Allowed',
 //     });
 //   };
-const [offlineTransaction,setOfflineTransaction]= useState(null)
-useEffect(() => {
-const fetchData = async () => {
-  try {
-    const response = await fetch("https://use2fun.onrender.com/admin/offline/transaction/getall");
-    if (!response.ok) {
-      throw new Error("error occurred");
-    }
-    const responseData = await response.json();
-    setOfflineTransaction(responseData.data);
-    console.log("result", responseData.data);
-  } catch (error) {
-    console.error("error", error);
-  }
-};
-fetchData();
-}, []);
+
+
   
   const renderTableRows = () => {
-    return offlineTransaction.map((item,index) => (
-      <tr key={index}>
-        <td>{index+1}</td>
-        <td><img className={style.images} src={item.img_url} alt='images' /></td>
-        <td>N/A</td>
-        <td>N/A</td>
-        <td>N/A</td>
-        <td>N/A</td>
-        <td>{item.price}</td>
-        <td>{item.coin}</td>
-        <td>N/A</td>
+    return tableData.map((row) => (
+      <tr key={row.id}>
+        <td>{row.id}</td>
+        <td><img className={style.images} src={row.image} alt='images' /></td>
+        <td>{row.username}</td>
+        <td>{row.sender}</td>
+        <td>{row.Name}</td>
+        <td>{row.PaymentId}</td>
+        <td>{row.price}</td>
+        <td>{row.coin}</td>
+        <td>{row.datetime}</td>
         <td>
         <button className={style.undo_btn}>Undo</button>
         </td>

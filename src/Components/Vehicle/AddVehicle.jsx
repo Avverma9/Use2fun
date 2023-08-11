@@ -1,28 +1,70 @@
 import React, { useState } from 'react';
 import styles from "./AddVehicle.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddVehicle = () => {
   const [formData, setFormData] = useState({
-    userID: '',
-    email: '',
-    mobile: '',
-    assignRole:'',
-    aadharFront: '',
-    aadharBack: '',
+    day: '',
+    price: '',
+    level: '',
+    vehicle:null,
+    thumbnail: null,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData); 
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    if (name === 'vehicle' || name === 'thumbnail' ) {
+      if (files.length > 0) {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: files[0],
+        }));
+      }
+    }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+ 
+
+    const formDataToSend = new FormData();
+
+    formDataToSend.append('vehicle', formData.vehicle);
+    formDataToSend.append('thumbnail', formData.thumbnail);
+
+    formDataToSend.append('day', formData.day);
+    formDataToSend.append('price', formData.price);
+    formDataToSend.append('level', formData.level);
+
+    try {
+      const response = await fetch('https://use2fun.onrender.com/admin/vehicle/add', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Response data:', responseData);
+        toast.success('Vehicle added successfully.');
+      } else {
+        console.error('Failed to add Vehicle. Response status:', response.status);
+        toast.error('Error occured while adding adding Vehicle.');
+      }
+    } catch (error) {
+      console.error('Error adding Vehicle:', error);
+    }
+  };
+
 
   return (
     <div className={styles.main}>
@@ -31,36 +73,36 @@ const AddVehicle = () => {
       <label>Image*</label>
         <input
           type="file"
-          name="aadharFront"
-          onChange={handleInputChange}
+          name="vehicle"
+          onChange={handleFileChange}
         />
 
         <label>Thumbnail</label>
         <input
           type="file"
-          name="aadharBack"
-          onChange={handleInputChange}
+          name="thumbnail"
+          onChange={handleFileChange}
         />
         <label>Level*</label>
         <input
           type="text"
-          name="userID"
-          value={formData.userID}
+          name="level"
+          value={formData.level}
           onChange={handleInputChange}
         />
         <label>Price*</label>
         <input
-          type="email"
-          name="email"
-          value={formData.email}
+          type="number"
+          name="price"
+          value={formData.price}
           onChange={handleInputChange}
         />
 
         <label>Validity*</label>
         <input
           type="number"
-          name="mobile"
-          value={formData.mobile}
+          name="day"
+          value={formData.day}
           onChange={handleInputChange}
         />
 

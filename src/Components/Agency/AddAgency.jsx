@@ -1,40 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./AddAgency.module.css";
+import React, { useState } from 'react';
+import styles from './AddAgency.module.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddAgency = () => {
-
   const [formData, setFormData] = useState({
-    userID: '',
-    agencyName: '',
-    email: '',
+    userId: '',
+    name: '',
     mobile: '',
-    agencyImage: '',
-    aadharFront: '',
-    aadharBack: '',
+    email: '',
+    agency: null,
+    aadhar_front: null,
+    aadhar_back: null,
   });
-
-  // const [signedIn, setSignedIn] = useState(
-  //   localStorage.getItem("signedIn") === "true"
-  // );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    if (name === 'agency' || name === 'aadhar_front' || name === 'aadhar_back') {
+      if (files.length > 0) {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: files[0],
+        }));
+      }
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData); 
-  };
 
-  // useEffect(() => {
-  //   if (!signedIn) {
-  //     navigate("/signin");
-  //   }
-  // }, [signedIn]);
+    if (!formData.name) {
+      toast.error('Please enter the agency name.');
+      return;
+    }
+
+    if (!formData.mobile || isNaN(formData.mobile) || formData.mobile.length !== 10) {
+      toast.error('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+
+    const formDataToSend = new FormData();
+
+    formDataToSend.append('agency', formData.agency);
+    formDataToSend.append('aadhar_front', formData.aadhar_front);
+    formDataToSend.append('aadhar_back', formData.aadhar_back);
+
+    formDataToSend.append('userId', formData.userId);
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('mobile', formData.mobile);
+    formDataToSend.append('email', formData.email);
+
+    try {
+      const response = await fetch('https://use2fun.onrender.com/admin/agency/add', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Response data:', responseData);
+        toast.success('Agency added successfully.');
+      } else {
+        console.error('Failed to add agency. Response status:', response.status);
+        toast.error('Error occured while adding adding Agent.');
+      }
+    } catch (error) {
+      console.error('Error adding agency:', error);
+    }
+  };
 
   return (
     <div className={styles.main}>
@@ -43,16 +84,16 @@ const AddAgency = () => {
         <label>UserID*</label>
         <input
           type="text"
-          name="userID"
-          value={formData.userID}
+          name="userId"
+          value={formData.userId}
           onChange={handleInputChange}
         />
 
         <label>Agency Name*</label>
         <input
           type="text"
-          name="agencyName"
-          value={formData.agencyName}
+          name="name"
+          value={formData.name}
           onChange={handleInputChange}
         />
 
@@ -73,29 +114,21 @@ const AddAgency = () => {
         />
 
         <label>Agency Image</label>
-        <input
-          type="file"
-          name="agencyImage"
-          onChange={handleInputChange}
-        />
+        <input type="file" name="agency" onChange={handleFileChange} />
 
         <label>AadharCard Front/ID-Proof</label>
-        <input
-          type="file"
-          name="aadharFront"
-          onChange={handleInputChange}
-        />
+        <input type="file" name="aadhar_front" onChange={handleFileChange} />
 
         <label>AadharCard Back/ID-Proof</label>
-        <input
-          type="file"
-          name="aadharBack"
-          onChange={handleInputChange}
-        />
+        <input type="file" name="aadhar_back" onChange={handleFileChange} />
 
         <div className={styles.btn}>
-          <button type="button" className={styles.cancelbtn}>Cancel</button>
-          <button type="submit" className={styles.submitbtn}>Submit</button>
+          <button type="button" className={styles.cancelbtn}>
+            Cancel
+          </button>
+          <button type="submit" className={styles.submitbtn}>
+            Submit
+          </button>
         </div>
       </form>
     </div>

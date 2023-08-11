@@ -1,5 +1,4 @@
 import React from "react";
-import './AddLiveGifts.css';
 
 function AddLiveGifts() {
   return (
@@ -57,8 +56,8 @@ function AddLiveGifts() {
           </div>
         </div>
         <div className="Button_div">
-          <button className="btn-btn1">Cancel</button>
-          <button className="btn-btn2">Submit</button>
+          <button className="btn btn1">Cancel</button>
+          <button className="btn btn2">Submit</button>
         </div>
       </div>
     </div>
