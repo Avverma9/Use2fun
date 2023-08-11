@@ -37,11 +37,3 @@ select{
     background: transparent;
     border: 1px solid grey;
 }
-.viewadminsearch{
-  border: none;
-    padding: 5px;
-    background:#BF00ED;
-    color: white;
-    font-weight: 501;
-    width: 200px;
-}

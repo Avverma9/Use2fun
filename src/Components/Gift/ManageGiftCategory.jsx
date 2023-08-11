@@ -1,5 +1,4 @@
 import React from "react";
-import './AddLiveGifts.css';
 
 
 function ManageGiftcategory() {

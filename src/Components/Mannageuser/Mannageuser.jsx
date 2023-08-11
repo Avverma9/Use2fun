@@ -23,6 +23,38 @@ const Mannageuser = () => {
     fetchData();
   }, []);
 
+  const fetchall = async () => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/user/getall");
+      const jsonData = await response.json();
+      setData(jsonData.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const deleteUserHandler = () => {
+    const id = localStorage.getItem("userId");
+    const url = `https://use2fun.onrender.com/admin/user/delete/${id}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("User deleted successfully");
+          fetchall();
+        } else {
+          console.log("Error deleting user");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleAction = (user, action) => {
     localStorage.setItem("userId", user._id);
 
@@ -34,6 +66,7 @@ const Mannageuser = () => {
         navigate("/edit-user");
         break;
       case "delete":
+        deleteUserHandler();
         break;
       case "received-gift-history":
         navigate("/recieved-gift-history");
@@ -43,10 +76,10 @@ const Mannageuser = () => {
 
         break;
       case "coin-history":
-        navigate("/coin-history");
+        navigate("/mannage-purchased-coin-history");
         break;
       case "live-history":
-        navigate("/live-history");
+        navigate("/mannage-live-user-history");
         break;
       case "decline":
         break;

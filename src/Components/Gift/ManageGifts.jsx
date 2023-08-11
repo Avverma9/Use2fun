@@ -1,5 +1,4 @@
 import React from "react";
-import './managegift.css';
 
 function ManageGift() {
   return (

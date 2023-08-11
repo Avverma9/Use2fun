@@ -1,5 +1,4 @@
-import React from 'react';
-import './AddSvip.css';
+import React from 'react'
 
 function AddSvip() {
   return (
@@ -31,8 +30,8 @@ function AddSvip() {
         <input className="input" type="text" name="" id=""  placeholder="Validity"/>
       </div>
       <div className='Button_div'>
-            <button className='btn-btn1'>Cancel</button>
-            <button className='btn-btn2'>Submit</button>
+            <button className='btn btn1'>Cancel</button>
+            <button className='btn btn2'>Submit</button>
         </div>
     </div>
   )
