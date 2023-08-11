@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './AddSvip.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -70,7 +71,8 @@ function AddSvip() {
 
   return (
     <form className="Vip_main" onSubmit={handleSubmit}>
-      <h3>Add  Svip</h3>
+    <div className='svip-head'>
+      <h3 >Add  Svip</h3></div>
       <div className="innerdiv">
         <label htmlFor="">Image*</label> <br />
         <div className="input">
@@ -97,8 +99,8 @@ function AddSvip() {
         <input className="input" type="number" name="" id="" placeholder="Validity" onChange={handleInputChange} />
       </div>
       <div className='Button_div'>
-        <button className='btn btn1'>Cancel</button>
-        <button  type="submit" className='btn btn2'>Submit</button>
+        <button className='btn-btn1'>Cancel</button>
+        <button  type="submit" className='btn-btn2'>Submit</button>
       </div>
     </form>
   )

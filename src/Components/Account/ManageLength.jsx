@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import './Managelength.css';
 
 const ManageLength = () => {
   return (
-    <div>
+    <div className='length-head'>
         <h2>ManageLength</h2>
-        <div>
-            Descrpition length
+        <div className='label-length'>
+           <label> Descrpition length</label>
             <select name="" id="">
                 <option value="10">10</option>
                 <option value="30">30</option>
