@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Liveusers.css";
 import Title from "../common/Title";
 
 const Liveusers = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("https://use2fun.onrender.com/user/live/getall")
+      .then((response) => response.json())
+      .then((data) => setUsers(data.data));
+  }, []);
+  console.log(users);
   return (
     <>
       <Title title="Mannage Live Users" />
@@ -35,33 +43,35 @@ const Liveusers = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Sourav007</td>
-            <td>Sourav</td>
-            <td>5579</td>
-            <td>Archived</td>
-            <td>2023-05-22 / 19:45:38</td>
-            <td>254</td>
-            <td>
-              <div className="dropdown">
-                <button
-                  className="action-btn dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  // Missing Dropdown options
-                >
-                  <span>Action</span>
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <button className="dropdown-item">View</button>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
+          {users.map((u, i) => (
+            <tr key={u._id}>
+              <th scope="row">{i + 1}</th>
+              <td>Sourav007</td>
+              <td>Sourav</td>
+              <td>{u.channelName}</td>
+              <td>Archived</td>
+              <td>2023-05-22 / 19:45:38</td>
+              <td>254</td>
+              <td>
+                <div className="dropdown">
+                  <button
+                    className="action-btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    // Missing Dropdown options
+                  >
+                    <span>Action</span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <button className="dropdown-item">View</button>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
