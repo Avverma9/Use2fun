@@ -1,0 +1,5 @@
+.chat-bubble{
+    display: flex;
+    gap: 10%;
+    flex-wrap: wrap;
+}

@@ -40,6 +40,7 @@ const AgentLogin = () => {
         <div className="login-image">
           <img src="https://i.gifer.com/IPNp.gif" alt="" />
         </div>
+        <div className="phone-no">
         <div className="input-country">
           <Select
             options={countries}
@@ -66,9 +67,12 @@ const AgentLogin = () => {
             onChange={(e) => setNumber(e.target.value)}
           />
         </div>
+        
+        
         <button type="submit" className="agent-next">
           Next
         </button>
+        </div>
       </form>
     </>
   );
