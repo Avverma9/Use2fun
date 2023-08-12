@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
-import style from "./ViewFrames.css";
-=======
 import  "./ViewFrames.css";
->>>>>>> origin/Abdul
 import { useNavigate } from 'react-router-dom';
 
 const ViewFrames = () => {
   const navigate = useNavigate();
   const [frame,setFrame] = useState(null);
-  const navigate = useNavigate()
+
     useEffect(()=>{
       
       const fetchData =async ()=>{
@@ -28,27 +24,16 @@ const ViewFrames = () => {
       fetchData();
     },[]);
 
-<<<<<<< HEAD
-    const navigatetoaddframe=()=>{
-      navigate('/add-frames');
-    }
-
-=======
 
     const handleNavigate=()=>{
       navigate('/add-frames')
     }
->>>>>>> origin/Abdul
     
 
   return (
     <div className='viewframe-main'>
         <h3>View Frames</h3>
-<<<<<<< HEAD
-        <button className='add-frame-btn' onClick={navigatetoaddframe}>Add Frame</button>
-=======
         <button className='add-frame-btn' onClick={handleNavigate}>Add Frame</button>
->>>>>>> origin/Abdul
 
 
         <table className="table">
