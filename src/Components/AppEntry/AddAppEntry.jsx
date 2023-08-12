@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./AddAppEntry.css";
-import { toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppEntry = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,7 +19,7 @@ const AppEntry = () => {
     }
 
     const formData = new FormData();
-    formData.append('appEntry', selectedFile);
+    formData.append('images', selectedFile);
 
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/appEntry/update', {
@@ -28,7 +28,7 @@ const AppEntry = () => {
       });
 
       if (response.ok) {
-        toast.success('App Entry Updated ');
+        toast.success('App Entry Updated');
       } else {
         toast.error('Failed to submit data.');
       }

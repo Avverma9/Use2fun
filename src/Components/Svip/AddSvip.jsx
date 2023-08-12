@@ -39,8 +39,12 @@ function AddSvip() {
 
     const formDataToSend = new FormData();
 
-    formDataToSend.append('svip', formData.svip);
-    formDataToSend.append('thumbnail', formData.thumbnail);
+    if (formData.svip) {
+      formDataToSend.append('images', formData.svip);
+    }
+    if (formData.thumbnail) {
+      formDataToSend.append('images', formData.thumbnail); 
+    }
 
     formDataToSend.append('level', formData.level);
     formDataToSend.append('price', formData.price);
@@ -56,13 +60,13 @@ function AddSvip() {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Response data:', responseData);
-        toast.success('Agency added successfully.');
+        toast.success('SVIP added successfully.');
       } else {
-        console.error('Failed to add agency. Response status:', response.status);
-        toast.error('Error occured while adding adding Agent.');
+        console.error('Failed to add SVIP. Response status:', response.status);
+        toast.error('Error occured while adding adding SVIP.');
       }
     } catch (error) {
-      console.error('Error adding agency:', error);
+      console.error('Error adding SVIP:', error);
     }
   };
 
@@ -96,7 +100,7 @@ function AddSvip() {
       </div>
       <div className="innerdiv">
         <label htmlFor="">Validity* (days)*</label> <br />
-        <input className="input" type="number" name="" id="" placeholder="Validity" onChange={handleInputChange} />
+        <input className="input" type="number" name="day" id="" placeholder="Validity" onChange={handleInputChange} />
       </div>
       <div className='Button_div'>
         <button className='btn-btn1'>Cancel</button>

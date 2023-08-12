@@ -46,7 +46,7 @@ fetchData()
             <tr key={index} className='viewappentry-row2'>
               <td>{index+1}</td>
               <td>
-                <img src={item.img_url} alt='image' />
+                <img src={item.images} alt='image' />
               </td>
               <td>
                 <select className="selectbar">
