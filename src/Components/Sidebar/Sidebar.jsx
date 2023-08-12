@@ -770,7 +770,6 @@ const Gift = () => {
 };
 
 //Coin Seller
-//Gifts
 const CoinSeller = () => {
   const [isExpanded, setExpanded] = useState(false);
   const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
@@ -862,17 +861,45 @@ const MasterAdmin = () => {
 
 //My Level
 const MyLevel = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
   return (
     <>
-      <li>
-        <Link to="/manage-mylevel">
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
           {" "}
           <img src={mylevel} alt="icon" srcset="" />
         </Link>
-        <Link to="/manage-mylevel">
-          <p> My Level</p>
+        <Link>
+          <p>My Level</p>
         </Link>
       </li>
+      <div {...getCollapseProps()}>
+        <ul>
+        <li>
+            <Link to="/add-level">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-level">
+              <p>Add Level</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/manage-mylevel">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/manage-mylevel">
+              <p>View Level</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };

@@ -43,7 +43,7 @@ function ViewSvip() {
         {viewsvip&&viewsvip.map((item,index)=>(
           <tr>
             <td className='priceth'>{index+1}</td>
-            <td className='priceth'><img src='{item.img_url}'/></td>
+            <td className='priceth'><img src={item.images[0]}/></td>
             <td className='priceth'>{item.price}</td>
             <td className='priceth'>{item.level}</td>
             <td className='priceth'>{item.day}<span>days</span></td>

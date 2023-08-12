@@ -64,6 +64,7 @@ import ManageGift from "./Components/Gift/ManageGifts";
 import SignIn from "./Components/SignIn/SignIn";
 import AddBubble from "./Components/ChatBubble/AddBubble";
 import CoinSeller from "./Components/Coinhistory/CoinSeller";
+import AddLevel from "./Components/MyLevel/AddLevel";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -181,6 +182,7 @@ function App() {
             <Route path="/admin-coin-history" element={<AdminCoinHistory/>}/>
             <Route path="/admin-recharge-history" element={<AdminRechargeHistory/>}/>
             <Route path="/manage-mylevel" element={<ManageMyLevel/>}/>
+            <Route path="/add-level" element={<AddLevel/>}/>
             <Route path="/manage-talent" element={<ManageTalentLevel/>}/>
             <Route path="/mange-report" element={<ManageReport/>}/>
             <Route path="/user-report" element={<UserReport/>}/> 

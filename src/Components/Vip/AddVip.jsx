@@ -36,33 +36,37 @@ function AddVip() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formDataToSend = new FormData();
+  
+    if (formData.vip) {
+      formDataToSend.append('images', formData.vip);
+    }
+    if (formData.thumbnail) {
+      formDataToSend.append('images', formData.thumbnail); 
+    }
+  
 
-    formDataToSend.append('vip', formData.vip);
-    formDataToSend.append('thumbnail', formData.thumbnail);
     formDataToSend.append('day', formData.day);
-
     formDataToSend.append('level', formData.level);
     formDataToSend.append('price', formData.price);
-
-
+  
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/vip/add', {
         method: 'POST',
         body: formDataToSend,
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
         console.log('Response data:', responseData);
-        toast.success('Agency added successfully.');
+        toast.success('Vip added successfully.');
       } else {
-        console.error('Failed to add agency. Response status:', response.status);
-        toast.error('Error occured while adding adding Agent.');
+        console.error('Failed to add Vip. Response status:', response.status);
+        toast.error('Error occurred while adding Vip.');
       }
     } catch (error) {
-      console.error('Error adding agency:', error);
+      console.error('Error adding Vip:', error);
     }
   };
 
