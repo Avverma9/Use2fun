@@ -34,12 +34,12 @@ const ApprovedHost = () => {
       return (
         <>
           {dataArray.map((item, index) => (
-            <tr key={item._id}>
+            <tr key={index}>
               <td>{index + 1}</td>
-              <td>{item.userId._id}</td>
-              <td>{item.userId.name}</td>
-              <td>{item.userId.email || "testing@gmail.com"}</td>
-              <td>{item.userId.mobile}</td>
+              <td>{item._id || "N/A"}</td>
+              <td>{item.name}</td>
+              <td>{item.email || "testing@gmail.com"}</td>
+              <td>{item.mobile}</td>
               <td>{item.agency_code}</td>
               <td>{item.status}</td>
               <td>
