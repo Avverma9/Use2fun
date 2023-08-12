@@ -27,21 +27,26 @@ const Pushmessage = () => {
     fetchData();
   }, []);
 
-  function sendMessage() {
-    const data = {
-      userId: userId,
-      message: message,
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      "https://use2fun.onrender.com/admin/message/send",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          userId: userId,
+          message: message,
+        }),
+      }
+    );
 
-    fetch("https://use2fun.onrender.com/admin/message/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then(setMessage(""), setUserId(""));
-  }
-
+    if (response.status === 200) {
+      setMessage("");
+      setUserId("");
+    }
+  };
+  console.log(userId);
+  console.log(message);
   return (
     <>
       <Title title="Send Message" />
@@ -77,7 +82,7 @@ const Pushmessage = () => {
       </div>
       <div className="field-button">
         <button className="cancel-butt">Cancel</button>
-        <button className="submit-butt" onClick={sendMessage}>
+        <button className="submit-butt" onClick={handleSubmit}>
           Submit
         </button>
       </div>

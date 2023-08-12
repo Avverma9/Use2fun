@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import './ViewVip.css';
+import { useNavigate } from "react-router-dom";
 
 
 function ViewVip() {
+  const navigate=useNavigate();
   const [vipdata,setVipdata]=useState(null);
   useEffect(()=>{
     const fetchData=async()=>{
@@ -18,11 +21,14 @@ function ViewVip() {
     }
   }
   fetchData();},[])
+  const navigatetoaddvip=()=>{
+    navigate('/add-vip')
+  }
   return (
     <div id="vip_main">
       <div className="vip_header">
         <h3>View Vip</h3>
-        <button className="vip_btn">Add vip</button>
+        <button className="vip_btn" onClick={navigatetoaddvip}>Add vip</button>
       </div>
 
       <table id="vip_table">
@@ -48,7 +54,9 @@ function ViewVip() {
           <td className="price">{item.price}</td>
           <td className="price">{item.level}</td>
           <td className="price">{item.day}(in days)</td>
-          
+          <td>{<select className='viewframe-select'>
+                <option value="action">Action</option>
+                </select>}</td>
         </tr>
       ))}
       </table>

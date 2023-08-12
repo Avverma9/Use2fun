@@ -13,10 +13,11 @@
     border: 1px solid #ccc;
   }
   
-  .priceth, .price {
+  .priceth1, .price1 {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+    width: 15%;
   }
   
   .vip_img {
@@ -60,5 +61,9 @@
   #vip_table th.priceth:last-child,
   #vip_table td.price:last-child {
     width: 100px;
+  }
+  .viewsvip-select{
+    width: 100%;
+    border: none;
   }
   

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import "./AddVip.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -97,8 +98,8 @@ function AddVip() {
         <input className="input" type="number" name="day" id="" placeholder="Validity" onChange={handleInputChange} />
       </div>
       <div className='Button_div'>
-        <button className='btn btn1'>Cancel</button>
-        <button  type="submit" className='btn btn2'>Submit</button>
+        <button className='btn-btn1'>Cancel</button>
+        <button  type="submit" className='btn-btn2'>Submit</button>
       </div>
     </form>
   )

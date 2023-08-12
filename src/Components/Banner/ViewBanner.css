@@ -41,18 +41,21 @@ table {
   table th:first-child,
   .bannertd:first-child {
     width: 30px;
+  
   }
   
   /* Styling for the second column header */
   table th:nth-child(2),
   .bannertd:nth-child(2) {
     width: 100px;
+    
   }
   
   /* Styling for the "HyperLink" column */
   table th:nth-child(3),
   .bannertd:nth-child(3) {
     width: 120px;
+    
   }
   
   /* Styling for the "Action" column */
@@ -60,4 +63,9 @@ table {
   .bannertd:last-child {
     width: 100px;
   }
-  
+  .viewbanner{
+    width: 100%;
+  }
+  .banner-table .banner-data{
+    width: 25%;
+  }

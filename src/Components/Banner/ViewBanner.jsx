@@ -24,7 +24,7 @@ function ViewBanner() {
   return (
     <div className="main">
       <h3>View Banner</h3>
-      <table>
+      <table className="banner-table">
         <tr>
           <th>Sr.</th>
           <th >Banner Image</th>
@@ -33,9 +33,12 @@ function ViewBanner() {
         </tr>
         {banner && banner.map((item,index)=>(
           <tr>
-            <td>{index+1}</td>
-            <td><img src={item.img_url} alt='image'/></td>
-            <td>{item.link}</td>
+            <td className="banner-data">{index+1}</td>
+            <td className="banner-data"><img src={item.img_url} alt='image'/></td>
+            <td className="bannner-data">{item.link}</td>
+            <td>{<select className='viewbanner'>
+                <option value="action">Action</option>
+                </select>}</td>
           </tr>
         ))}
       </table>

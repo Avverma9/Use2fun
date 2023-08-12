@@ -151,6 +151,63 @@ const Host = () => {
   );
 };
 
+
+//Agent route from here //=================================================
+const Agent = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={hostIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Agent</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/agent/login">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/agent/login">
+              <p>Agent Login</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/approved-host-request">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/approved-host-request">
+              <p>Approved Host Request</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/rejected-host-request">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/rejected-host-request">
+              <p>Rejected Host Request</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+
+
 //Agency
 const Agency = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -1071,6 +1128,7 @@ const Sidebar = () => {
           {/* <Home /> */}
           <User />
           <Host/>
+          <Agent/>
           <Agency/>
           <Admin/>
           <SubAdmin/>

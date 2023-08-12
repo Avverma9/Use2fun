@@ -7,9 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddBubble = () => {
   const [formData, setFormData] = useState({
-    day: '',
     price: '',
-    wallpaper: null 
+    images: []
   });
 
   const handleSubmit = async (e) => {
@@ -21,12 +20,12 @@ const AddBubble = () => {
     }
 
     const formDataToSend = new FormData();  
-    formDataToSend.append('day', formData.day);
+   
     formDataToSend.append('price', formData.price);
-    formDataToSend.append('wallpaper', formData.wallpaper);
+    formDataToSend.append('images', formData.images);
 
     try {
-      const response = await fetch('https://use2fun.onrender.com/admin/wallpaper/add', {
+      const response = await fetch('https://use2fun.onrender.com/admin/chatBubble/add', {
         method: 'POST',
         body: formDataToSend,
       });
@@ -38,9 +37,8 @@ const AddBubble = () => {
     
       if (response.ok) {
         setFormData({
-          day: '',
           price: '',
-          wallpaper: null,
+          chatBubble: null,
         });
         toast.success('Wallpaper added successfully')
       } else {
@@ -54,7 +52,7 @@ const AddBubble = () => {
   }
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, wallpaper: e.target.files[0] });  
+    setFormData({ ...formData, images: e.target.files[0] });  
   };
 
   return (
@@ -65,8 +63,8 @@ const AddBubble = () => {
         <label>Images*</label>
         <input type="file" accept="image/*" onChange={handleFileChange} />
 
-        <label>Validity</label>
-        <input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: e.target.value })} placeholder='Validity' min="0" />
+        {/* <label>Validity</label>
+        <input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: e.target.value })} placeholder='Validity' min="0" /> */}
 
         <label>Price*(If free price will be zero(0))</label>
         <input type="number" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} placeholder='Price' min="0" />
