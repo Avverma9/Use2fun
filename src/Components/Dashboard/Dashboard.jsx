@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import "./Dashboard.css";
 import Title from "../common/Title";
 
 const Dashboard = () => {
+  const [loading, setLoading] = useState(null);
+  const [totalUser, setTotalUser] = useState(null);
+  const [totalApprovedHost, setTotalApprovedHost] = useState(null);
+  const [totalRejectedHost, setTotalRejectedHost] = useState(null);
+  const [totalPendingHost, setTotalPendingHost] = useState(null);
+
+  const getTotalUser = () => {
+    fetch("https://use2fun.onrender.com/user/getall")
+      .then((response) => response.json())
+      .then((data) => setTotalUser(data.data.length));
+  };
+  const getApprovedHost = () => {
+    fetch("https://use2fun.onrender.com/host/getApproved")
+      .then((response) => response.json())
+      .then((data) => setTotalApprovedHost(data.data.length));
+  };
+  const getRejectedHost = () => {
+    fetch("https://use2fun.onrender.com/host/getRejected")
+      .then((response) => response.json())
+      .then((data) => setTotalRejectedHost(data.data.length));
+  };
+  const getPendingHost = () => {
+    fetch("https://use2fun.onrender.com/host/getPending")
+      .then((response) => response.json())
+      .then((data) => setTotalPendingHost(data.data.length));
+  };
+  useEffect(() => {
+    setLoading(true);
+    getTotalUser();
+    getApprovedHost();
+    getRejectedHost();
+    getPendingHost();
+    return setLoading(false);
+  }, []);
+
   return (
     <>
       <Title title="Dashboard" />
@@ -16,7 +51,9 @@ const Dashboard = () => {
               </h5>
               <div>
                 <h5 className="card-title text-white">Total User</h5>
-                <p className="card-text text-white">23</p>
+                <p className="card-text text-white">
+                  {!loading && totalUser !== null ? totalUser : "Loading Data"}
+                </p>
               </div>
             </div>
           </div>
@@ -29,7 +66,11 @@ const Dashboard = () => {
               </h5>
               <div>
                 <h5 className="card-title text-white">Total Approved Host</h5>
-                <p className="card-text text-white">23</p>
+                <p className="card-text text-white">
+                  {!loading && totalApprovedHost !== null
+                    ? totalApprovedHost
+                    : "Loading Data"}
+                </p>
               </div>
             </div>
           </div>
@@ -43,7 +84,11 @@ const Dashboard = () => {
               </h5>
               <div>
                 <h5 className="card-title text-white">Total Rejected Host</h5>
-                <p className="card-text text-white">23</p>
+                <p className="card-text text-white">
+                  {!loading && totalRejectedHost !== null
+                    ? totalRejectedHost
+                    : "Loading Data"}
+                </p>
               </div>
             </div>
           </div>
@@ -56,7 +101,11 @@ const Dashboard = () => {
               </h5>
               <div>
                 <h5 className="card-title text-white">Total Pending Host</h5>
-                <p className="card-text text-white">23</p>
+                <p className="card-text text-white">
+                  {!loading && totalPendingHost !== null
+                    ? totalPendingHost
+                    : "Loading Data"}
+                </p>
               </div>
             </div>
           </div>
