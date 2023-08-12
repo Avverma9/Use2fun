@@ -56,22 +56,22 @@ function AddBanner() {
 
   return (
     <div id='main'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <h3>Add Banner</h3>
-        <div className='input_div input1'>
+        <div className={styles.input_fields}>
             <label htmlFor="">Image*</label><br />
-            <div>
+            <div className={styles.input_file}>
             <input type="file" name="banner" id="" onChange={handleFileChange} />
             </div> 
         </div>
-        <div className='input_div input2'>
+        <div className={styles.input_input2}>
             <label htmlFor="">HyperLink*</label> <br />
             <input type="url" name="link" id="" placeholder='Hyperlink'  onChange={(e) => setFormData({ ...formData, link: e.target.value })}/>
         </div>
 
         <div className='Button_div'>
-            <button className='btn btn1'>Cancel</button>
-            <button type='submit' className='btn btn2'>Submit</button>
+            <button className={styles.btn_btn1}>Cancel</button>
+            <button type='submit' className={styles.btn_btn2}>Submit</button>
         </div>
         </form>
     </div>

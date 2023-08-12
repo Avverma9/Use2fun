@@ -42,4 +42,7 @@ a {
   margin-left: 18%;
   width: 82%;
   /* height: 100vh; */
+  margin-top: 100px;
+  overflow-y: scroll;
+  height: calc(100% - 100px);
 }

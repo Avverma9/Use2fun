@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './Managesplash.css';
 
 const ManageSplashImage = () => {
   return (
-    <div>
-        <h2>ManageSplashImage</h2>
+    <div className='splash-head'>
+        <h2>Manage Splash Image</h2>
 
-        <div style={{display:"flex", flexDirection:"column"}}>
-            Update Splash Image
+        <div className='label-splash'>
+           <label> Update Splash Image</label>
             <input type="file" />
         </div>
     </div>

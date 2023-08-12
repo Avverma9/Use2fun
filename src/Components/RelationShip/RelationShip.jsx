@@ -1,4 +1,5 @@
 import React from 'react'
+import './RelationShip.css';
 
 const RelationShip = () => {
   return (
@@ -7,10 +8,10 @@ const RelationShip = () => {
         <div>
             <p>Add Relationship</p>
             <input type="text" />
-            <button>ADD</button>
+            <button className='add-btn-k'>ADD</button>
         </div>
-        <button>CANCEL</button>
-        <button>SUBMIT</button>
+        <button className='cancel-btn-a'>CANCEL</button>
+        <button className='submit-btn-b'>SUBMIT</button>
     </div>
   )
 }

@@ -1,16 +1,17 @@
-import React from 'react'
+import React from 'react';
+import './LockRoom.css';
 
 const LockRoom = () => {
   return (
     <div>
         <h2>Lock Room</h2>
-        <div>
+        <div className='lock-room'>
             <p>Lock Room id</p>
             <input type="text" />
-            <button>ADD</button>
+            <button className='cancel-btn-a'>ADD</button>
         </div>
-        <button>CANCEL</button>
-        <button>SUBMIT</button>
+        <button className='cancel-btn-a'>CANCEL</button>
+        <button className='submit-btn-b'>SUBMIT</button>
     </div>
   )
 }

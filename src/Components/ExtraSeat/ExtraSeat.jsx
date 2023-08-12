@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './Extraseat.css';
 
 const ExtraSeat = () => {
   return (
@@ -7,10 +8,10 @@ const ExtraSeat = () => {
         <div>
           <p>ExtraSeat**</p>
             <input type="text" />
-            <button>ADD</button>
+            <button className='add-btn-k'>ADD</button>
         </div>
-        <button>CANCEL</button>
-        <button>SUBMIT</button>
+        <button className='cancel-btn-a'>CANCEL</button>
+        <button className='submit-btn-b'>SUBMIT</button>
     </div>
   )
 }
