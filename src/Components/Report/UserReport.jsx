@@ -87,7 +87,7 @@ const UserReport = () => {
         );
         const jsonData = await response.json();
         if (response.ok) {
-          setData(jsonData.data);
+          setData([]);
           setLoading(false);
         }
       } catch (error) {
@@ -96,7 +96,6 @@ const UserReport = () => {
     };
     fetchData();
   }, []);
-  console.log(data);
   return (
     <div className={style.main}>
       <h3>Manage User Report</h3>
@@ -126,7 +125,7 @@ const UserReport = () => {
           </tr>
         </thead>
         {/* <tbody>{renderTableRows()}</tbody> */}
-        {/* <tbody>
+        <tbody>
           {!loading && data !== null
             ? data.map((data, i) => (
                 <tr key={data._id}>
@@ -139,8 +138,8 @@ const UserReport = () => {
                   <td>N/A</td>
                 </tr>
               ))
-            : "Data Loading..."}
-        </tbody> */}
+            : "No Data Found"}
+        </tbody>
       </table>
 
       {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
