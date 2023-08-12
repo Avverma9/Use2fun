@@ -63,6 +63,7 @@ import ManageGiftcategory from "./Components/Gift/ManageGiftCategory";
 import ManageGift from "./Components/Gift/ManageGifts";
 import SignIn from "./Components/SignIn/SignIn";
 import AddBubble from "./Components/ChatBubble/AddBubble";
+import AgentLogin from "./Components/Agent/Login";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -159,6 +160,7 @@ function App() {
             <Route path="/add-vehicle" element={<AddVehicle/>}/>
             <Route path="/view-vehicle" element={<ViewVehicle/>}/>
             <Route path="/extra-seat" element={<ExtraSeat/>}/>
+            <Route path="/agent/login" element={<AgentLogin/>}/>
             <Route path="/specialid" element={<SpecialIdComp/>}/>
             <Route path="/lock-room" element={<LockRoom/>}/>
             <Route path="/add-banner" element={<AddBanner/>}/>
