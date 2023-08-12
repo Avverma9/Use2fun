@@ -2,27 +2,27 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { hostIcon, userIcon } from "../../assets";
 // import hostIcon from "../../assets/icons/host.png"
-import agencyIcon from "../../assets/icons/agency.png"
-import adminIcon from "../../assets/icons/admin.png"
-import subAdminIcon from "../../assets/icons/subadmin.png"
-import appEntryIcon from "../../assets/icons/appentey.png"
-import roomWallpaperIcon from "../../assets/icons/coinHistory.png"
-import framesIcon from "../../assets/icons/frames.png"
-import shopIcon from "../../assets/icons/shop.png"
-import mylevel from "../../assets/icons/mylevel.png"
-import talentIcon from "../../assets/icons/talent.png"
-import reportIcon from "../../assets/icons/report.png"
-import rechargeIcon from "../../assets/icons/Recharge.png"
-import vehicleIcon from "../../assets/icons/vehicle.png"
-import lockroomIcon from "../../assets/icons/lockroom.png"
-import chatbubbleIcon from "../../assets/icons/chatbubble.png"
-import relationshipIcon from "../../assets/icons/relationship.png"
-import specialIdIcon from "../../assets/icons/specialid.png"
-import extraSeatIcon from "../../assets/icons/extraseat.png"
-import VipIcon from "../../assets/icons/vip.png"
-import BannerIcon from "../../assets/icons/banner.png"
-import GiftIcon from "../../assets/icons/gift.png"
-import coinIcon from "../../assets/icons/coin.png"
+import agencyIcon from "../../assets/icons/agency.png";
+import adminIcon from "../../assets/icons/admin.png";
+import subAdminIcon from "../../assets/icons/subadmin.png";
+import appEntryIcon from "../../assets/icons/appentey.png";
+import roomWallpaperIcon from "../../assets/icons/coinHistory.png";
+import framesIcon from "../../assets/icons/frames.png";
+import shopIcon from "../../assets/icons/shop.png";
+import mylevel from "../../assets/icons/mylevel.png";
+import talentIcon from "../../assets/icons/talent.png";
+import reportIcon from "../../assets/icons/report.png";
+import rechargeIcon from "../../assets/icons/Recharge.png";
+import vehicleIcon from "../../assets/icons/vehicle.png";
+import lockroomIcon from "../../assets/icons/lockroom.png";
+import chatbubbleIcon from "../../assets/icons/chatbubble.png";
+import relationshipIcon from "../../assets/icons/relationship.png";
+import specialIdIcon from "../../assets/icons/specialid.png";
+import extraSeatIcon from "../../assets/icons/extraseat.png";
+import VipIcon from "../../assets/icons/vip.png";
+import BannerIcon from "../../assets/icons/banner.png";
+import GiftIcon from "../../assets/icons/gift.png";
+import coinIcon from "../../assets/icons/coin.png";
 
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
@@ -152,7 +152,6 @@ const Host = () => {
   );
 };
 
-
 //Agent route from here //=================================================
 const Agent = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -201,13 +200,38 @@ const Agent = () => {
               <p>Rejected Host Request</p>
             </Link>
           </li>
+          <li>
+            <Link to="/recharge-dashboard">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/recharge-dashboard">
+              <p>Recharge Dashboard</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/diamond-account">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/diamond-account">
+              <p>Diamond Account</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/profile">
+              <p>Profile</p>
+            </Link>
+          </li>
         </ul>
       </div>
     </>
   );
 };
-
-
 
 //Agency
 const Agency = () => {
@@ -585,7 +609,6 @@ const ChatBubble = () => {
   );
 };
 
-
 //Relationship
 const Relationship = () => {
   return (
@@ -937,7 +960,7 @@ const MyLevel = () => {
       </li>
       <div {...getCollapseProps()}>
         <ul>
-        <li>
+          <li>
             <Link to="/add-level">
               {" "}
               <img src={mylevel} alt="icon" srcset="" />
@@ -1201,32 +1224,32 @@ const Sidebar = () => {
         <ul>
           {/* <Home /> */}
           <User />
-          <Host/>
-          <Agent/>
-          <Agency/>
-          <Admin/>
-          <SubAdmin/>
-          <AppEntry/>
-          <Shop/>
-          <Frames/>
-          <Vehicle/>
-          <LockRoom/>
-          <ChatBubble/>
-          <Relationship/>
-          <SpecialId/>
-          <ExtraSeat/>
-          <Svip/>
-          <Vip/>
-          <Banner/>
-          <Gift/>
-          <CoinSeller/>
-          <MasterAdmin/>
-          <MyLevel/>
-          <TheTalent/>
-          <Report/>
-          <TransactionHistory/>
-          <Recharge/>
-          <Account/>
+          <Host />
+          <Agent />
+          <Agency />
+          <Admin />
+          <SubAdmin />
+          <AppEntry />
+          <Shop />
+          <Frames />
+          <Vehicle />
+          <LockRoom />
+          <ChatBubble />
+          <Relationship />
+          <SpecialId />
+          <ExtraSeat />
+          <Svip />
+          <Vip />
+          <Banner />
+          <Gift />
+          <CoinSeller />
+          <MasterAdmin />
+          <MyLevel />
+          <TheTalent />
+          <Report />
+          <TransactionHistory />
+          <Recharge />
+          <Account />
         </ul>
       </div>
     </div>
