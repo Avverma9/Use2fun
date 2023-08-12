@@ -9,12 +9,12 @@ td img{
 }
 .viewappentry .selectbar{
     border: 1px solid grey;
-    width: 100%;
+    width: 130px;
     background: transparent;
 }
 .viewappentry-row1{
     display: flex;
-    gap:200px;
+    gap:160px;
     margin-bottom: 20px;
 }
 .viewappentry-row2{
@@ -24,4 +24,16 @@ td img{
 }
 .viewappentry h2{
     margin-bottom: 20px;
+}
+.addapp-entry{
+    background-color: #058D9E;
+    
+    border: none;
+    padding: 10px;
+    
+    color: white;
+    font-weight: 501;
+    width: 150px;
+    margin-right: 10px;
+    margin-top: 20px;
 }

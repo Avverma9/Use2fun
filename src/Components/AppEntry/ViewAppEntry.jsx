@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./ViewAppEntry.css"
+import { useNavigate } from 'react-router-dom';
+ 
 
 const ViewAppEntry = () => {
+  
+   const navigate = useNavigate();
+   
+ 
   const[data,setData] =useState(null)
   useEffect(()=>{
     const fetchData=async()=>{
@@ -19,10 +25,14 @@ const ViewAppEntry = () => {
     }
 fetchData()
   },[])
-
+  const navigateappentry=()=>{
+    
+   navigate("/add-appentry")
+ }
   return (
     <div className='viewappentry'>
       <h2>ViewAppEntry</h2>
+      <button className='addapp-entry' onClick={navigateappentry}>Add App Entry</button>
       <table>
         <thead>
           <tr className='viewappentry-row1'>

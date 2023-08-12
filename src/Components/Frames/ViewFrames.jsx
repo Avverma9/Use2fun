@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import style from "./ViewFrames.css";
+import { useNavigate } from 'react-router-dom';
 
 const ViewFrames = () => {
+  const navigate = useNavigate();
   const [frame,setFrame] = useState(null);
     useEffect(()=>{
       
@@ -21,12 +23,16 @@ const ViewFrames = () => {
       fetchData();
     },[]);
 
+    const navigatetoaddframe=()=>{
+      navigate('/add-frames');
+    }
+
     
 
   return (
     <div className='viewframe-main'>
         <h3>View Frames</h3>
-        <button className='add-frame-btn'>Add Frame</button>
+        <button className='add-frame-btn' onClick={navigatetoaddframe}>Add Frame</button>
 
 
         <table className="table">
