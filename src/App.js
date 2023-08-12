@@ -64,6 +64,7 @@ import ManageGift from "./Components/Gift/ManageGifts";
 import SignIn from "./Components/SignIn/SignIn";
 import AddBubble from "./Components/ChatBubble/AddBubble";
 import CoinSeller from "./Components/Coinhistory/CoinSeller";
+import AgentLogin from "./Components/Agent/Login";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
