@@ -14,8 +14,14 @@ td img{
 }
 .viewappentry-row1{
     display: flex;
-    gap:160px;
+    
     margin-bottom: 20px;
+}
+.viewapp-head{
+    width: 100% !important;
+}
+.viewappentry-head{
+    width: 50% !important;
 }
 .viewappentry-row2{
     display: flex;
