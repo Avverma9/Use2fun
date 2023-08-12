@@ -6,8 +6,8 @@ const AgentLogin = () => {
   const [number, setNumber] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const countries = [
-    { value: "+1", label: "United States", flag: "US-flag-image-url" },
-    // Add more countries here...
+    { value: "+1", label: "United States", flag: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fus-flag-circle&psig=AOvVaw0mgId7BDKs2o7jy1H0fUWt&ust=1691941969655000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCICI_oy914ADFQAAAAAdAAAAABAZ" },
+    { value: "+91", label: "India", flag: "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" },
   ];
 
   const handleSubmit = async (e) => {
