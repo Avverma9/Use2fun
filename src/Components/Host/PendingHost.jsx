@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import style from "./PendingHost.module.css"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const PendingHost = () => {
   const [data,setData]=useState(null)
@@ -43,6 +45,8 @@ const PendingHost = () => {
 
       if (response.ok) {
          console.log(itemId,"Data Changed")
+         window.location.reload('/pending-host-request')
+        //  toast.success('Host accepted')
       } else {
         throw new Error('Network response was not ok');
       }
@@ -77,6 +81,9 @@ const PendingHost = () => {
                   }
                   if (selectedValue === 'accept') {
                     handleStatusChange(item._id, 'Approved');
+                  }
+                  if (selectedValue === 'reject') {
+                    handleStatusChange(item._id, 'Rejected');
                   }
                 }}>
                   <option value="">Action</option>

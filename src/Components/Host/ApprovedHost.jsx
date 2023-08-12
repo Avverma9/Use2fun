@@ -35,12 +35,11 @@ const ApprovedHost = () => {
         <>
           {dataArray.map((item, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item._id || "N/A"}</td>
-              <td>{item.name}</td>
-              <td>{item.email || "testing@gmail.com"}</td>
-              <td>{item.mobile}</td>
-              <td>{item.agency_code}</td>
+              <td>{index+1}</td>
+              <td>{item.userId && item.userId.userId ? item.userId.userId : "N/A"}</td>
+              <td>{item.userId && item.userId.name ? item.userId.name : "N/A"}</td>
+              <td>{item.userId && item.userId.mobile ? item.userId.mobile : "N/A"}</td>
+              <td>{item.agency_code || "N/A"}</td>
               <td>{item.status}</td>
               <td>
                 <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
@@ -64,7 +63,7 @@ const ApprovedHost = () => {
       );
     }
   };
-  
+
 
   return (
     <div className={style.main}>
@@ -89,7 +88,6 @@ const ApprovedHost = () => {
             <th>Sr.</th>
             <th>Username</th>
             <th>Name</th>
-            <th>Email</th>
             <th>Phone</th>
             <th>Agency Code</th>
             <th>Status</th>
