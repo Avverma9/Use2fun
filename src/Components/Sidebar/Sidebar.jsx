@@ -227,6 +227,24 @@ const Agent = () => {
               <p>Profile</p>
             </Link>
           </li>
+          <li>
+            <Link to="/ranking">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/ranking">
+              <p>Ranking</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/recharge-option">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/recharge-option">
+              <p>Recharge Option</p>
+            </Link>
+          </li>
         </ul>
       </div>
     </>

@@ -48,15 +48,6 @@ function ViewVip() {
           <th className="priceth">Validity</th>
           <th className="priceth">Action</th>
         </tr>
-        {viewsvip&&viewsvip.map((item,index)=>(
-          <tr>
-            <td className='priceth'>{index+1}</td>
-            <td className='priceth'><img src={item.images[0]}/></td>
-            <td className='priceth'>{item.price}</td>
-            <td className='priceth'>{item.level}</td>
-            <td className='priceth'>{item.day}<span>days</span></td>
-            
-          </tr>
 
         {vipdata &&
           vipdata.map((item, index) => (
