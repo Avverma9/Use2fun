@@ -63,6 +63,7 @@ import ManageGiftcategory from "./Components/Gift/ManageGiftCategory";
 import ManageGift from "./Components/Gift/ManageGifts";
 import SignIn from "./Components/SignIn/SignIn";
 import AddBubble from "./Components/ChatBubble/AddBubble";
+import CoinSeller from "./Components/Coinhistory/CoinSeller";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -192,6 +193,8 @@ function App() {
             <Route path="/manage-splash-image" element={<ManageSplashImage/>}/>
             <Route path="/transaction-history" element={<TransactionHistory/>}/>
             <Route path="/send-coins" element={<SendCoins/>}/>
+            <Route path="/coin-seller" element={<CoinSeller/>}/>
+
             <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/>
           </Routes>
         </div>
