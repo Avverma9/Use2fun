@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import './ViewSvip.css';
 
 function ViewSvip() {
+  const [viewsvip,setViewsvip] = useState(null);
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const response = await fetch("https://use2fun.onrender.com/admin/svip/getall")
+        if (!response.ok){
+          throw new Error("Network problem");
+        }
+        const jsonData=await response.json();
+        setViewsvip(jsonData.data);
+        console.log(jsonData.data ,"svip")
+
+      }catch (error){
+        console.error("fetching-issue",error)
+      }
+
+    }
+    fetchData();
+  },[])
   return (
     <div>
         <div id="vip_main">
@@ -20,58 +40,18 @@ function ViewSvip() {
           <th className="priceth">Validity</th>
           <th className="priceth">Action</th>
         </tr>
-        <tr>
-          <td className="price">
-            <div className="num">1</div>
-          </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            {" "}
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>{" "}
-          </td>
-        </tr>
-        <tr>
-          <td className="price">
-            <div className="num">2</div>
-          </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td className="price">
-            <div className="num">3</div>
-          </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>
-          </td>
-        </tr>
+        {viewsvip&&viewsvip.map((item,index)=>(
+          <tr>
+            <td className='priceth'>{index+1}</td>
+            <td className='priceth'><img src='{item.img_url}'/></td>
+            <td className='priceth'>{item.price}</td>
+            <td className='priceth'>{item.level}</td>
+            <td className='priceth'>{item.day}<span>days</span></td>
+            
+          </tr>
+
+        ))}
+       
       </table>
     </div>
     </div>

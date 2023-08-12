@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 function ViewVip() {
+  const [vipdata,setVipdata]=useState(null);
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const response = await fetch("https://use2fun.onrender.com/admin/vip/getall");
+        if(!response.ok){
+          throw new Error("An error occupied");
+        };
+        const jsonData=await response.json()
+        setVipdata(jsonData.data);
+        console.log("result" ,jsonData.data);
+      }catch (error) {
+        console.error("Error fetching data:", error);
+    }
+  }
+  fetchData();},[])
   return (
     <div id="vip_main">
       <div className="vip_header">
@@ -20,59 +36,23 @@ function ViewVip() {
           <th className="priceth">Validity</th>
           <th className="priceth">Action</th>
         </tr>
-        <tr>
+        
+        
+        
+        {vipdata&& vipdata.map((item,index)=>(
+        <tr key={index} className="row2">
+          <td className="price">{index+1}</td>
           <td className="price">
-            <div className="num">1</div>
+            <img src={item.img_url} alt="image" />
           </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            {" "}
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>{" "}
-          </td>
+          <td className="price">{item.price}</td>
+          <td className="price">{item.level}</td>
+          <td className="price">{item.day}(in days)</td>
+          
         </tr>
-        <tr>
-          <td className="price">
-            <div className="num">2</div>
-          </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td className="price">
-            <div className="num">3</div>
-          </td>
-          <td className="price">
-            <div className="vip_img"></div>
-          </td>
-          <td className="price">6589</td>
-          <td className="price">25</td>
-          <td className="price">23</td>
-          <td className="price">
-            <select name="cars" id="cars">
-              <option value="volvo">Action</option>
-              <option value="saab">Reaction</option>
-            </select>
-          </td>
-        </tr>
+      ))}
       </table>
+      
     </div>
   );
 }
