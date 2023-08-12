@@ -48,6 +48,9 @@ function ManageGift() {
             <td>{item.category_name}</td>
             <td>{item.coin}</td>
             <td>{status}</td>
+            <td><select>
+              <option>select</option>
+            </select></td>
           </tr>
         ))}
         </table>

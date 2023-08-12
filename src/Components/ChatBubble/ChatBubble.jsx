@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './Chatbubble.css';
 
 const ChatBubble = () => {
   const [data, setData] = useState([]); // Initialize data as an empty array
@@ -11,7 +12,7 @@ const ChatBubble = () => {
   }, []);
 
   return (
-    <div>
+    <div className="chat-bubble">
       {data.map((item) => (
         <div key={item._id}>
           <p>Price: {item.price}</p>

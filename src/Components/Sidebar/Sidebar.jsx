@@ -22,6 +22,7 @@ import extraSeatIcon from "../../assets/icons/extraseat.png"
 import VipIcon from "../../assets/icons/vip.png"
 import BannerIcon from "../../assets/icons/banner.png"
 import GiftIcon from "../../assets/icons/gift.png"
+import coinIcon from "../../assets/icons/coin.png"
 
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
@@ -825,6 +826,51 @@ const Gift = () => {
   );
 };
 
+//Coin Seller
+const CoinSeller = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={coinIcon} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Coin Seller</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/coin-seller">
+              {" "}
+              <img src={coinIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/coin-seller">
+              <p>Add Coin Seller</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/send-coins">
+              {" "}
+              <img src={coinIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/send-coins">
+              <p>Send Coins</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 //Master Admin Coin history
 const MasterAdmin = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -872,17 +918,45 @@ const MasterAdmin = () => {
 
 //My Level
 const MyLevel = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
   return (
     <>
-      <li>
-        <Link to="/manage-mylevel">
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
           {" "}
           <img src={mylevel} alt="icon" srcset="" />
         </Link>
-        <Link to="/manage-mylevel">
-          <p> My Level</p>
+        <Link>
+          <p>My Level</p>
         </Link>
       </li>
+      <div {...getCollapseProps()}>
+        <ul>
+        <li>
+            <Link to="/add-level">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/add-level">
+              <p>Add Level</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/manage-mylevel">
+              {" "}
+              <img src={mylevel} alt="icon" srcset="" />
+            </Link>
+            <Link to="/manage-mylevel">
+              <p>View Level</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
@@ -1145,6 +1219,7 @@ const Sidebar = () => {
           <Vip/>
           <Banner/>
           <Gift/>
+          <CoinSeller/>
           <MasterAdmin/>
           <MyLevel/>
           <TheTalent/>

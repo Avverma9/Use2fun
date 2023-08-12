@@ -33,12 +33,12 @@ fetchData()
     <div className='viewappentry'>
       <h2>ViewAppEntry</h2>
       <button className='addapp-entry' onClick={navigateappentry}>Add App Entry</button>
-      <table>
-        <thead>
+      <table className='viewappentry-table'>
+        <thead className='viewappentry-head'>
           <tr className='viewappentry-row1'>
-            <th>Sr.</th>
-            <th>Image</th>
-            <th>Action</th>
+            <th className='viewapp-head'>Sr.</th>
+            <th className='viewapp-head'>Image</th>
+            <th className='viewapp-head'>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@ fetchData()
             <tr key={index} className='viewappentry-row2'>
               <td>{index+1}</td>
               <td>
-                <img src={item.img_url} alt='image' />
+                <img src={item.images} alt='image' />
               </td>
               <td>
                 <select className="selectbar">

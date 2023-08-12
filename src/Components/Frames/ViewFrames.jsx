@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import style from "./ViewFrames.css";
+import  "./ViewFrames.css";
 import { useNavigate } from 'react-router-dom';
 
 const ViewFrames = () => {
   const navigate = useNavigate();
   const [frame,setFrame] = useState(null);
+
     useEffect(()=>{
       
       const fetchData =async ()=>{
@@ -23,16 +24,16 @@ const ViewFrames = () => {
       fetchData();
     },[]);
 
-    const navigatetoaddframe=()=>{
-      navigate('/add-frames');
-    }
 
+    const handleNavigate=()=>{
+      navigate('/add-frames')
+    }
     
 
   return (
     <div className='viewframe-main'>
         <h3>View Frames</h3>
-        <button className='add-frame-btn' onClick={navigatetoaddframe}>Add Frame</button>
+        <button className='add-frame-btn' onClick={handleNavigate}>Add Frame</button>
 
 
         <table className="table">
@@ -48,7 +49,7 @@ const ViewFrames = () => {
           {frame&&frame.map((item,index)=>(
             <tr key={index}>
             <td>{index+1}</td>
-            <td><img src={item.img_url} alt='image'/></td>
+            <td><img src={item.images[0]} alt='image'/></td>
             <td>{item.price}</td>
             <td>{item.level}</td>
             <td>{item.day}</td>
