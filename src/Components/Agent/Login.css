@@ -17,15 +17,16 @@
   }
   
   .input-number input {
-    width: 30%;
-    padding: 10px;
+    width: 100%;
+    padding: 6px;
     border: 1px solid #ccc;
+    border-left: none;
     border-radius: 5px;
   }
   
   .agent-next {
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 7px 30px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -36,4 +37,19 @@
   .agent-next:hover {
     background-color: #0056b3;
   }
+  .login-image{
+    display: flex;
+    justify-content: center;
+  }
+  .phone-no{
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+  }
   
+  .css-b62m3t-container {
+    width: 100%;
+  }
+  .css-1fdsijx-ValueContainer{
+    padding: 5px;
+  }

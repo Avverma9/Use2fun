@@ -66,6 +66,10 @@ import AddBubble from "./Components/ChatBubble/AddBubble";
 import CoinSeller from "./Components/Coinhistory/CoinSeller";
 import AddLevel from "./Components/MyLevel/AddLevel";
 import AgentLogin from "./Components/Agent/Login";
+import Otp from "./Components/Agent/Otp";
+import RechargeDashboard from "./Components/Agent/RechargeDashboard";
+import DiamondAccount from "./Components/Agent/DiamondAccount";
+import Profilesee from "./Components/Agent/Profilesee";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -200,6 +204,10 @@ function App() {
             <Route path="/coin-seller" element={<CoinSeller/>}/>
 
             <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/>
+            <Route path="/otp-recharge" element={<Otp/>}/>
+            <Route path="/recharge-dashboard" element={<RechargeDashboard/>}/>
+            <Route path="/diamond-account" element={<DiamondAccount/>}/>
+            <Route path="/profile" element={<Profilesee/>}/>
           </Routes>
         </div>
       </Router>

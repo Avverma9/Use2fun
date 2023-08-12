@@ -1,6 +1,9 @@
 import React from "react";
 const Welcome=()=>{
-    return
-    
+    return(
+        <div className="welcome-container">
+        
+        </div>
+    )
 }
 export default Welcome

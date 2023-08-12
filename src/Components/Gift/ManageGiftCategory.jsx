@@ -41,6 +41,9 @@ function ManageGiftcategory() {
             <td>{index+1}</td>
             <td>{item.name}</td>
             <td>{status}</td>
+            <td><select>
+              <option>select</option>
+            </select></td>
           </tr>
 
         ))}
