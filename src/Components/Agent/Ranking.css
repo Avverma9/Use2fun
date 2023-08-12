@@ -1,0 +1,28 @@
+.first-head{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.first-column{
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+}
+.first-column img{
+    width: 25px;
+}
+.heading-pro{
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+    height: 40px;
+    align-items: center;
+    color: white;
+    font-weight: 501;
+    width: 100%;
+}
+.below-head p{
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+}
