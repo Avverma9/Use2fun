@@ -47,22 +47,11 @@ function ViewSvip() {
         </tr>
         {viewsvip&&viewsvip.map((item,index)=>(
           <tr>
-<<<<<<< HEAD
-            <td className='priceth1'>{index+1}</td>
-            <td className='priceth1'><img src='{item.img_url}'/></td>
-            <td className='priceth1'>{item.price}</td>
-            <td className='priceth1'>{item.level}</td>
-            <td className='priceth1'>{item.day}<span>days</span></td>
-            <td>{<select className='viewsvip-select'>
-                <option value="action">Action</option>
-                </select>}</td>
-=======
             <td className='priceth'>{index+1}</td>
             <td className='priceth'><img src={item.images[0]}/></td>
             <td className='priceth'>{item.price}</td>
             <td className='priceth'>{item.level}</td>
             <td className='priceth'>{item.day}<span>days</span></td>
->>>>>>> origin/Abdul
             
           </tr>
 

@@ -70,6 +70,7 @@ import Otp from "./Components/Agent/Otp";
 import RechargeDashboard from "./Components/Agent/RechargeDashboard";
 import DiamondAccount from "./Components/Agent/DiamondAccount";
 import Profilesee from "./Components/Agent/Profilesee";
+import Welcome from "./Components/Welcome/Welcome.jsx";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
       <Router>
         <Header />
         <Sidebar />
+        <Welcome/>
         <div
           className="app_body p-5"
           // contain routes and side navigation
@@ -178,7 +180,7 @@ function App() {
             <Route path="/add-live-gifts" element={<AddLiveGifts/>}/>
             <Route path="/manage-gift-category" element={<ManageGiftcategory/>}/>
             <Route path="/manage-gifts" element={<ManageGift/>}/>
-
+          
 
 
 
