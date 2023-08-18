@@ -228,6 +228,15 @@ const Agent = () => {
               <p>Profile</p>
             </Link>
           </li>
+          <li>
+            <Link to="/agent-ranking">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/agent-ranking">
+              <p>Ranking</p>
+            </Link>
+          </li>
         </ul>
       </div>
     </>
