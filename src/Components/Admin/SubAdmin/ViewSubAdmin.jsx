@@ -74,7 +74,7 @@ const ViewSubAdmin = () => {
           <tr key={index}>
             <td>{index + 1}</td>
             <td>
-              {item.userId && <img className="images" src={item.userId.image_url} alt='images' />}
+              {item.userId && <img className="images" src={item.userId.images} alt='images' />}
             </td>
             <td>{item.userId ? item.userId.name : 'N/A'}</td>
             <td>{item.userId ? item.userId.userId : 'N/A'}</td>

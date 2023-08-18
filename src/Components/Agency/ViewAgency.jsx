@@ -35,7 +35,7 @@ const ViewAgency = () => {
             <tr key={item.id}>
               <td>{index + 1}</td>
               <td>
-                <img className="images" src={item.image} alt="images" />
+                <img className="images" src={item.images[0]} alt="images" />
               </td>
               <td>{item.userId && item.userId.name}</td>
               <td>{item.userId && item.userId.name}</td>

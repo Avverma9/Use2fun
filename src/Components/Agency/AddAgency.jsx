@@ -49,9 +49,15 @@ const AddAgency = () => {
 
     const formDataToSend = new FormData();
 
-    formDataToSend.append('agency', formData.agency);
-    formDataToSend.append('aadhar_front', formData.aadhar_front);
-    formDataToSend.append('aadhar_back', formData.aadhar_back);
+    if (formData.agency) {
+      formDataToSend.append('images', formData.agency);
+    }
+    if (formData.aadhar_front) {
+      formDataToSend.append('images', formData.aadhar_front);
+    }
+    if (formData.aadhar_back) {
+      formDataToSend.append('images', formData.aadhar_back);
+    }
 
     formDataToSend.append('userId', formData.userId);
     formDataToSend.append('name', formData.name);
@@ -70,7 +76,7 @@ const AddAgency = () => {
         toast.success('Agency added successfully.');
       } else {
         console.error('Failed to add agency. Response status:', response.status);
-        toast.error('Error occured while adding adding Agent.');
+        toast.error('Error occurred while adding agency.');
       }
     } catch (error) {
       console.error('Error adding agency:', error);
@@ -79,7 +85,7 @@ const AddAgency = () => {
 
   return (
     <div className={styles.main}>
-      <h3>AddAgency</h3>
+      <h3>Add Agency</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>UserID*</label>
         <input

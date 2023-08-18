@@ -1,25 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Userslist.css";
 import Title from "../common/Title";
 
 const Userslist = () => {
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [startDate, setStartDate] = useState("");
+  // const [endDate, setEndDate] = useState("");
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://use2fun.onrender.com/user/getall"
+        );
+        const jsonData = await response.json();
+        if (response.ok) {
+          setData(jsonData.data);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleSearch = () => {
+    const filteredData = data.filter((user) => {
+      return user.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setData(filteredData);
+  };
+
   return (
     <>
       <Title title="Mannage Report" />
       <div className="d-flex align-items-center gap-1 input-fields">
         <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Search</p>
-          <input type="text" name="search" id="search" className="p-1" />
+          <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-        <div className="d-flex align-items-center gap-1">
+        {/* <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Start Date</p>
-          <input type="text" name="search" id="search" className="p-1" />
-        </div>
-        <div className="d-flex align-items-center gap-1">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div> */}
+        {/* <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">End Date</p>
-          <input type="text" name="search" id="search" className="p-1" />
-        </div>
-        <button className="py-1 px-3 text-white search-btn">Search</button>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div> */}
+        <button
+          className="py-1 px-3 text-white search-btn"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
       </div>
       <table className="table table-borderless mt-3">
         <thead>
@@ -34,15 +93,19 @@ const Userslist = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Sourav007</td>
-            <td>example@example.com</td>
-            <td>9090909090</td>
-            <td>bio...</td>
-            <td>2023-05-22</td>
-            <td>status..</td>
-          </tr>
+          {!loading && data !== null
+            ? data.map((data, i) => (
+                <tr key={data._id}>
+                  <th scope="row">{i + 1}</th>
+                  <td>{data.name}</td>
+                  <td>N/A</td>
+                  <td>{data.mobile}</td>
+                  <td>N/A</td>
+                  <td>{data.dob}</td>
+                  <td>{data.status}</td>
+                </tr>
+              ))
+            : "Data Loading..."}
         </tbody>
       </table>
     </>

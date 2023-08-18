@@ -21,9 +21,13 @@ const AddRoomWallpaper = () => {
     }
 
     const formDataToSend = new FormData();  
+
+    if (formData.wallpaper) {
+      formDataToSend.append('images', formData.wallpaper);
+    }
     formDataToSend.append('day', formData.day);
     formDataToSend.append('price', formData.price);
-    formDataToSend.append('wallpaper', formData.wallpaper);
+
 
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/wallpaper/add', {
