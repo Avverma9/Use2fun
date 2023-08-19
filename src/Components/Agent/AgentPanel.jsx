@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Recharge/RechargeDashboard.css";
 import RechargeDashboard from './Recharge/RechargeDashboard';
+import AgencyBalance from './AgencyBalance/AgencyBalance';
 
 const AgentPanel = () => {
   const [activeMenu, setActiveMenu] = useState("recharge"); 
@@ -47,6 +48,7 @@ const AgentPanel = () => {
       </div>
       <div>
         {activeMenu === "recharge" && <RechargeDashboard />}
+        {activeMenu === "balance" && <AgencyBalance />}
         
       </div>
     </div>
