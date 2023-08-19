@@ -67,12 +67,13 @@ import CoinSeller from "./Components/Coinhistory/CoinSeller";
 import AddLevel from "./Components/MyLevel/AddLevel";
 import AgentLogin from "./Components/Agent/Login";
 import Otp from "./Components/Agent/Otp";
-import RechargeDashboard from "./Components/Agent/RechargeDashboard";
-import DiamondAccount from "./Components/Agent/DiamondAccount";
+import RechargeDashboard from "./Components/Agent/Recharge/RechargeDashboard";
+import DiamondAccount from "./Components/Agent/Recharge/DiamondAccount";
 import Profilesee from "./Components/Agent/Profilesee";
 import Welcome from "./Components/Welcome/Welcome.jsx";
 import AddTags from "./Components/Tags/AddTags";
 import Ranking from "./Components/Agent/Ranking";
+import AgentPanel from "./Components/Agent/AgentPanel";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -214,6 +215,7 @@ function App() {
             <Route path="/profile" element={<Profilesee/>}/>
             <Route path="/addTags" element={<AddTags/>}/>
             <Route path="/agent-ranking"  element={<Ranking/>}/>
+            <Route path="/agent-panel" element={<AgentPanel/>}/>
           </Routes>
         </div>
       </Router>

@@ -5,6 +5,7 @@ import diamondIcon from "../../assets/icons/diamond.png"
 
 
 
+
 function Ranking() {
     const [ranking, setRanking] = useState([])
     useEffect(() => {
@@ -24,8 +25,6 @@ function Ranking() {
         }
         fetchData();
     }, []);
-
-
 
     return (
         <>

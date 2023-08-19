@@ -1,6 +1,6 @@
 import React from 'react'
 import './DiamondAccount.css';
-import admin from '../../assets/icons/admin.png';
+import admin from '../../../assets/icons/admin.png'
 
 function DiamondAccount() {
     return (

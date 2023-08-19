@@ -78,18 +78,3 @@ width: 100px;
 height: 40px;
 margin-top: 45px;
 }
-.img-ranking{
-    display: flex;
-justify-content: center;
-margin-bottom: 40px;
-}
-.img-ranking img{
-    width: 62%;
-}
-.middle-center p:hover{
-border-bottom: 1px solid blue;
-
-}
-.last-cont-1{
-    width: 40%;
-}
