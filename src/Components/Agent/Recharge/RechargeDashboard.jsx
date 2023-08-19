@@ -41,7 +41,9 @@ function RechargeDashboard() {
     <div className='main-cont'>
       <div className='last-cont'>
         <div className='last-cont-1'>
+        
           <label htmlFor='text'>Usefun Id</label>
+          <div className='confirm-flex'>
           <input
             type='text'
             className='usefun-id-text'
@@ -49,6 +51,11 @@ function RechargeDashboard() {
             value={usefunId}
             onChange={(e) => setUsefunId(e.target.value)}
           />
+        
+        <div className='btn2'>
+        <button className='cofirm-btn'>Confirm</button>
+        </div>
+        </div>
         </div>
         <div className='last-cont-1'>
           <label htmlFor='text'>Amount</label>

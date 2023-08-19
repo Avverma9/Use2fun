@@ -27,34 +27,50 @@
 .middle-center p{
     font-weight: 501;
     cursor: pointer;
+    
+}
+.middle-center p:hover{
+    border: none;
+    border-bottom: 2px solid grey;
+    
 }
 .last-cont{
     margin-top: 40px;
 display: flex;
 flex-direction: column;
-justify-content: center;
-width: 100%;
 align-items: center;
+
+width: 100%;
+
 }
 .last-cont-1{
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 .usefun-id-text{
     width: 100%;
     padding: 8px;
+    border: none;
+    border-bottom: 1px solid grey;
+    transition: 0.5s;
 }
 .confirm{
     padding: 9px;
-    background: rgb(40, 151, 248);
+    background: rgb(191,0,237);
     border: none;
     
     color: white;
     font-weight: 501;
+    font-size: 14px;
+    width: 150px;
+    height: 50px;
     
 }
 .button-sub{
     margin-top: 25px;
+    display: flex;
+    justify-content: center;
 }
 .last-last-cont{
     width: 100%;

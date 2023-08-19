@@ -78,3 +78,22 @@ width: 100px;
 height: 40px;
 margin-top: 45px;
 }
+.img-agent img{
+    height: 230px;
+}
+.img-agent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.confirm-flex{
+    display: flex;
+   
+}
+.btn2 button{
+    border: none;
+    background-color: rgb(200, 200, 200);
+    border-radius: 20px;
+    padding: 8px;
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Recharge/RechargeDashboard.css";
 import RechargeDashboard from './Recharge/RechargeDashboard';
 import AgencyBalance from './AgencyBalance/AgencyBalance';
+import agent from '../../assets/icons/Rectangle 384.png';
 
 const AgentPanel = () => {
   const [activeMenu, setActiveMenu] = useState("recharge"); 
@@ -25,6 +26,7 @@ const AgentPanel = () => {
             <button className='logout'>Logout</button>
           </div>
         </div>
+        <div className='img-agent'><img src={agent} alt='image'/></div>
         <div className='middle-center'>
           <p
             className={activeMenu === "recharge" ? "active-menu" : ""}
