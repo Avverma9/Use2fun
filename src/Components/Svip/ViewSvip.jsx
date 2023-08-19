@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./ViewSvip.css"
 
 function ViewVip() {
   const navigate = useNavigate();
@@ -25,15 +26,15 @@ function ViewVip() {
   }, []);
 
   const handleNavigate = () => {
-    navigate("/add-vip");
+    navigate("/add-svip");
   };
 
   return (
     <div id="vip_main">
       <div className="vip_header">
-        <h3>View Vip</h3>
+        <h3>View SVip</h3>
         <button className="vip_btn" onClick={handleNavigate}>
-          Add vip
+          Add Svip
         </button>
       </div>
 

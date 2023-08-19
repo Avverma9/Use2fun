@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import './Extraseat.css';
+import {FiUpload} from 'react-icons/fi';
 
 const ExtraSeat = () => {
   const [day, setDay] = useState("");
@@ -32,8 +34,13 @@ const ExtraSeat = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="seat-container">
+    <div className="text-cont">
+      <h1>Extra Seat</h1>
+      <button className="view">View</button>
+    </div>
+    <div className="img"><img src="https://icons.veryicon.com/png/o/miscellaneous/linear-icon-25/seat-2.png" alt="img"/></div>
+      <form className="seat-form" onSubmit={handleSubmit}>
         <input
           type="text"
           value={day}
@@ -46,12 +53,17 @@ const ExtraSeat = () => {
           placeholder="Enter price"
           onChange={(e) => setPrice(e.target.value)}
         />
+        <label className="fileupload-" htmlFor="fileupload"><FiUpload/>File Upload</label>
         <input
+        id="fileupload"
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
         />
-        <button type="submit">Submit</button>
+        <div className="btn-cont7">
+        <button className="disable" type="disable">Disable</button>
+        <button className="submit" type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );

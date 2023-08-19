@@ -27,7 +27,7 @@ const AdminRechargeHistory = () => {
 
   return (
     <div>
-        <h3>Admin Coin History</h3>
+        <h3>Admin Recharge History</h3>
 
 
 
