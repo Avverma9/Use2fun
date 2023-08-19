@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
+const styles = {
+  submitbtn: {
+    backgroundColor: "#BF00ED",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    padding: "10px"
+  }
+};
 function CoinSeller() {
   const [formData, setFormData] = useState({
     userId: "",
@@ -33,28 +44,36 @@ function CoinSeller() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formDataToSend = new FormData();
     formDataToSend.append("userId", formData.userId);
     formDataToSend.append("seller_name", formData.seller_name);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("mobile", formData.mobile);
-    formDataToSend.append("aadharf", formData.aadharf);
-    formDataToSend.append("aadharb", formData.aadharb);
-
+    formDataToSend.append("images", formData.aadharf);
+    formDataToSend.append("images", formData.aadharb);
+  
     try {
       const response = await axios.post(
         "https://use2fun.onrender.com/admin/coinSeller/add",
         formDataToSend
       );
+
+      console.log(response)
+      
       if (response.data) {
-        alert("Data has been received");
+        if (response.data === 'Already exist') {
+          toast.error('Already exist');
+        } else {
+          toast.error(response.data.error);
+        }
+      } else {
+        toast.success('Added successful');
       }
     } catch (error) {
-    alert("Success")
+      toast.error(error.message || "An error occurred");
     }
   };
-
   return (
     <div>
       <div className="Vip_main">
@@ -127,7 +146,7 @@ function CoinSeller() {
             </div>
           </div>
           <div className="Button_div">
-            <button type="submit" className="btn btn2">
+            <button type="submit" style={styles.submitbtn}>
               Submit
             </button>
           </div>

@@ -71,6 +71,7 @@ import RechargeDashboard from "./Components/Agent/RechargeDashboard";
 import DiamondAccount from "./Components/Agent/DiamondAccount";
 import Profilesee from "./Components/Agent/Profilesee";
 import Welcome from "./Components/Welcome/Welcome.jsx";
+import AddTags from "./Components/Tags/AddTags";
 import Ranking from "./Components/Agent/Ranking";
 import RechargeOption from "./Components/Agent/RechargeOption";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
@@ -226,7 +227,8 @@ function App() {
             <Route path="/recharge-dashboard" element={<RechargeDashboard />} />
             <Route path="/diamond-account" element={<DiamondAccount />} />
             <Route path="/profile" element={<Profilesee />} />
-            <Route path="/ranking" element={<Ranking />} />
+            <Route path="/addTags" element={<AddTags />} />
+            <Route path="/agent-ranking" element={<Ranking />} />
             <Route path="/recharge-option" element={<RechargeOption />} />
           </Routes>
         </div>

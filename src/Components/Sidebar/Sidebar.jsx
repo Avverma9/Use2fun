@@ -23,6 +23,7 @@ import VipIcon from "../../assets/icons/vip.png";
 import BannerIcon from "../../assets/icons/banner.png";
 import GiftIcon from "../../assets/icons/gift.png";
 import coinIcon from "../../assets/icons/coin.png";
+import tagIcon from "../../assets/icons/tags.png"
 
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
@@ -228,21 +229,12 @@ const Agent = () => {
             </Link>
           </li>
           <li>
-            <Link to="/ranking">
+            <Link to="/agent-ranking">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
             </Link>
-            <Link to="/ranking">
+            <Link to="/agent-ranking">
               <p>Ranking</p>
-            </Link>
-          </li>
-          <li>
-            <Link to="/recharge-option">
-              {" "}
-              <img src={hostIcon} alt="icon" srcset="" />
-            </Link>
-            <Link to="/recharge-option">
-              <p>Recharge Option</p>
             </Link>
           </li>
         </ul>
@@ -1019,6 +1011,24 @@ const TheTalent = () => {
   );
 };
 
+//Tags
+const Tags = () => {
+  return (
+    <>
+      <li>
+        <Link to="/addTags">
+          {" "}
+          <img src={tagIcon} alt="icon" srcset="" />
+        </Link>
+        <Link to="/addTags">
+          <p> Tags</p>
+        </Link>
+      </li>
+    </>
+  );
+};
+
+
 //Report
 const Report = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -1264,6 +1274,7 @@ const Sidebar = () => {
           <MasterAdmin />
           <MyLevel />
           <TheTalent />
+          <Tags/>
           <Report />
           <TransactionHistory />
           <Recharge />

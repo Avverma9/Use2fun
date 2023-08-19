@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ViewVehicle.module.css';
+// import './ViewVehicle.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const ViewVehicle = () => {
