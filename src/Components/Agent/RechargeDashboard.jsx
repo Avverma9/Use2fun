@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import './RechargeDashboard.css';
+import ranking from '../../assets/icons/Rectangle 384.png';
 
 function RechargeDashboard() {
   const [usefunId, setUsefunId] = useState('');
@@ -51,6 +52,7 @@ function RechargeDashboard() {
           <button className='logout'>Logout</button>
         </div>
       </div>
+      <div className='img-ranking'><img src={ranking}/></div>
       <div className='middle-center'>
         <p>Recharge To</p>
         <p>My Agent Balance</p>

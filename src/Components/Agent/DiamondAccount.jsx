@@ -20,7 +20,9 @@ function DiamondAccount() {
                         <button className='logout'>Logout</button>
                     </div>
                 </div>
+                
                 <div className='middle-center'>
+
                     <p>Recharge To</p>
                     <p>My Agent Balance</p>
                     <p>Agent Center</p>
