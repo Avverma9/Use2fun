@@ -33,6 +33,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 20px;
 }
 .last-cont-1{
     display: flex;
@@ -89,6 +90,8 @@ margin-top: 45px;
 }
 .confirm-flex{
     display: flex;
+    justify-content: space-between;
+    /* border: 2px solid black; */
    
 }
 .btn2 button{
@@ -97,3 +100,35 @@ margin-top: 45px;
     border-radius: 20px;
     padding: 8px;
 }
+
+.avatar-main-div{
+    display: flex;
+    gap: 30px;
+}
+
+.usefunId-bold{
+    font-weight: 800;
+}
+
+.name-div{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 5px;
+}
+
+.img-avatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cancel-btn{
+    padding: 5px 5px;
+    border-radius: 10px;
+    background-color: gray;
+    color: black;
+    border: none;
+}
+

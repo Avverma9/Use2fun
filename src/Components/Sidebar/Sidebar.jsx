@@ -219,7 +219,7 @@ const Agent = () => {
               <p>Recharge Dashboard</p>
             </Link>
           </li> */}
-          <li>
+          {/* <li>
             <Link to="/diamond-account">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
@@ -227,8 +227,8 @@ const Agent = () => {
             <Link to="/diamond-account">
               <p>Diamond Account</p>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link to="/profile">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
@@ -236,7 +236,7 @@ const Agent = () => {
             <Link to="/profile">
               <p>Profile</p>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/agent-ranking">
               {" "}

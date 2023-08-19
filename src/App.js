@@ -74,9 +74,20 @@ import Welcome from "./Components/Welcome/Welcome.jsx";
 import AddTags from "./Components/Tags/AddTags";
 import Ranking from "./Components/Agent/Ranking";
 import AgentPanel from "./Components/Agent/AgentPanel";
+import { useState } from "react";
+import { useEffect } from "react";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setAuthenticated(true);
+    }
+  }, []);
+
   return (
     <div className="app">
       <Router>
@@ -171,7 +182,7 @@ function App() {
             <Route path="/add-vehicle" element={<AddVehicle/>}/>
             <Route path="/view-vehicle" element={<ViewVehicle/>}/>
             <Route path="/extra-seat" element={<ExtraSeat/>}/>
-            <Route path="/agent/login" element={<AgentLogin/>}/>
+            
             <Route path="/specialid" element={<SpecialIdComp/>}/>
             <Route path="/lock-room" element={<LockRoom/>}/>
             <Route path="/add-banner" element={<AddBanner/>}/>
@@ -216,6 +227,7 @@ function App() {
             <Route path="/addTags" element={<AddTags/>}/>
             <Route path="/agent-ranking"  element={<Ranking/>}/>
             <Route path="/agent-panel" element={<AgentPanel/>}/>
+            <Route path="/agent/login" element={<AgentLogin/>}/>
           </Routes>
         </div>
       </Router>
