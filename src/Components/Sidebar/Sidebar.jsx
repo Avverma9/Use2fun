@@ -210,7 +210,7 @@ const Agent = () => {
               <p>Rejected Host Request</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/recharge-dashboard">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
@@ -218,7 +218,7 @@ const Agent = () => {
             <Link to="/recharge-dashboard">
               <p>Recharge Dashboard</p>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/diamond-account">
               {" "}
