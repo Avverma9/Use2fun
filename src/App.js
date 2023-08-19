@@ -72,6 +72,7 @@ import DiamondAccount from "./Components/Agent/DiamondAccount";
 import Profilesee from "./Components/Agent/Profilesee";
 import Welcome from "./Components/Welcome/Welcome.jsx";
 import AddTags from "./Components/Tags/AddTags";
+import Ranking from "./Components/Agent/Ranking";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -212,6 +213,7 @@ function App() {
             <Route path="/diamond-account" element={<DiamondAccount/>}/>
             <Route path="/profile" element={<Profilesee/>}/>
             <Route path="/addTags" element={<AddTags/>}/>
+            <Route path="/agent-ranking"  element={<Ranking/>}/>
           </Routes>
         </div>
       </Router>

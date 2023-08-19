@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import admin from '../../assets/icons/admin.png';
 import './Ranking.css';
+import diamondIcon from "../../assets/icons/diamond.png"
+
+
+
 function Ranking() {
+    const [ranking, setRanking] = useState([])
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://use2fun.onrender.com/admin/agentRanking");
+                if (!response.ok) {
+                    throw new Error("network issue");
+                }
+                const jsonData = await response.json();
+                setRanking(jsonData.data);
+                console.log("Ranking", jsonData.data)
+            } catch (error) {
+                console.error("error fetching data", error)
+            }
+        }
+        fetchData();
+    }, []);
+
+
+
     return (
         <>
             <div className='all-data'>
@@ -9,33 +34,32 @@ function Ranking() {
                     <div className='heading-pro'><p>Ranking</p></div>
                     <div className='below-head'><p>Statistics Based on the diamond purchase</p></div>
                 </div>
-                <div className='first-coloumn'>
-                   <p>Rank</p>
-                   <img src={admin} alt="Example Image" />
-                   <img src={admin} alt="Example Image" />
-                   <img src={admin} alt="Example Image" />
-                   <img src={admin} alt="Example Image" />
-                   <img src={admin} alt="Example Image" />
-                   <img src={admin} alt="Example Image" />
-                </div>
-                <div className='second-column'>
-                    <p>Agent-Id</p>
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                </div>
-                <div className='third-column'>
-                    <p>Prchased</p>
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                    <img src={admin} alt="Example Image" />
-                </div>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Agent Id</th>
+                            <th>Purchased</th>
+                        </tr>
+                        {ranking && ranking.map((item, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{item.coinSellerId}</td>
+                                <td>
+                                    <img src={diamondIcon} alt="Diamond Icon" />
+                                     X {` ${item.amount} `}
+                                </td>
+                                <td>{item.day}</td>
+
+
+                            </tr>
+                        ))
+
+
+                        }
+                    </thead>
+
+                </table>
             </div>
         </>
     )
