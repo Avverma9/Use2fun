@@ -184,7 +184,16 @@ const Agent = () => {
             </Link>
           </li>
           <li>
-            <Link to="/approved-host-request">
+            <Link to="/agent-panel">
+              {" "}
+              <img src={hostIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/agent-panel">
+              <p>Agent Panel</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/agent-panel">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
             </Link>
