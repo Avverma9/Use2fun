@@ -88,5 +88,8 @@ margin-bottom: 40px;
 }
 .middle-center p:hover{
 border-bottom: 1px solid blue;
-padding: 5px;
+
+}
+.last-cont-1{
+    width: 40%;
 }

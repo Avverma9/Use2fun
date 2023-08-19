@@ -30,9 +30,11 @@
 }
 .last-cont{
     margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 100%;
+align-items: center;
 }
 .last-cont-1{
     display: flex;
