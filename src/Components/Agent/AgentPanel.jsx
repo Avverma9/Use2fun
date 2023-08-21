@@ -4,6 +4,7 @@ import RechargeDashboard from './Recharge/RechargeDashboard';
 import AgencyBalance from './AgencyBalance/AgencyBalance';
 import agent from '../../assets/icons/rankingImg.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import AgentCenter from './AgentCenter/AgentCenter';
 
 const AgentPanel = () => {
   const [activeMenu, setActiveMenu] = useState("recharge"); 
@@ -73,6 +74,7 @@ const AgentPanel = () => {
       <div>
         {activeMenu === "recharge" && <RechargeDashboard coinseller={parsedData._id}/>}
         {activeMenu === "balance" && <AgencyBalance />}
+        {activeMenu === "center" && <AgentCenter/>}
         
       </div>
     </div>
