@@ -14,6 +14,15 @@ const AddTags = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!formData.name){
+      toast.error("Plase select a name")
+      return 
+    }
+    if(!formData.images){
+      toast.error("Plase select a Image")
+      return 
+    }
+
     const formDataToSend = new FormData();  
    
     formDataToSend.append('name', formData.name);

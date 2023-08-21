@@ -14,6 +14,21 @@ const AddLevel = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if(!formData.images){
+      toast.error("Plase select a Image")
+      return 
+    }
+    if(!formData.level){
+      toast.error("Plase select a level")
+      return 
+    }
+    if(!formData.count){
+      toast.error("Plase select a count")
+      return 
+    }
+
+    
 
     const formDataToSend = new FormData();  
     formDataToSend.append('level', formData.level);
