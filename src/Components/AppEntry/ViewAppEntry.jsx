@@ -18,7 +18,7 @@ const ViewAppEntry = () => {
         };
         const jsonData=await response.json();
         setData(jsonData.data)
-        console.log("Fetched Data:", jsonData.data);
+        // console.log("Fetched Data:", jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

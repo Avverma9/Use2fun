@@ -29,10 +29,17 @@
     cursor: pointer;
     
 }
-.middle-center p:hover{
-    border: none;
-    border-bottom: 2px solid grey; 
-}
+.active-menu {
+    font-weight: bold; 
+    
+    border-bottom: 2px solid gray; 
+  }
+
+  .middle-center p {
+    cursor: pointer; 
+    margin: 0 20px; 
+  }
+
 .last-cont{
     margin-top: 40px;
 display: flex;

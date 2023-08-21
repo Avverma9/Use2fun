@@ -16,27 +16,27 @@ const AgentCenter = () => {
     <div  className='agentCenterdiv'>
           <div className='middle-center'>
           <p
-            className={activeMenu === "customer" ? "active-menu" : ""}
+            className={activeMenu === "customer" ? "active-menubtn" : ""}
             onClick={() => handleMenuClick("customer")}
           >
             My Customer
           </p>
           <p
-            className={activeMenu === "income" ? "active-menu" : ""}
+            className={activeMenu === "income" ? "active-menubtn" : ""}
             onClick={() => handleMenuClick("income")}
           >
             Income Record
           </p>
           <p
-            className={activeMenu === "balance" ? "active-menu" : ""}
+            className={activeMenu === "balance" ? "active-menubtn" : ""}
             onClick={() => handleMenuClick("balance")}
           >
             Balance Record
           </p>
         </div>
         <div>
-        {activeMenu === "recharge" && <MyCustomer/>}
-        {activeMenu === "balance" && <IncomeRecord />}
+        {activeMenu === "customer" && <MyCustomer/>}
+        {activeMenu === "income" && <IncomeRecord />}
         {activeMenu === "center" && <BalanceRecord/>}
         
       </div>

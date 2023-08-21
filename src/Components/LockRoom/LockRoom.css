@@ -28,7 +28,40 @@
     width: 150px;
     margin-top: 20px;
 }
+.uploadbtn{
+    /* background-color: gray; */
+    /* color: black; */
+    /* outline: none;
+  
+    padding: 10px;
+    border: none; */
+    margin-top: 30px;
+    width: 140%;
+    /* border: 2px solid red; */
+
+}
 .lock-room input{
     padding: 10px;
     margin-right: 5px;
+}
+
+.lock-room{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+.lockImg{
+    width: 100px;
+}
+
+.flexdiv{
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    /* border: 2px solid red; */
+    width: 690px;
+}
+
+.flexdiv input{
+    width: 130px;
 }

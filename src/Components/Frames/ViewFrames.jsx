@@ -16,9 +16,9 @@ const ViewFrames = () => {
           }
           const jsonData= await response.json();
           setFrame(jsonData.data);
-          console.log("frame", jsonData.data)
+          // console.log("frame", jsonData.data)
         } catch (error){
-          console.error("error fetching data" ,error)
+          // console.error("error fetching data" ,error)
         }
       }
       fetchData();

@@ -33,6 +33,36 @@ const AddSubAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.userId) {
+      toast.error('Please enter the valid userId.');
+      return;
+    }
+    if (!formData.email) {
+      toast.error('Please enter a valid email.');
+      return;
+    }
+    
+    if (!formData.mobile || isNaN(formData.mobile) || formData.mobile.length !== 10) {
+      toast.error('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+    if (!formData.role) {
+      toast.error('Please select role.');
+      return;
+    }
+
+    if (!formData.aadharFront) {
+      toast.error('Please upload the AadharCard Front image.');
+      return;
+    }
+
+    if (!formData.aadharBack) {
+      toast.error('Please upload the AadharCard Back image.');
+      return;
+    }
+
+
     const formDataToSend = new FormData();
 
     if (formData.aadharFront) {
@@ -48,21 +78,22 @@ const AddSubAdmin = () => {
     formDataToSend.append('role', formData.role);
 
     try {
-      const response = await fetch('https://use2fun.onrender.com/admin/subadmin/add', {
+      const response = await fetch('https://use2fun.onrender.com/admin/make/subAdminUser', {
         method: 'POST',
         body: formDataToSend,
       });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Response data:', responseData);
-        toast.success('Sub Admin added successfully.');
+  
+      const responseData = await response.json();
+  
+      if (response.ok && !responseData.error) {
+        toast.success('User is SubAdmin now.');
       } else {
-        console.error('Failed to add Sub Admin. Response status:', response.status);
-        toast.error('Error occurred while adding Sub Admin.');
+        console.error('Failed to add SubAdmin. Response data:', responseData);
+        toast.error(responseData.error || 'Error occurred while adding SubAdmin.');
       }
     } catch (error) {
-      console.error('Error adding Sub Admin:', error);
+      console.error('Error adding Subadmin:', error);
+      toast.error('An error occurred while adding SubAdmin.');
     }
   };
 
@@ -74,7 +105,7 @@ const AddSubAdmin = () => {
         <input
           type="text"
           name="userId"
-          value={formData.userID}
+          value={formData.userId}
           onChange={handleInputChange}
         />
         <label>Email*</label>

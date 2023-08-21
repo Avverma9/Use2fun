@@ -47,6 +47,32 @@ const AddAgency = () => {
       return;
     }
 
+    if (!formData.userId) {
+      toast.error('Please enter the valid userId.');
+      return;
+    }
+
+    if (!formData.email) {
+      toast.error('Please enter a valid email.');
+      return;
+    }
+
+    if (!formData.agency) {
+      toast.error('Please upload the Agency Image.');
+      return;
+    }
+
+    if (!formData.aadhar_front) {
+      toast.error('Please upload the AadharCard Front image.');
+      return;
+    }
+
+    if (!formData.aadhar_back) {
+      toast.error('Please upload the AadharCard Back image.');
+      return;
+    }
+
+
     const formDataToSend = new FormData();
 
     if (formData.agency) {
@@ -69,19 +95,21 @@ const AddAgency = () => {
         method: 'POST',
         body: formDataToSend,
       });
-
-      if (response.ok) {
-        const responseData = await response.json();
+    
+      const responseData = await response.json();
+    
+      if (response.ok && !responseData.error) {
         console.log('Response data:', responseData);
         toast.success('Agency added successfully.');
       } else {
-        console.error('Failed to add agency. Response status:', response.status);
-        toast.error('Error occurred while adding agency.');
+        console.error('Failed to add agency. Response data:', responseData);
+        toast.error(responseData.error || 'Error occurred while adding agency.');
       }
     } catch (error) {
       console.error('Error adding agency:', error);
+      toast.error('An error occurred while adding agency.');
     }
-  };
+  }
 
   return (
     <div className={styles.main}>

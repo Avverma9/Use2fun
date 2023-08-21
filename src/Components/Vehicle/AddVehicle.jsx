@@ -35,12 +35,34 @@ const AddVehicle = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!formData.vehicle){
+      toast.error("Please add vehicle Image")
+      return
+    }
+    if(!formData.thumbnail){
+      toast.error("Please add thumbnail Image")
+      return
+    }
+    if(!formData.level){
+      toast.error("Please add level")
+      return
+    }
+    if(!formData.price){
+      toast.error("Please add Price")
+      return
+    }
+    if(!formData.day){
+      toast.error("Please add Validity")
+      return
+    }
+    
  
 
     const formDataToSend = new FormData();
 
-    formDataToSend.append('vehicle', formData.vehicle);
-    formDataToSend.append('thumbnail', formData.thumbnail);
+    formDataToSend.append('images', formData.vehicle);
+    formDataToSend.append('images', formData.thumbnail);
 
     formDataToSend.append('day', formData.day);
     formDataToSend.append('price', formData.price);

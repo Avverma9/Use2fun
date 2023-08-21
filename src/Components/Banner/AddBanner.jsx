@@ -18,6 +18,18 @@ function AddBanner() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!formData.banner){
+      toast.error("Please select a banner")
+      return 
+    }
+
+    if(!formData.link){
+      toast.error("Please select a link")
+      return 
+    }
+
+    
+
     const formDataToSend = new FormData();  
     formDataToSend.append('link', formData.link);
     formDataToSend.append('banner', formData.banner);

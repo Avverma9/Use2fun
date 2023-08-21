@@ -10,7 +10,7 @@ function ViewVip() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://use2fun.onrender.com/admin/vip/getall"
+          "https://use2fun.onrender.com/admin/svip/getall"
         );
         if (!response.ok) {
           throw new Error("An error occupied");

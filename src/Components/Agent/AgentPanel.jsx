@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Recharge/RechargeDashboard.css";
+import "./Recharge/DiamondAccount.css"
 import RechargeDashboard from './Recharge/RechargeDashboard';
 import AgencyBalance from './AgencyBalance/AgencyBalance';
 import agent from '../../assets/icons/rankingImg.png';

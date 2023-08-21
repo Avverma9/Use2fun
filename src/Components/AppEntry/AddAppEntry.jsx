@@ -14,7 +14,7 @@ const AppEntry = () => {
     event.preventDefault();
 
     if (!selectedFile) {
-      alert("Please select a file.");
+      toast.error("Please select a file.");
       return;
     }
 

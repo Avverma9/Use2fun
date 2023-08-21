@@ -16,6 +16,11 @@ const AddAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!formData.userName){
+      toast.error('Please enter valid userId')
+      return
+    }
+  
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/make/adminUser', {
         method: 'POST',
@@ -24,15 +29,18 @@ const AddAdmin = () => {
         },
         body: JSON.stringify({ userId: formData.userName }),
       });
-
-      if (response.ok) {
-        console.log('POST request successful');
-        toast.success('User is Admin now ');
+  
+      const responseData = await response.json();
+  
+      if (response.ok && !responseData.error) {
+        toast.success('User is Admin now.');
       } else {
-        console.error('POST request failed');
+        console.error('Failed to add Admin. Response data:', responseData);
+        toast.error(responseData.error || 'Error occurred while adding Admin.');
       }
     } catch (error) {
-      console.error('Error making POST request:', error);
+      console.error('Error adding admin:', error);
+      toast.error('An error occurred while adding Admin.');
     }
   };
 
@@ -41,12 +49,12 @@ const AddAdmin = () => {
       <h2>AddAdmin</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          UserName*
+          UserId*
         </label>
         <input
           type="text"
           name="userName"
-          placeholder="UserName"
+          placeholder="UserId"
           value={formData.userName}
           onChange={handleChange}
         />
