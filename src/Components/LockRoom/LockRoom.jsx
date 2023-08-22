@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './LockRoom.css';
-import { AiOutlineUpload } from 'react-icons/ai';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LockRoom = () => {
   const [lockRoomData, setLockRoomData] = useState([]);
@@ -19,11 +20,7 @@ const LockRoom = () => {
         setLockRoomData(responseData.data);
         if (responseData.data.length > 0) {
           const firstRoom = responseData.data[0];
-          const initialEditedRoom = {
-            ...firstRoom,
-            images: firstRoom.images[0] || '',
-          };
-          setEditedRoom(initialEditedRoom);
+          setEditedRoom(firstRoom); 
         }
       } else {
         console.error('Failed to fetch lock room data. Response:', response);
@@ -33,55 +30,68 @@ const LockRoom = () => {
     }
   };
 
-  const handleEditChange = (e) => {
-    const { name, value } = e.target;
+  const handleEdit = (item) => {
+    setEditedRoom(item);
+  };
+
+  const handlePriceChange = (e) => {
+    const newPrice = e.target.value;
     setEditedRoom((prevRoom) => ({
       ...prevRoom,
-      [name]: value,
+      price: newPrice,
+    }));
+  };
+
+  const handleDayChange = (e) => {
+    const newDay = e.target.value;
+    setEditedRoom((prevRoom) => ({
+      ...prevRoom,
+      day: newDay,
     }));
   };
 
   const handleSubmit = async () => {
+    if (!editedRoom) {
+      return; 
+    }
 
     const formDataToSend = new FormData();
+    formDataToSend.append('price', editedRoom.price);
+    formDataToSend.append('day', editedRoom.day);
 
-    
-
+    if (editedRoom.newImage) {
+      formDataToSend.append('images', editedRoom.newImage);
+    }
 
     try {
-      if (editedRoom) {
-        const response = await fetch(`https://use2fun.onrender.com/admin/lockRoom/update/${editedRoom._id}`, {
-          method: 'PUT',
-          body: JSON.stringify({
-            price: editedRoom.price,
-            day: editedRoom.day,
-            images: [editedRoom.images],
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+      const response = await fetch(`https://use2fun.onrender.com/admin/lockRoom/update/${editedRoom._id}`, {
+        method: 'PUT',
+        body: formDataToSend,
+      });
 
-        if (response.ok) {
-          console.log(`Lock room ${editedRoom._id} updated successfully.`);
-        } else {
-          console.error(`Failed to update lock room ${editedRoom._id}. Response:`, response);
-        }
+      if (response.ok) {
+        console.log(`Lock room ${editedRoom._id} updated successfully.`);
+        toast.success("Data Updated")
+        
+        fetchLockRoomData();
+      } else {
+        console.error(`Failed to update lock room ${editedRoom._id}. Response:`, response);
+        toast.error("Failed to update Data")
       }
     } catch (error) {
       console.error('Error updating lock room:', error);
+      toast.error(`Failed to update ${error}`)
     }
   };
 
   const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    if (name === 'lockroom') {
-      if (files.length > 0) {
-        setEditedRoom((prevRoom) => ({
-          ...prevRoom,
-          images: files[0].name, 
-        }));
-      }
+    const { files } = e.target;
+    if (files.length > 0) {
+      const newImage = files[0];
+      setEditedRoom((prevRoom) => ({
+        ...prevRoom,
+        newImage,
+      }));
     }
   };
 
@@ -92,7 +102,7 @@ const LockRoom = () => {
         <div className='lock-room'>
           <p>Lock Room id</p>
           <div>
-            <img className='lockImg' src={editedRoom.images} alt='' />
+            <img className='lockImg' src={editedRoom.images[0]} alt='' />
           </div>
           <div className='flexdiv'>
             <p>
@@ -101,7 +111,7 @@ const LockRoom = () => {
                 type='number'
                 value={editedRoom.price}
                 name='price'
-                onChange={handleEditChange}
+                onChange={handlePriceChange}
               />
             </p>
             <p>
@@ -110,7 +120,7 @@ const LockRoom = () => {
                 type='number'
                 value={editedRoom.day}
                 name='day'
-                onChange={handleEditChange}
+                onChange={handleDayChange}
               />
             </p>
           </div>
