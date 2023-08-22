@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Pushmessage.css";
 import { GiRoundStar } from "react-icons/gi";
-import Title from "../common/Title";
+import Title from "../../common/Title";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Pushmessage = () => {
   const [message, setMessage] = useState("");
@@ -17,6 +19,7 @@ const Pushmessage = () => {
           "https://use2fun.onrender.com/user/getall"
         );
         const jsonData = await response.json();
+        console.log(jsonData.data)
         setUser(jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,24 +32,33 @@ const Pushmessage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(
-      "https://use2fun.onrender.com/admin/message/send",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          userId: userId,
-          message: message,
-        }),
+  
+    try {
+      const response = await fetch(
+        "https://use2fun.onrender.com/admin/message/send",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: userId,
+            message: message,
+          }),
+        }
+      );
+  
+      if (response.ok) {
+        setMessage("");
+        setUserId("");
+        toast.success("Message Sent Successfully");
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
-    );
-
-    if (response.status === 200) {
-      setMessage("");
-      setUserId("");
+    } catch (error) {
+      toast.error(error.message);
     }
   };
-  console.log(userId);
-  console.log(message);
+  
+
   return (
     <>
       <Title title="Send Message" />
@@ -57,11 +69,11 @@ const Pushmessage = () => {
         </h6>
         {/* <input type="" name="username" id="username" /> */}
         <select value={userId} onChange={(e) => setUserId(e.target.value)}>
-          <option value="">Select user</option>
+          <option value="All">All Users</option>
           {!loading &&
             user.length !== 0 &&
             user.map((user) => (
-              <option key={user._id} value={user._id}>
+              <option key={user.userId} value={user.userId}>
                 {user.name}
               </option>
             ))}

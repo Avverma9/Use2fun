@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Userslist.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 
 const Userslist = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,7 @@ const Userslist = () => {
         );
         const jsonData = await response.json();
         if (response.ok) {
+          console.log(jsonData.data, "DATA")
           setData(jsonData.data);
           setLoading(false);
         }
@@ -28,6 +29,9 @@ const Userslist = () => {
     };
     fetchData();
   }, []);
+
+
+  console.log(data)
 
   const handleSearch = () => {
     const filteredData = data.filter((user) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Topusers.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 
 const Topusers = () => {
   return (

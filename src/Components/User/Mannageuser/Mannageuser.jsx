@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Mannageuser.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 import { useNavigate } from "react-router-dom";
 
 const Mannageuser = () => {

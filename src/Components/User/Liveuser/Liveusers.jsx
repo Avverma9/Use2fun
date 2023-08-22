@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Liveusers.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 
 const Liveusers = () => {
   const [users, setUsers] = useState([]);

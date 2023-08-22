@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 import "./Edituser.css";
 import { GiRoundStar } from "react-icons/gi";
 
