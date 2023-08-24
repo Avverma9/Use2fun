@@ -13,6 +13,7 @@ const PendingHost = () => {
       try {
         const response = await fetch("https://use2fun.onrender.com/host/getPending");
         const jsonData = await response.json();
+        console.log(jsonData.data)
         setData(jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -67,12 +68,12 @@ const PendingHost = () => {
           {dataArray.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
-              <td>{item.userId.name}</td>
-              <td>{item.userId.name}</td>
-              <td>{item.userId.email || "testing@gmail.com"}</td>
-              <td>{item.userId.mobile}</td>
-              <td>{item.agency_code}</td>
-              <td>{item.status}</td>
+              <td>{item.name || "no data available"}</td>
+              <td>{item.name || "no data available"}</td>
+              <td>{item.email || "testing@gmail.com"}</td>
+              <td>{item.mobile  || "no data available"}</td>
+              <td>{item.agency_code || "no data available"}</td>
+              <td>{item.status  || "no data available"}</td>
               <td>
               <select onChange={(e) => {
                   const selectedValue = e.target.value;

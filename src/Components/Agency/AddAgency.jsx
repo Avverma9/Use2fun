@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AddAgency.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddAgency = () => {
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [selectedAdmin, setSelectedAdmin] = useState('');
   const [formData, setFormData] = useState({
     userId: '',
     name: '',
@@ -13,6 +15,25 @@ const AddAgency = () => {
     aadhar_front: null,
     aadhar_back: null,
   });
+
+
+  useEffect(() => {
+    fetch('https://use2fun.onrender.com/admin/adminUser/getall')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 1) {
+          setAdminUsers(data.data);
+        } else {
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching admin users:', error);
+      });
+  }, []);
+
+  const handleAdminChange = (e) => {
+    setSelectedAdmin(e.target.value);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -84,7 +105,7 @@ const AddAgency = () => {
     if (formData.aadhar_back) {
       formDataToSend.append('images', formData.aadhar_back);
     }
-
+    formDataToSend.append('admin', selectedAdmin);
     formDataToSend.append('userId', formData.userId);
     formDataToSend.append('name', formData.name);
     formDataToSend.append('mobile', formData.mobile);
@@ -95,9 +116,9 @@ const AddAgency = () => {
         method: 'POST',
         body: formDataToSend,
       });
-    
+
       const responseData = await response.json();
-    
+
       if (response.ok && !responseData.error) {
         console.log('Response data:', responseData);
         toast.success('Agency added successfully.');
@@ -130,6 +151,16 @@ const AddAgency = () => {
           value={formData.name}
           onChange={handleInputChange}
         />
+
+        <label>Admin</label>
+        <select className={styles.selectadmin} name="admin" value={selectedAdmin} onChange={handleAdminChange}>
+          <option value="">Select an admin</option>
+          {adminUsers.map(admin => (
+            <option key={admin.userId} value={admin.userId}>
+              {admin.userId}
+            </option>
+          ))}
+        </select>
 
         <label>Email*</label>
         <input

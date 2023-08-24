@@ -3,3 +3,8 @@
     gap: 10%;
     flex-wrap: wrap;
 }
+.chatbubbleimg{
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 50px;
+}

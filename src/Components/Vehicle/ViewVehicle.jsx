@@ -44,13 +44,13 @@ const ViewVehicle = () => {
             <th>Validity</th>
             <th>Action</th>
           </tr>
-          {vehicle&&vehicle.map((item,index)=>(
+          {vehicle?vehicle.map((item,index)=>(
             <tr key={index}>
-            <td>{index+1}</td>
-            <td><img src={item.images[0] } alt='image'/></td>
-            <td>{item.price}</td>
-            <td>{item.level}</td>
-            <td>{item.day}</td>
+            <td>{index+1 || "N/A"}</td>
+            <td><img src={item.images[0] || "N/A" } alt='image'/></td>
+            <td>{item.price || "N/A"}</td>
+            <td>{item.level || "N/A"}</td>
+            <td>{item.day || "N/A"}</td>
             <td>{<select className='viewframe-select'>
                 <option value="action">Action</option>
                 </select>}</td>
@@ -59,7 +59,9 @@ const ViewVehicle = () => {
             </tr>
           ))
           
-          
+          :<td colSpan="8">
+          <h2>No data available</h2>
+        </td>
           }
         </thead>
     

@@ -87,7 +87,7 @@ const AddRoomWallpaper = () => {
         <label>Price*(If free price will be zero(0))</label>
         <input type="number" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} placeholder='Price' min="0" />
 
-        <label>Validity</label>
+        <label>Validity in (Weeks)</label>
         <input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: e.target.value })} placeholder='Validity' min="0" />
 
         <div className="btn">

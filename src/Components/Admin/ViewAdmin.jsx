@@ -9,6 +9,7 @@ const ViewAdmin = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedAction, setSelectedAction] = useState("action");
   const [checkboxes, setCheckboxes] = useState({
     banUnban: false,
     mute: false,
@@ -18,22 +19,22 @@ const ViewAdmin = () => {
     dpApprove: false,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://use2fun.onrender.com/admin/adminUser/getall`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const jsonData = await response.json();
-        setData(jsonData.data);
-        console.log("Fetched Data:", jsonData.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`https://use2fun.onrender.com/admin/adminUser/getall`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
+      const jsonData = await response.json();
+      setData(jsonData.data);
+      console.log("Fetched Data:", jsonData.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
 
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -43,12 +44,12 @@ const ViewAdmin = () => {
     setShowModal(true);
     setSelectedUser(user);
     setCheckboxes({
-      banUnban: user.banUnban === 'Allowed',
-      mute: user.mute === 'Allowed',
-      kick: user.kick === 'Allowed',
-      screenshot: user.screenshot === 'Allowed',
-      agencyBan: user.agencyBan === 'Allowed',
-      dpApprove: user.dpApprove === 'Allowed',
+      banUnban: user.is_ban_unban,
+      mute: user.mute,
+      kick: user.kick,
+      screenshot: user.screenshot,
+      agencyBan: user.agencyban,
+      dpApprove: user.dpapprove,
     });
   };
 
@@ -61,10 +62,39 @@ const ViewAdmin = () => {
     }));
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     console.log('Selected User:', selectedUser);
     console.log('Updated Checkboxes:', checkboxes);
     setShowModal(false);
+  
+    try {
+      if (selectedUser) {
+        const response = await fetch(`https://use2fun.onrender.com/admin/adminUser/update/${selectedUser.userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            is_ban_unban: checkboxes.banUnban,
+            mute: checkboxes.mute,
+            kick: checkboxes.kick,
+            screenshot: checkboxes.screenshot,
+            agencyban: checkboxes.agencyBan,
+            dpapprove: checkboxes.dpApprove,
+          }),
+        });
+  
+        if (response.ok) {
+          toast.success('User permissions updated successfully');
+          fetchData()
+          setSelectedAction("action");
+        } else {
+          console.error('Failed to update user permissions');
+        }
+      }
+    } catch (error) {
+      console.error('Error updating user permissions:', error);
+    }
   };
 
   const handleDeleteUser = async () => {
@@ -112,13 +142,16 @@ const ViewAdmin = () => {
                 <td>
                   <select onChange={(e) => {
                     const selectedValue = e.target.value;
+                    setSelectedAction(selectedValue);
                     if (selectedValue === 'update') {
                       handleUpdateClick(item);
                     }
                     if (selectedValue === 'remove') {
                       handleDeleteUser(item);
                     }
-                  }}>
+                  }}
+                  value={selectedAction}
+                  >
                     <option value="action">Action</option>
                     <option value="update">Update</option>
                     <option value="remove">Remove</option>

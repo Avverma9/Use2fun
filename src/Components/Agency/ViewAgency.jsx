@@ -37,9 +37,9 @@ const ViewAgency = () => {
               <td>
                 <img className="images" src={item.images[0]} alt="images" />
               </td>
-              <td>{item.userId && item.userId.name}</td>
-              <td>{item.userId && item.userId.name}</td>
-              <td>{item.userId && item.userId.userId}</td>
+              <td>{item.name || "N/A"}</td>
+              <td>{item.userId || "N/A"}</td>
+              <td>{item.code || "N/A"}</td>
               <td>{item.email}</td>
               <td>
                 <select>
@@ -85,7 +85,7 @@ const ViewAgency = () => {
             <th>Sr.</th>
             <th>Image</th>
             <th>AgencyName</th>
-            <th>UserName</th>
+            <th>UserId</th>
             <th>AgencyCode</th>
             <th>Email</th>
             <th>Action</th>
