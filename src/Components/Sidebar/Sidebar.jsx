@@ -1288,6 +1288,7 @@ const Sidebar = () => {
           <TransactionHistory />
           <Recharge />
           <Account />
+          
         </ul>
       </div>
     </div>
