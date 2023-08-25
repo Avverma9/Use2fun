@@ -1,74 +1,60 @@
 // import React, { useState } from 'react';
 // import { Modal, Button } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 import  styles from './ManageProblemReport.module.css';
 
 const UserVideoReport = () => {
-//   const [showModal, setShowModal] = useState(false);
-//   const [selectedUser, setSelectedUser] = useState(null);
-//   const [checkboxes, setCheckboxes] = useState({
-//     banUnban: false,
-//     mute: false,
-//     kick: false,
-//     screenshot: false,
-//     agencyBan: false,
-//     dpApprove: false,
-//   });
+  const [data,setData]=useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://use2fun.onrender.com/user/userReport/getall`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+          setData(jsonData.data); 
+          console.log("Fetched Data:", jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    
+  
+    fetchData();
+  }, []);
+
+  console.log(data, "data")
 
   const tableData = [
     { id: 1, UserName:"Janem",reportUserName:"xyx",report:"qwe",date:"12/65/44",video:"www.hgfff.com" },
 
   ];
 
-//   const handleUpdateClick = (user) => {
-//     setShowModal(true);
-//     setSelectedUser(user);
-//     setCheckboxes({
-//       banUnban: user.banUnban === 'Allowed',
-//       mute: user.mute === 'Allowed',
-//       kick: user.kick === 'Allowed',
-//       screenshot: user.screenshot === 'Allowed',
-//       agencyBan: user.agencyBan === 'Allowed',
-//       dpApprove: user.dpApprove === 'Allowed',
-//     });
-//   };
 
-//   const handleCheckboxChange = (e) => {
-//     const checkboxName = e.target.name;
-//     const isChecked = e.target.checked;
-//     setCheckboaxes((prevCheckboxes) => ({
-//       ...prevCheckboxes,
-//       [checkboxName]: isChecked,
-//     }));
-//   };
-
-//   const handleSaveChanges = () => {
-//     console.log('Selected User:', selectedUser);
-//     console.log('Updated Checkboxes:', checkboxes);
-//     setShowModal(false);
-//   };
-
-  const renderTableRows = () => {
-    return tableData.map((row) => (
-      <tr key={row.id}>
-        <td>{row.id}</td>
-        <td>{row.UserName}</td>
-        <td>{row.reportUserName}</td>
-        <td>{row.report}</td>
-        <td>{row.date}</td>
-        <td>{row.video}</td>
-        <td>
-          <select
-            // onChange={() => handleUpdateClick(row)}
-            // value={selectedUser === row ? 'update' : 'action'}
-          >
-            <option value="action">Action</option>
-            <option value="update">Update</option>
-            <option value="remove">Remove</option>
-          </select>
-        </td>
-      </tr>
-    ));
-  };
+  // const renderTableRows = () => {
+  //   return tableData.map((row) => (
+  //     <tr key={row.id}>
+  //       <td>{row.id}</td>
+  //       <td>{row.UserName}</td>
+  //       <td>{row.reportUserName}</td>
+  //       <td>{row.report}</td>
+  //       <td>{row.date}</td>
+  //       <td>{row.video}</td>
+  //       <td>
+  //         <select
+  //           // onChange={() => handleUpdateClick(row)}
+  //           // value={selectedUser === row ? 'update' : 'action'}
+  //         >
+  //           <option value="action">Action</option>
+  //           <option value="update">Update</option>
+  //           <option value="remove">Remove</option>
+  //         </select>
+  //       </td>
+  //     </tr>
+  //   ));
+  // };
 
   return (
     <div className={styles.main}>
@@ -86,7 +72,7 @@ const UserVideoReport = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{renderTableRows()}</tbody>
+        {/* <tbody>{renderTableRows()}</tbody> */}
       </table>
 
 

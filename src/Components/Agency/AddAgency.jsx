@@ -157,7 +157,7 @@ const AddAgency = () => {
           <option value="">Select an admin</option>
           {adminUsers.map(admin => (
             <option key={admin.userId} value={admin.userId}>
-              {admin.userId}
+                   {admin.userDetails.map(user => user.name).join(', ')}
             </option>
           ))}
         </select>

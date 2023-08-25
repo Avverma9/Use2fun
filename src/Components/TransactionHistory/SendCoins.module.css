@@ -66,4 +66,11 @@
     
     text-align: center;
   }
-  
+  .selectadmin{
+    width: 190px;
+}
+
+.coinsInput{
+  height: 40px;
+  width: 90px;
+}

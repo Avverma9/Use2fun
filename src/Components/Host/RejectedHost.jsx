@@ -46,8 +46,8 @@ const RejectedHost = () => {
                 <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
                   <option value="">Action</option>
                   <option value="view">View</option>
-                  <option value="accept">Accept</option>
-                  <option value="reject">Reject</option>
+                  {/* <option value="accept">Accept</option>
+                  <option value="reject">Reject</option> */}
                 </select>
               </td>
             </tr>
