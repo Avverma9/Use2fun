@@ -29,7 +29,7 @@ function ManageGiftcategory() {
         <button className="gift_btn">Add Gift Category</button>
       </div>
 
-      <table className="gift_table">
+      <table >
         <tr>
           <th>Sr.</th>
           <th> Title</th>

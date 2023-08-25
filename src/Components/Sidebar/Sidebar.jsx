@@ -23,7 +23,7 @@ import VipIcon from "../../assets/icons/vip.png";
 import BannerIcon from "../../assets/icons/banner.png";
 import GiftIcon from "../../assets/icons/gift.png";
 import coinIcon from "../../assets/icons/coin.png";
-import tagIcon from "../../assets/icons/tags.png"
+import tagIcon from "../../assets/icons/tags.png";
 import salary from "../../assets/icons/Rectangle 275.png";
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
@@ -1270,7 +1270,7 @@ const Salary = () => {
               <img src={BannerIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/sallary">
-              <p>Sallery</p>
+              <p>Salary Setup</p>
             </Link>
           </li>
           <li>
@@ -1279,7 +1279,7 @@ const Salary = () => {
               <img src={BannerIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/view-salary">
-              <p>View Sallery</p>
+              <p>View</p>
             </Link>
           </li>
         </ul>
