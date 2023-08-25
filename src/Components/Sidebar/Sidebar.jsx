@@ -1261,7 +1261,7 @@ const Salary = () => {
               <img src={BannerIcon} alt="icon" srcset="" />
             </Link>
             <Link to="/sallary-setup">
-              <p>Add Banner</p>
+              <p>salary</p>
             </Link>
           </li>
           <li>

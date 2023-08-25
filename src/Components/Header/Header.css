@@ -7,3 +7,25 @@
   width: 100% !important;
   z-index: 100 !important;
 }
+.bell-icon{
+  color: rgb(221, 221, 221);
+  font-size: 33px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.bell-icon:hover{
+  color: white;
+  transition: 0.5s;
+  font-size: 36px;
+}
+.notification{
+  margin-right: 5%;
+  background: rgba(0, 0, 0, 0.26);
+  border-radius: 50%;
+ 
+}
+.notification:hover{
+  background: rgba(0, 0, 0, 0.605);
+  transition: 0.3s;
+  
+}

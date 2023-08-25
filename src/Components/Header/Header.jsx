@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import {IoIosNotifications} from 'react-icons/io';
 
 const Header = () => {
   return (
@@ -9,6 +10,10 @@ const Header = () => {
         <span className="navbar-brand mb-0 h1 text-white">
           Usefuns Admin Panel
         </span>
+        <div className="notification">
+        <IoIosNotifications className="bell-icon"/>
+        </div>
+        
       </div>
     </nav>
     
