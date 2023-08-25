@@ -5,8 +5,6 @@ import AgencyBalance from './AgencyBalance/AgencyBalance';
 import agent from '../../assets/icons/rankingImg.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AgentCenter from './AgentCenter/AgentCenter';
-import agent from '../../assets/icons/Rectangle 384.png';
-
 
 const AgentPanel = () => {
   const [activeMenu, setActiveMenu] = useState("recharge"); 
