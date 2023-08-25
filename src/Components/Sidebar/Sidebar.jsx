@@ -24,7 +24,7 @@ import BannerIcon from "../../assets/icons/banner.png";
 import GiftIcon from "../../assets/icons/gift.png";
 import coinIcon from "../../assets/icons/coin.png";
 import tagIcon from "../../assets/icons/tags.png"
-
+import salary from "../../assets/icons/Rectangle 275.png";
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
 
@@ -1229,6 +1229,60 @@ const Account = () => {
             </Link>
           </li>
         </ul>
+        
+      </div>
+    </>
+  );
+};
+
+const Salary = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={salary} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Salary Setup</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/sallary-setup">
+              {" "}
+              <img src={BannerIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/sallary-setup">
+              <p>Add Banner</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/sallary">
+              {" "}
+              <img src={BannerIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/sallary">
+              <p>Sallery</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-salary">
+              {" "}
+              <img src={BannerIcon} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-salary">
+              <p>View Sallery</p>
+            </Link>
+          </li>
+        </ul>
       </div>
     </>
   );
@@ -1288,6 +1342,7 @@ const Sidebar = () => {
           <TransactionHistory />
           <Recharge />
           <Account />
+          <Salary/>
           
         </ul>
       </div>
