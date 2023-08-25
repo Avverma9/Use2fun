@@ -36,12 +36,12 @@ const RejectedHost = () => {
           {dataArray.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
-              <td>{item.userId.name}</td>
-              <td>{item.userId.name}</td>
-              <td>{item.userId.email || "testing@gmail.com"}</td>
-              <td>{item.userId.mobile}</td>
-              <td>{item.agency_code}</td>
-              <td>{item.status}</td>
+              <td>{item.name || "N/A"}</td>
+              <td>{item.name || "N/A"}</td>
+              <td>{item.email || "testing@gmail.com"}</td>
+              <td>{item.mobile || "N/A"}</td>
+              <td>{item.agency_code || "N/A"}</td>
+              <td>{item.status || "N/A"}</td>
               <td>
                 <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
                   <option value="">Action</option>

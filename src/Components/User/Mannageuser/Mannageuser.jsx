@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Mannageuser.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 import { useNavigate } from "react-router-dom";
 
 const Mannageuser = () => {
@@ -14,6 +14,7 @@ const Mannageuser = () => {
           "https://use2fun.onrender.com/user/getall"
         );
         const jsonData = await response.json();
+        console.log(jsonData.data)
         setData(jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -27,6 +28,7 @@ const Mannageuser = () => {
     try {
       const response = await fetch("https://use2fun.onrender.com/user/getall");
       const jsonData = await response.json();
+      console.log(jsonData.data)
       setData(jsonData.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -113,7 +115,7 @@ const Mannageuser = () => {
             <th scope="col">Sr. No</th>
             <th scope="col">Image</th>
             <th scope="col">Name</th>
-            <th scope="col">Username</th>
+            <th scope="col">UserId</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
             <th scope="col">Coin</th>
@@ -123,12 +125,14 @@ const Mannageuser = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((user, index) => (
+          {
+          data?
+          data.map((user, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
               <td>
                 <img
-                  src={user.img_url}
+                  src={user?.images[0] || ""}
                   alt="profile"
                   style={{
                     width: "40px",
@@ -226,7 +230,7 @@ const Mannageuser = () => {
                 </div>
               </td>
             </tr>
-          ))}
+          )) : "Data Loading..."}
         </tbody>
       </table>
     </>

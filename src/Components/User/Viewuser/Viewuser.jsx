@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Viewuser.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 
 const Viewuser = () => {
   const [data, setData] = useState(null);

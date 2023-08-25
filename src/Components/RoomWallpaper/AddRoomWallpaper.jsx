@@ -15,6 +15,21 @@ const AddRoomWallpaper = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!formData.wallpaper){
+      toast.error("Please add a wallpaper")
+      return
+    }
+    if(!formData.price){
+      toast.error("Please add a price")
+      return
+    }
+    
+    if(!formData.day){
+      toast.error("Please add validity")
+      return
+    }
+
+
     if (formData.price < 0 || formData.day < 0) {
       toast.error('Price and validity cannot be negative');
       return;
@@ -37,8 +52,8 @@ const AddRoomWallpaper = () => {
     
       const responseData = await response.json();
       
-      console.log('Response:', response);
-      console.log('Response Data:', responseData);
+      // console.log('Response:', response);
+      // console.log('Response Data:', responseData);
     
       if (response.ok) {
         setFormData({
@@ -72,7 +87,7 @@ const AddRoomWallpaper = () => {
         <label>Price*(If free price will be zero(0))</label>
         <input type="number" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} placeholder='Price' min="0" />
 
-        <label>Validity</label>
+        <label>Validity in (Weeks)</label>
         <input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: e.target.value })} placeholder='Validity' min="0" />
 
         <div className="btn">

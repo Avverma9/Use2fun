@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Header from "./Components/Header/Header";
-import Mannageuser from "./Components/Mannageuser/Mannageuser";
-import Viewuser from "./Components/Viewuser/Viewuser";
+import Mannageuser from "./Components/User/Mannageuser/Mannageuser";
+import Viewuser from "./Components/User/Viewuser/Viewuser";
 import Sidebar from "./Components/Sidebar/Sidebar";
-import Edituser from "./Components/Edituser/Edituser";
+import Edituser from "./Components/User/Edituser/Edituser";
 import Receivedgifts from "./Components/Receivedgifts/Receivedgifts";
 import Sendgifts from "./Components/Sendgifts/Sendgifts";
 import Coinhistory from "./Components/Coinhistory/Coinhistory";
-import Liveuserhistory from "./Components/Liveuserhistory/Liveuserhistory";
-import Topusers from "./Components/Topusers/Topusers";
+import Liveuserhistory from "./Components/User/Liveuserhistory/Liveuserhistory";
+import Topusers from "./Components/User/Topusers/Topusers";
 import AddAgency from "./Components/Agency/AddAgency";
 import ViewAgency from "./Components/Agency/ViewAgency";
 import AddAdmin from "./Components/Admin/AddAdmin";
@@ -26,9 +26,9 @@ import RejectedHost from "./Components/Host/RejectedHost";
 import ViewHostInfo from "./Components/Host/ViewHostInfo";
 import AddFrames from "./Components/Frames/AddFrames";
 import ViewFrames from "./Components/Frames/ViewFrames";
-import Liveusers from "./Components/Liveuser/Liveusers";
-import Userslist from "./Components/Userlist/Userslist";
-import Pushmessage from "./Components/Pushmessage/Pushmessage";
+import Liveusers from "./Components/User/Liveuser/Liveusers";
+import Userslist from "./Components/User/Userlist/Userslist";
+import Pushmessage from "./Components/User/Pushmessage/Pushmessage";
 import UserProfile from "./Components/Account/UserProfile";
 import ChangePassword from "./Components/Account/ChangePassword";
 import TransactionHistory from "./Components/TransactionHistory/TransactionHistory";
@@ -74,9 +74,20 @@ import Welcome from "./Components/Welcome/Welcome.jsx";
 import AddTags from "./Components/Tags/AddTags";
 import Ranking from "./Components/Agent/Ranking";
 import AgentPanel from "./Components/Agent/AgentPanel";
+import { useState } from "react";
+import { useEffect } from "react";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setAuthenticated(true);
+    }
+  }, []);
+
   return (
     <div className="app">
       <Router>
@@ -171,7 +182,7 @@ function App() {
             <Route path="/add-vehicle" element={<AddVehicle/>}/>
             <Route path="/view-vehicle" element={<ViewVehicle/>}/>
             <Route path="/extra-seat" element={<ExtraSeat/>}/>
-            <Route path="/agent/login" element={<AgentLogin/>}/>
+            
             <Route path="/specialid" element={<SpecialIdComp/>}/>
             <Route path="/lock-room" element={<LockRoom/>}/>
             <Route path="/add-banner" element={<AddBanner/>}/>
@@ -216,6 +227,7 @@ function App() {
             <Route path="/addTags" element={<AddTags/>}/>
             <Route path="/agent-ranking"  element={<Ranking/>}/>
             <Route path="/agent-panel" element={<AgentPanel/>}/>
+            <Route path="/agent/login" element={<AgentLogin/>}/>
           </Routes>
         </div>
       </Router>

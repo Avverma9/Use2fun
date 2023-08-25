@@ -32,6 +32,34 @@ const AddFrames = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!formData.image){
+      toast.error("Please add a Image")
+      return
+    }
+
+    if(!formData.thumbnail){
+      toast.error("Please add a Thumbnail")
+      return
+    }
+
+    if(!formData.level){
+      toast.error("Please add Level")
+      return
+    }
+
+    if(!formData.price){
+      toast.error("Please add Price")
+      return
+    }
+
+    if(!formData.day){
+      toast.error("Please add Validity")
+      return
+    }
+
+
+
     const formDataToSend = new FormData();
 
     if (formData.image) {
@@ -53,14 +81,14 @@ const AddFrames = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log('Response data:', responseData);
+        // console.log('Response data:', responseData);
         toast.success('Frames added successfully.');
       } else {
-        console.error('Failed to add Frames. Response status:', response.status);
+        // console.error('Failed to add Frames. Response status:', response.status);
         toast.error('Error occurred while adding Frames.');
       }
     } catch (error) {
-      console.error('Error adding Frames:', error);
+      // console.error('Error adding Frames:', error);
     }
   };
 

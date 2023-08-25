@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import './ViewSubAdmin.css';
+import avatarImg from "../../../assets/icons/avatar.png"
 
 const ViewSubAdmin = () => {
   const [showModal, setShowModal] = useState(false);
@@ -70,23 +71,23 @@ const ViewSubAdmin = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       return (
         <>
-        {data.map((item, index) => (
+        {dataArray.map((item, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
             <td>
-              {item.userId && <img className="images" src={item.userId.images} alt='images' />}
+              { <img className="images" src={item.images[0] || {avatarImg}} alt='images' />}
             </td>
             <td>{item.userId ? item.userId.name : 'N/A'}</td>
-            <td>{item.userId ? item.userId.userId : 'N/A'}</td>
-            <td>{item.email}</td>
-            <td>{item.userId ? item.userId.mobile : 'N/A'}</td>
-            <td>{item.userId ? item.userId.coins : 'N/A'}</td>
-            <td>{item.role}</td>
-            <td>{item.userId ? item.userId.status : 'N/A'}</td>
+            <td>{item.userId || 'N/A'}</td>
+            <td>{item.email || "N/A"}</td>
+            <td>{ item.mobile || 'N/A'}</td>
+            <td>{item.coins || 'N/A'}</td>
+            <td>{item.role || "N/A"}</td>
+            <td>{item.status || 'N/A'}</td>
             <td>
               <select
                 className='select-viewsubadmin'
-                onChange={() => handleUpdateClick(item)}
+                // onChange={() => handleUpdateClick(item)}
                 value={selectedUser === item ? 'update' : 'action'}
               >
                 <option value="action">Action</option>

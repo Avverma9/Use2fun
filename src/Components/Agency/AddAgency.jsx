@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AddAgency.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddAgency = () => {
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [selectedAdmin, setSelectedAdmin] = useState('');
   const [formData, setFormData] = useState({
     userId: '',
     name: '',
@@ -13,6 +15,25 @@ const AddAgency = () => {
     aadhar_front: null,
     aadhar_back: null,
   });
+
+
+  useEffect(() => {
+    fetch('https://use2fun.onrender.com/admin/adminUser/getall')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 1) {
+          setAdminUsers(data.data);
+        } else {
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching admin users:', error);
+      });
+  }, []);
+
+  const handleAdminChange = (e) => {
+    setSelectedAdmin(e.target.value);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +68,32 @@ const AddAgency = () => {
       return;
     }
 
+    if (!formData.userId) {
+      toast.error('Please enter the valid userId.');
+      return;
+    }
+
+    if (!formData.email) {
+      toast.error('Please enter a valid email.');
+      return;
+    }
+
+    if (!formData.agency) {
+      toast.error('Please upload the Agency Image.');
+      return;
+    }
+
+    if (!formData.aadhar_front) {
+      toast.error('Please upload the AadharCard Front image.');
+      return;
+    }
+
+    if (!formData.aadhar_back) {
+      toast.error('Please upload the AadharCard Back image.');
+      return;
+    }
+
+
     const formDataToSend = new FormData();
 
     if (formData.agency) {
@@ -58,7 +105,7 @@ const AddAgency = () => {
     if (formData.aadhar_back) {
       formDataToSend.append('images', formData.aadhar_back);
     }
-
+    formDataToSend.append('admin', selectedAdmin);
     formDataToSend.append('userId', formData.userId);
     formDataToSend.append('name', formData.name);
     formDataToSend.append('mobile', formData.mobile);
@@ -70,18 +117,20 @@ const AddAgency = () => {
         body: formDataToSend,
       });
 
-      if (response.ok) {
-        const responseData = await response.json();
+      const responseData = await response.json();
+
+      if (response.ok && !responseData.error) {
         console.log('Response data:', responseData);
         toast.success('Agency added successfully.');
       } else {
-        console.error('Failed to add agency. Response status:', response.status);
-        toast.error('Error occurred while adding agency.');
+        console.error('Failed to add agency. Response data:', responseData);
+        toast.error(responseData.error || 'Error occurred while adding agency.');
       }
     } catch (error) {
       console.error('Error adding agency:', error);
+      toast.error('An error occurred while adding agency.');
     }
-  };
+  }
 
   return (
     <div className={styles.main}>
@@ -102,6 +151,16 @@ const AddAgency = () => {
           value={formData.name}
           onChange={handleInputChange}
         />
+
+        <label>Admin</label>
+        <select className={styles.selectadmin} name="admin" value={selectedAdmin} onChange={handleAdminChange}>
+          <option value="">Select an admin</option>
+          {adminUsers.map(admin => (
+            <option key={admin.userId} value={admin.userId}>
+              {admin.userId}
+            </option>
+          ))}
+        </select>
 
         <label>Email*</label>
         <input

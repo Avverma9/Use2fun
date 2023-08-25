@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./ViewSvip.css"
 
 function ViewVip() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function ViewVip() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://use2fun.onrender.com/admin/vip/getall"
+          "https://use2fun.onrender.com/admin/svip/getall"
         );
         if (!response.ok) {
           throw new Error("An error occupied");
@@ -25,14 +26,14 @@ function ViewVip() {
   }, []);
 
   const handleNavigate = () => {
-    navigate("/add-vip");
+    navigate("/add-svip");
   };
 
   return (
     <div id="vip_main">
       <div className="vip_header">
         <h3>View SVip</h3>
-        <button className="add-vip_btn" onClick={handleNavigate}>
+        <button className="vip_btn" onClick={handleNavigate}>
           Add Svip
         </button>
       </div>

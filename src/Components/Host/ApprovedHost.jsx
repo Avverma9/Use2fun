@@ -13,6 +13,7 @@ const ApprovedHost = () => {
       try {
         const response = await fetch("https://use2fun.onrender.com/host/getApproved");
         const jsonData = await response.json();
+        console.log(jsonData.data)
         setData(jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,11 +37,11 @@ const ApprovedHost = () => {
           {dataArray.map((item, index) => (
             <tr key={index}>
               <td>{index+1}</td>
-              <td>{item.userId && item.userId.userId ? item.userId.userId : "N/A"}</td>
-              <td>{item.userId && item.userId.name ? item.userId.name : "N/A"}</td>
-              <td>{item.userId && item.userId.mobile ? item.userId.mobile : "N/A"}</td>
+              <td>{item.userId || "N/A"}</td>
+              <td>{item.name || "N/A"}</td>
+              <td>{item.mobile || "N/A"}</td>
               <td>{item.agency_code || "N/A"}</td>
-              <td>{item.status}</td>
+              <td>{item.status || "N/A"}</td>
               <td>
                 <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
                   <option value="">Action</option>

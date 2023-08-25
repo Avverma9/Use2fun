@@ -1,6 +1,6 @@
 import React from "react";
 import "./Liveuserhistory.css";
-import Title from "../common/Title";
+import Title from "../../common/Title";
 
 const Liveuserhistory = () => {
   return (

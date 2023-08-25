@@ -45,3 +45,20 @@
     font-weight: 501;
     width: 150px;
 }
+
+.checkbox-container {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  /* flex-direction: column; */
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.checkbox-label input {
+  margin-right: 10px;
+}

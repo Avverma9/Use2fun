@@ -1,15 +1,39 @@
 import React, { useState } from 'react';
-import "./Recharge/RechargeDashboard.css";
+import "./Recharge/DiamondAccount.css"
 import RechargeDashboard from './Recharge/RechargeDashboard';
 import AgencyBalance from './AgencyBalance/AgencyBalance';
+import agent from '../../assets/icons/rankingImg.png';
+import { useLocation, useNavigate } from 'react-router-dom';
+import AgentCenter from './AgentCenter/AgentCenter';
 import agent from '../../assets/icons/Rectangle 384.png';
 
 
 const AgentPanel = () => {
   const [activeMenu, setActiveMenu] = useState("recharge"); 
+  const location = useLocation(); 
+  const navigate = useNavigate();
+
+  const AgentloginData = location.state;
+
+  if (!AgentloginData) {
+    navigate("/agent/login");
+    return null;
+  }
+
+  localStorage.setItem("AgentLoginData", JSON.stringify(AgentloginData.data)); 
+  console.log(AgentloginData.data);
+
+  const Data = localStorage.getItem("AgentLoginData");
+  const parsedData = JSON.parse(Data);
 
   const handleMenuClick = (menu) => {
     setActiveMenu(menu);
+  };
+
+  const handleLogout = () => {
+    localStorage.setItem("AgentSignIn",false);
+    localStorage.removeItem("AgentLoginData");
+    navigate("/agent/login");
   };
 
   return (
@@ -20,11 +44,11 @@ const AgentPanel = () => {
             <img src="https://i.gifer.com/IPNp.gif" alt="" />
           </div>
           <div className='phone'>
-            <p className='no'>6375360267</p>
-            <p className='blnc'>my agent balance:500$</p>
+            <p className='no'>{parsedData.userId}</p>
+            <p className='blnc'>my agent balance: {parsedData.totalCoins}</p>
           </div>
           <div className='button-logout'>
-            <button className='logout'>Logout</button>
+            <button className='logout' onClick={handleLogout}>Logout</button>
           </div>
         </div>
         <div className='img-agent'><img src={agent} alt='image'/></div>
@@ -50,8 +74,9 @@ const AgentPanel = () => {
         </div>
       </div>
       <div>
-        {activeMenu === "recharge" && <RechargeDashboard />}
+        {activeMenu === "recharge" && <RechargeDashboard coinseller={parsedData._id}/>}
         {activeMenu === "balance" && <AgencyBalance />}
+        {activeMenu === "center" && <AgentCenter/>}
         
       </div>
     </div>

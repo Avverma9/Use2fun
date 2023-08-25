@@ -38,10 +38,10 @@ const ViewRoomWallpaper = () => {
         <>
           {dataArray.map((item, index) => (
       <tr key={index}>
-        <td>{index+1}</td>
-        <td><img className="images" src={item.images} alt='images' /></td>
-        <td>{item.price}</td>
-        <td>{item.day}</td>
+        <td>{index+1 || "N/A"}</td>
+        <td><img className="images" src={item.images || "N/A"} alt='images' /></td>
+        <td>{item.price || "N/A"}</td>
+        <td>{item.day || "N/A"} Weeks</td>
         <td>
           <select>
             <option value="action">Action</option>

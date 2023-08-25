@@ -37,6 +37,27 @@ function AddSvip() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!formData.svip){
+      toast.error("Please upload svip Image")
+      return
+    }
+    if(!formData.thumbnail){
+      toast.error("Please upload thumbnail Image")
+      return
+    }
+    if(!formData.level){
+      toast.error("Please upload level")
+      return
+    }
+    if(!formData.price){
+      toast.error("Please upload price")
+      return
+    }
+    if(!formData.day){
+      toast.error("Please upload day")
+      return
+    }
+
     const formDataToSend = new FormData();
 
     if (formData.svip) {
