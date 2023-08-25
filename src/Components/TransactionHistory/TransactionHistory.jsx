@@ -21,34 +21,37 @@ const TransactionHistory = () => {
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>Transaction History</h3>
-      <div className={styles.transactionrow}>
-        <p>Sr.</p>
-        <p>Image</p>
-        <p>Name</p>
-        <p>Username</p>
-        <p>Email</p>
-        <p>Price</p>
-        <p>Coin</p>
-        <p>OrderId</p>
-        <p>Status</p>
-      </div>
+      <table className={styles.table}>
+      <tr>
+        <th>Sr.</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Price</th>
+        <th>Coin</th>
+        <th>OrderId</th>
+        <th>Status</th>
+        </tr>
+      
       {transactions.map((transaction, index) => (
-        <div className={styles.transactionrow1} key={index}>
-          <p>{transaction.sr}</p>
-          
+        <tr key={index}>
+          <td>{transaction.sr}</td>
+          <td>
             <img className={styles.profile_img} src={transaction.image} alt="Profile-pic" />
+          </td>
           
-          
-            <p>{transaction.name}</p>
-            <p>{transaction.username}</p>
-            <p>{transaction.email}</p>
-            <p>{transaction.price}</p>
-            <p>{transaction.coin}</p>
-            <p>{transaction.orderId}</p>
-            <p>{transaction.status}</p>
-          </div>
+            <td>{transaction.name}</td>
+            <td>{transaction.username}</td>
+            <td>{transaction.email}</td>
+            <td>{transaction.price}</td>
+            <td>{transaction.coin}</td>
+            <td>{transaction.orderId}</td>
+            <td>{transaction.status}</td>
+          </tr>
         
       ))}
+    </table>
     </div>
   );
 }

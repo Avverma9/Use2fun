@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './ViewVip.css';
 
 
 function ViewVip() {
@@ -34,38 +35,40 @@ function ViewVip() {
     <div id="vip_main">
       <div className="vip_header">
         <h3>View Vip</h3>
-        <button className="vip_btn" onClick={handleNavigate}>Add vip</button>
+        <button className="add-vip_btn" onClick={handleNavigate}>Add vip</button>
       </div>
 
-      <table id="vip_table">
+      <table className="table">
+      <thead>
         <tr>
-          <th className="priceth">Sr.</th>
-          <th className="priceth">Vip Image</th>
-          <th className="priceth" width="10px">
+          <th >Sr.</th>
+          <th >Vip Image</th>
+          <th >
             Price
           </th>
-          <th className="priceth">Level</th>
-          <th className="priceth">Validity</th>
-          <th className="priceth">Action</th>
+          <th >Level</th>
+          <th>Validity</th>
+          <th >Action</th>
         </tr>
         
         
         
         {vipdata&& vipdata.map((item,index)=>(
         <tr key={index} className="row2">
-          <td className="price">{index+1}</td>
-          <td className="price">
+          <td >{index+1}</td>
+          <td >
             <img src={item.images[0]} alt="image" />
           </td>
-          <td className="price">{item.price}</td>
-          <td className="price">{item.level}</td>
-          <td className="price">{item.day}(in days)</td>
-          <select name="" id="">Action
+          <td >{item.price}</td>
+          <td >{item.level}</td>
+          <td>{item.day}(in days)</td>
+          <select className='viewframe-select' id="">Action
           <option value="action">Action</option>
           </select>
           
         </tr>
       ))}
+      </thead>
       </table>
       
     </div>
