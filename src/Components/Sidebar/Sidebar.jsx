@@ -24,6 +24,8 @@ import BannerIcon from "../../assets/icons/banner.png";
 import GiftIcon from "../../assets/icons/gift.png";
 import coinIcon from "../../assets/icons/coin.png";
 import tagIcon from "../../assets/icons/tags.png"
+import salary from "../../assets/icons/salary.png"
+import signout from "../../assets/icons/signout.png"
 
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
@@ -1234,6 +1236,76 @@ const Account = () => {
   );
 };
 
+const Salary = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  return (
+    <>
+      <li
+        {...getToggleProps({
+          onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <Link>
+          {" "}
+          <img src={salary} alt="icon" srcset="" />
+        </Link>
+        <Link>
+          <p>Salary Setup</p>
+        </Link>
+      </li>
+      <div {...getCollapseProps()}>
+        <ul>
+          <li>
+            <Link to="/salary-setup">
+              {" "}
+              <img src={salary} alt="icon" srcset="" />
+            </Link>
+            <Link to="/salary-setup">
+              <p>salary</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/salary">
+              {" "}
+              <img src={salary} alt="icon" srcset="" />
+            </Link>
+            <Link to="/salary">
+              <p>Salary Setup</p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/view-salary">
+              {" "}
+              <img src={salary} alt="icon" srcset="" />
+            </Link>
+            <Link to="/view-salary">
+              <p>View</p>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+//Signout
+const Signout = () => {
+  return (
+    <>
+      <li>
+        <Link to="/">
+          {" "}
+          <img src={signout} alt="icon" srcset="" />
+        </Link>
+        <Link to="/">
+          <p> SignOut</p>
+        </Link>
+      </li>
+    </>
+  );
+};
+
 // const Home = () => {
 //   return (
 //     <>
@@ -1288,6 +1360,8 @@ const Sidebar = () => {
           <TransactionHistory />
           <Recharge />
           <Account />
+          <Salary/>
+          <Signout/>
         </ul>
       </div>
     </div>

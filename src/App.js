@@ -76,6 +76,9 @@ import Ranking from "./Components/Agent/Ranking";
 import AgentPanel from "./Components/Agent/AgentPanel";
 import { useState } from "react";
 import { useEffect } from "react";
+import Salerysetup from "./Components/Salarysetup/Salerysetup";
+import Setupsallery from "./Components/Salarysetup/Setupsallery";
+import Viewsallary from "./Components/Salarysetup/Viewsallary";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 function App() {
@@ -228,6 +231,9 @@ function App() {
             <Route path="/agent-ranking"  element={<Ranking/>}/>
             <Route path="/agent-panel" element={<AgentPanel/>}/>
             <Route path="/agent/login" element={<AgentLogin/>}/>
+            <Route path="/salary-setup" element={<Salerysetup/>}/>
+            <Route path="/salary" element={<Setupsallery/>}/>
+            <Route path="/view-salary" element={<Viewsallary/>}/>
           </Routes>
         </div>
       </Router>

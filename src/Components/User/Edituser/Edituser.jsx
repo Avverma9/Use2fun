@@ -80,6 +80,7 @@ const Edituser = () => {
           id="username"
           value={userData.name}
           onChange={handleInputChange}
+          maxLength={20}
         />
       </div>
       <div className="fields">
