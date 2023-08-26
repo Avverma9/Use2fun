@@ -103,16 +103,16 @@ function App() {
             {/* <Route path="/signout" element={<SignOutComp/>}/> */}
             <Route path="/" element={<Dashboard />} />
             <Route path="/view-users" element={<Mannageuser />} />
-            <Route path="/view-user" element={<Viewuser />} />
-            <Route path="/edit-user" element={<Edituser />} />
-            <Route path="/recieved-gift-history" element={<Receivedgifts />} />
-            <Route path="/send-gift-history" element={<Sendgifts />} />
+            <Route path="/view-user/:id" element={<Viewuser />} />
+            <Route path="/edit-user/:id" element={<Edituser />} />
+            <Route path="/recieved-gift-history/:id" element={<Receivedgifts />} />
+            <Route path="/send-gift-history/:id" element={<Sendgifts />} />
             <Route
-              path="/mannage-purchased-coin-history"
+              path="/mannage-purchased-coin-history/:id"
               element={<Coinhistory />}
             />
             <Route
-              path="/mannage-live-user-history"
+              path="/mannage-live-user-history/:id"
               element={<Liveuserhistory />}
             />
             <Route path="/top-users" element={<Topusers />} />
@@ -136,7 +136,7 @@ function App() {
             <Route path="/pending-host-request" element={<PendingHost />} />
             <Route path="/approved-host-request" element={<ApprovedHost />} />
             <Route path="/rejected-host-request" element={<RejectedHost />} />
-            <Route path="/view-host-info" element={<ViewHostInfo />} />
+            <Route path="/view-host-info/:id" element={<ViewHostInfo />} />
             <Route path="/add-frames" element={<AddFrames />} />
             <Route path="/view-frames" element={<ViewFrames />} />
             <Route path="/add-vehicle" element={<AddVehicle />} />

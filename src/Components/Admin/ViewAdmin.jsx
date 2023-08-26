@@ -26,13 +26,16 @@ const ViewAdmin = () => {
         throw new Error('Network response was not ok');
       }
       const jsonData = await response.json();
-      setData(jsonData.data);
-      console.log("Fetched Data:", jsonData.data);
+      const modifiedData = jsonData.data.map((item) => ({
+        ...item,
+        selectedAction: "action",
+      }));
+      setData(modifiedData);
+      console.log("Fetched Data:", modifiedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
 
   useEffect(() => {
     fetchData();
@@ -40,18 +43,6 @@ const ViewAdmin = () => {
 
   console.log(data, "data")
 
-  const handleUpdateClick = (user) => {
-    setShowModal(true);
-    setSelectedUser(user);
-    setCheckboxes({
-      banUnban: user.is_ban_unban,
-      mute: user.mute,
-      kick: user.kick,
-      screenshot: user.screenshot,
-      agencyBan: user.agencyban,
-      dpApprove: user.dpapprove,
-    });
-  };
 
   const handleCheckboxChange = (e) => {
     const checkboxName = e.target.name;
@@ -66,7 +57,7 @@ const ViewAdmin = () => {
     console.log('Selected User:', selectedUser);
     console.log('Updated Checkboxes:', checkboxes);
     setShowModal(false);
-  
+
     try {
       if (selectedUser) {
         const response = await fetch(`https://use2fun.onrender.com/admin/adminUser/update/${selectedUser.userId}`, {
@@ -83,7 +74,7 @@ const ViewAdmin = () => {
             dpapprove: checkboxes.dpApprove,
           }),
         });
-  
+
         if (response.ok) {
           toast.success('User permissions updated successfully');
           fetchData()
@@ -97,27 +88,37 @@ const ViewAdmin = () => {
     }
   };
 
-  const handleDeleteUser = async () => {
-    setShowDeleteModal(true);
+  
+  const handleDeleteUser = (userId) => {
+    setSelectedUser(userId); // Store the userId to delete
+    setShowDeleteModal(true); // Open the delete modal
+  };
+
+  const confirmDelete = async () => {
     try {
-      if (selectedUser) {
-        const response = await fetch(`https://use2fun.onrender.com/admin/remove/adminUser`, {
+      const response = await fetch(
+        `https://use2fun.onrender.com/admin/remove/adminUser`,
+        {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId: selectedUser.id }),
-        });
-
-        if (response.ok) {
-          toast.success('User removed successfully');
-          setData((prevData) => prevData.filter((user) => user.id !== selectedUser.id));
-        } else {
-          console.error('Failed to remove user');
+          body: JSON.stringify({ userId: selectedUser }),
         }
+      );
+
+      if (response.ok) {
+        toast.success('User removed successfully');
+        setData((prevData) => prevData.filter((user) => user.userId !== selectedUser));
+      } else {
+        console.error('Failed to remove user');
+        const errorResponse = await response.json();
+        console.error('Error Response:', errorResponse);
       }
     } catch (error) {
       console.error('Error removing user:', error);
+    } finally {
+      setShowDeleteModal(false); // Close the delete modal
     }
   };
 
@@ -126,40 +127,60 @@ const ViewAdmin = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       return (
         <>
-          {dataArray.map((item, index) => {
-            console.log("Item:", item);
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td><img className="images" src={item.image_url} alt='images' /></td>
-                <td>{item.name || "N/A"}</td>
-                <td>{item.is_ban_unban ? 'Allowed' : 'Not Allowed'}</td>
-                <td>{item.kick ? 'Allowed' : 'Not Allowed'}</td>
-                <td>{item.agencyban ? 'Allowed' : 'Not Allowed'}</td>
-                <td>{item.mute ? 'Allowed' : 'Not Allowed'}</td>
-                <td>{item.screenshot ? 'Allowed' : 'Not Allowed'}</td>
-                <td>{item.dpapprove ? 'Allowed' : 'Not Allowed'}</td>
-                <td>
-                  <select onChange={(e) => {
+          {dataArray.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>
+                {item.userDetails && item.userDetails[0]?.images[0] && (
+                  <img className="images" src={item.userDetails[0].images[0]} alt='images' />
+                )}
+              </td>
+              <td>{item.userDetails ? item.userDetails[0]?.name || "N/A" : "N/A"}</td>
+              <td>{item.is_ban_unban ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.kick ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.agencyban ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.mute ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.screenshot ? 'Allowed' : 'Not Allowed'}</td>
+              <td>{item.dpapprove ? 'Allowed' : 'Not Allowed'}</td>
+              <td>
+                <select
+                  onChange={(e) => {
                     const selectedValue = e.target.value;
-                    setSelectedAction(selectedValue);
+                    const updatedData = data.map((d, i) => {
+                      if (i === index) {
+                        return { ...d, selectedAction: selectedValue };
+                      }
+                      return d;
+                    });
+                    setData(updatedData);
                     if (selectedValue === 'update') {
-                      handleUpdateClick(item);
+                      setCheckboxes({
+                        banUnban: item.is_ban_unban,
+                        mute: item.mute,
+                        kick: item.kick,
+                        screenshot: item.screenshot,
+                        agencyBan: item.agencyban,
+                        dpApprove: item.dpapprove,
+                      });
+                      setSelectedUser(item);
+                      setShowModal(true);
                     }
                     if (selectedValue === 'remove') {
-                      handleDeleteUser(item);
+                      setSelectedUser(item);
+                      setShowDeleteModal(true);
+                      handleDeleteUser(item.userId);
                     }
+
                   }}
-                  value={selectedAction}
-                  >
-                    <option value="action">Action</option>
-                    <option value="update">Update</option>
-                    <option value="remove">Remove</option>
-                  </select>
-                </td>
-              </tr>
-            );
-          })}
+                  value={item.selectedAction}
+                >
+                  <option value="action">Action</option>
+                  <option value="update">Update</option>
+                  <option value="remove">Remove</option>
+                </select>
+              </td>
+            </tr>
+          ))}
         </>
       );
     } else {
@@ -172,7 +193,6 @@ const ViewAdmin = () => {
       );
     }
   };
-
 
   return (
     <div className="main">
@@ -287,10 +307,10 @@ const ViewAdmin = () => {
       </Modal>
 
 
-      {/* Confirmation Modal */}
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+       {/* Confirmation Modal */}
+       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm User Removal</Modal.Title>
+          <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Are you sure you want to remove this user?
@@ -299,8 +319,8 @@ const ViewAdmin = () => {
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteUser}>
-            Confirm Removal
+          <Button variant="danger" onClick={confirmDelete}>
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>

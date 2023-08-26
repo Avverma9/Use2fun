@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Mannageuser.css";
 import Title from "../../common/Title";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Mannageuser = () => {
   const navigate = useNavigate();
@@ -35,9 +38,8 @@ const Mannageuser = () => {
     }
   };
 
-  const deleteUserHandler = () => {
-    const id = localStorage.getItem("userId");
-    const url = `https://use2fun.onrender.com/admin/user/delete/${id}`;
+  const deleteUserHandler = (userId) => {
+    const url = `https://use2fun.onrender.com/admin/user/delete/${userId}`;
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -47,41 +49,40 @@ const Mannageuser = () => {
       .then((response) => {
         if (response.status === 200) {
           console.log("User deleted successfully");
+          toast.success("Data deleted")          
           fetchall();
         } else {
           console.log("Error deleting user");
+          toast.error("Error while deleting data")    
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   const handleAction = (user, action) => {
-    localStorage.setItem("userId", user._id);
-
     switch (action) {
       case "view":
-        navigate("/view-user");
+        navigate(`/view-user/${user._id}`);
         break;
       case "edit":
-        navigate("/edit-user");
+        navigate(`/edit-user/${user._id}`);
         break;
       case "delete":
-        deleteUserHandler();
+        deleteUserHandler(user);
         break;
       case "received-gift-history":
-        navigate("/recieved-gift-history");
+        navigate(`/recieved-gift-history/${user._id}`);
         break;
       case "send-gift-history":
-        navigate("/send-gift-history");
+        navigate(`/send-gift-history/${user._id}`);
 
         break;
       case "coin-history":
-        navigate("/mannage-purchased-coin-history");
+        navigate(`/mannage-purchased-coin-history/${user._id}`);
         break;
       case "live-history":
-        navigate("/mannage-live-user-history");
+        navigate(`/mannage-live-user-history/${user._id}`);
         break;
       case "decline":
         break;
@@ -128,7 +129,7 @@ const Mannageuser = () => {
           {
           data?
           data.map((user, index) => (
-            <tr key={index}>
+            <tr key={user._id}>
               <th scope="row">{index + 1}</th>
               <td>
                 <img
@@ -142,7 +143,7 @@ const Mannageuser = () => {
               </td>
               <td>{user.name}</td>
               <td>{user.userId}</td>
-              <td>{user.name}</td>
+              <td>{user.email? user.email :"No data"}</td>
               <td>{user.mobile}</td>
               <td>{user.coins}</td>
               <td>{user.coins}</td>
@@ -179,7 +180,7 @@ const Mannageuser = () => {
                     <li>
                       <button
                         className="dropdown-item"
-                        onClick={() => handleAction(user, "delete")}
+                        onClick={() => handleAction(user && user._id, "delete")}
                       >
                         Delete
                       </button>

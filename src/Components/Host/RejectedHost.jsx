@@ -22,8 +22,8 @@ const RejectedHost = () => {
 
   console.log(data)
 
-  const handleNavigate = () => {
-    navigate('/view-host-info')
+  const handleNavigate = (itemId) => {
+    navigate(`/view-host-info/${itemId}`);
   }
  
     
@@ -36,18 +36,23 @@ const RejectedHost = () => {
           {dataArray.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
-              <td>{item.name || "N/A"}</td>
-              <td>{item.name || "N/A"}</td>
-              <td>{item.email || "testing@gmail.com"}</td>
-              <td>{item.mobile || "N/A"}</td>
-              <td>{item.agency_code || "N/A"}</td>
-              <td>{item.status || "N/A"}</td>
+              <td>{item.userId?.userId || "No data"}</td>
+            <td>{item.userId?.name || "No data"}</td>
+            <td>{item.userId?.email || "No data"}</td>
+            <td>{item.userId?.mobile || "No data"}</td>
+              <td>{item.agency_code || "No data"}</td>
+              <td>{item.status ||"No data"}</td>
               <td>
-                <select onChange={(e) => e.target.value === 'view' && handleNavigate()}>
+              <select onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  if(selectedValue==='view'){
+                    handleNavigate(item._id); 
+                  }
+                  
+             
+                }}>
                   <option value="">Action</option>
                   <option value="view">View</option>
-                  {/* <option value="accept">Accept</option>
-                  <option value="reject">Reject</option> */}
                 </select>
               </td>
             </tr>
@@ -87,7 +92,7 @@ const RejectedHost = () => {
         <thead>
           <tr>
             <th>Sr.</th>
-            <th>Username</th>
+            <th>UserId</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>

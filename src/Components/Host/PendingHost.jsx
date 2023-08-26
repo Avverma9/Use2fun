@@ -25,8 +25,8 @@ const PendingHost = () => {
 
   console.log(data)
 
-  const handleNavigate = () => {
-    navigate('/view-host-info')
+  const handleNavigate = (itemId) => {
+    navigate(`/view-host-info/${itemId}`);
   }
 
 
@@ -68,17 +68,17 @@ const PendingHost = () => {
           {dataArray.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
-              <td>{item.name || "no data available"}</td>
-              <td>{item.name || "no data available"}</td>
+              <td>{item.userId.userId || "no data available"}</td>
+              <td>{item.userId.name || "no data available"}</td>
               <td>{item.email || "testing@gmail.com"}</td>
-              <td>{item.mobile  || "no data available"}</td>
+              <td>{item.userId.mobile  || "no data available"}</td>
               <td>{item.agency_code || "no data available"}</td>
               <td>{item.status  || "no data available"}</td>
               <td>
               <select onChange={(e) => {
                   const selectedValue = e.target.value;
                   if(selectedValue==='view'){
-                    handleNavigate()
+                    handleNavigate(item._id); 
                   }
                   if (selectedValue === 'accept') {
                     handleStatusChange(item._id, 'Approved');
@@ -131,7 +131,7 @@ const PendingHost = () => {
         <thead>
           <tr>
             <th>Sr.</th>
-            <th>Username</th>
+            <th>UserId</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>

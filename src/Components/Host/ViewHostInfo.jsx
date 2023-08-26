@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./ViewHostInfo.module.css"
+import { useParams } from 'react-router-dom';
 
 const ViewHostInfo = () => {
-  const data = {
-    agencyCode: 123,
-    userName: "abc",
-    name: "xyz",
-    status: "approved",
-    email: "abc@gmail.com",
-    created: "12/09/2023",
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://use2fun.onrender.com/host/getbyid/${id}`);
+        const jsonData = await response.json();
+        console.log(jsonData.data);
+        setData(jsonData.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  console.log(id, "IDDDDDDDDDDDDDDDDDDDDDD")
+
+
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
+
+
+
+  // const dataa = {
+  //   agencyCode: 123,
+  //   userName: "abc",
+  //   name: "xyz",
+  //   status: "approved",
+  //   email: "abc@gmail.com",
+  //   created: "12/09/2023",
+  // };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const year = date.getUTCFullYear();
+
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -20,15 +58,15 @@ const ViewHostInfo = () => {
           <thead>
             <tr>
               <th>Agency Code</th>
-              <td>{data.agencyCode}</td>
+              <td>{data.agency_code}</td>
             </tr>
             <tr>
-              <th>User Name</th>
-              <td>{data.userName}</td>
+              <th>User Id</th>
+              <td>{data.userId?.userId || "No data"}</td>
             </tr>
             <tr>
               <th>Name</th>
-              <td>{data.name}</td>
+              <td>{data.userId?.name || "No data"}</td>
             </tr>
             <tr>
               <th>Status</th>
@@ -36,11 +74,12 @@ const ViewHostInfo = () => {
             </tr>
             <tr>
               <th>Email</th>
-              <td>{data.email}</td>
+              <td>{data.userId?.email || "No data"}</td>
             </tr>
             <tr>
               <th>Created</th>
-              <td>{data.created}</td>
+              <td>{formatDate(data.createdAt
+              ) || "no data"}</td>
             </tr>
           </thead>
         </table>
@@ -49,13 +88,13 @@ const ViewHostInfo = () => {
       <div className={styles.box} >
         <label>Live(Ban/Unban)</label>
         <select name="" id="">
-            <option value="banuser">Ban users</option>
-            <option value="unabuser">Unban users</option>
+          <option value="banuser">Ban users</option>
+          <option value="unabuser">Unban users</option>
         </select>
 
         <label>Host Request</label>
         <select name="" id="">
-            <option value="banuser">Select User Status</option>
+          <option value="banuser">Select User Status</option>
         </select>
       </div>
     </div>

@@ -1,12 +1,57 @@
 import React, { useState, useEffect } from "react";
 import "./Viewuser.css";
 import Title from "../../common/Title";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+import { useParams } from "react-router-dom";
 
 const Viewuser = () => {
   const [data, setData] = useState(null);
-  const id = localStorage.getItem("userId").trim();
+  const {id} = useParams()
 
-  useEffect(() => {
+
+  const handleRemoveDP = async () => {
+    try {
+      const response = await fetch(
+        `https://use2fun.onrender.com/admin/user/removeDp/${id}`,
+        {
+          method: "POST",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const updatedData = await response.json();
+      setData(updatedData.data);
+      console.log("DP Removed:", updatedData.data);
+      toast.success("DP removed");
+  
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://use2fun.onrender.com/user/getbyid/${id}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const jsonData = await response.json();
+          setData(jsonData.data);
+          console.log("Fetched Data:", jsonData.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+  
+      fetchData();
+    } catch (error) {
+      console.error("Error removing DP:", error);
+      toast.error("Error while removing DP");
+    }
+  };
+
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -23,8 +68,12 @@ const Viewuser = () => {
       }
     };
 
-    fetchData();
-  }, [id]);
+
+    useEffect(()=>{
+      fetchData();
+
+    },[])
+
 
   console.log(data, "data");
   return (
@@ -161,7 +210,9 @@ const Viewuser = () => {
                   </select>
                 </label>
               </div>
-              <button className="remove-button">Remove DP</button>
+              <button className="remove-button" onClick={handleRemoveDP}>
+              Remove DP
+            </button>
             </div>
             {data && (
               <div key={data._id} className="user-values">
