@@ -9,7 +9,28 @@ import { useParams } from "react-router-dom";
 
 const Viewuser = () => {
   const [data, setData] = useState(null);
-  const {id} = useParams()
+  const { id } = useParams()
+  const [badges, setBadges] = useState([]);
+  const [previousIsActive, setPreviousIsActive] = useState(false);
+  const [liveBanData,setLiveBanData]=useState(false);
+
+ 
+
+
+
+  const fetchBadges = async () => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/admin/tags/getall");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const jsonData = await response.json();
+      setBadges(jsonData.data);
+      console.log("Fetched Badges:", jsonData.data);
+    } catch (error) {
+      console.error("Error fetching badges:", error);
+    }
+  };
 
 
   const handleRemoveDP = async () => {
@@ -27,7 +48,7 @@ const Viewuser = () => {
       setData(updatedData.data);
       console.log("DP Removed:", updatedData.data);
       toast.success("DP removed");
-  
+
       const fetchData = async () => {
         try {
           const response = await fetch(
@@ -43,7 +64,7 @@ const Viewuser = () => {
           console.error("Error fetching data:", error);
         }
       };
-  
+
       fetchData();
     } catch (error) {
       console.error("Error removing DP:", error);
@@ -52,27 +73,93 @@ const Viewuser = () => {
   };
 
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://use2fun.onrender.com/user/getbyid/${id}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const jsonData = await response.json();
-        setData(jsonData.data);
-        console.log("Fetched Data:", jsonData.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://use2fun.onrender.com/user/getbyid/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
+      const jsonData = await response.json();
+      setData(jsonData.data);
+      console.log("Fetched Data:", jsonData.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  //Ban User
+  const handleBanUser = async () => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/admin/user/banUserId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: id,
+          is_active_userId: !data.is_active_userId,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const updatedData = await response.json();
+      setData(updatedData.data);
+      console.log("User ban status updated:", updatedData.data);
+      toast.success(`User ${data.is_active_userId ? "unbanned" : "banned"}`);
+    } catch (error) {
+      console.error("Error toggling user ban:", error);
+      toast.error("Error toggling user ban");
+    }
+  };
+
+  //Ban Live
+  const handleBanLive = async () => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/admin/user/banUserLive", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: id,
+          is_active_live: !data.is_active_live,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const updatedData = await response.json();
+      setData(updatedData.data);
+      console.log("User Live ban status updated:", updatedData.data);
+      toast.success(`User ${data.is_active_live ? "Live Unbanned" : "Live Banned"}`);
+    } catch (error) {
+      console.error("Error toggling user Live ban:", error);
+      toast.error("Error toggling user Live ban");
+    }
+  };
 
 
-    useEffect(()=>{
-      fetchData();
 
-    },[])
+  useEffect(() => {
+    fetchData();
+    fetchBadges();
+
+  }, [])
+
+
+  useEffect(() => {
+    if (data) {
+      setPreviousIsActive(data.is_active_userId);
+      setLiveBanData(data.is_active_live)
+    }
+  }, [data]);
 
 
   console.log(data, "data");
@@ -110,10 +197,14 @@ const Viewuser = () => {
               <div className="user-id-ban">
                 <label htmlFor="user-ban">
                   User ID(Ban/Unban)
-                  <select name="user-ban" id="user-ban">
-                    <option value="ban">Ban</option>
-                    <option value="unban">Unban</option>
-                  </select>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      checked={data ? data.is_active_userId : false}
+                      onChange={handleBanUser}
+                    />
+                    <span className="slider round"></span>
+                  </label>
                 </label>
               </div>
               <div className="user-badges">
@@ -121,18 +212,19 @@ const Viewuser = () => {
                   Badges
                   <select name="user-badges" id="user-badges">
                     <option value="badges">Select Badges</option>
-                    <option value="ban">Ban</option>
-                    <option value="unban">Unban</option>
+                    {badges?.map(badge => (
+                      <option key={badge._id} value={badge.name}>{badge.name}</option>
+                    ))}
                   </select>
                 </label>
               </div>
               <div className="live-hotlist">
                 <label htmlFor="live-hotlist">
                   Live Hotlist
-                  <select name="live-hotlist" id="live-hotlist">
-                    <option value="ban">Ban</option>
-                    <option value="unban">Unban</option>
-                  </select>
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
                 </label>
               </div>
             </div>
@@ -160,7 +252,7 @@ const Viewuser = () => {
                   <p>{data._id}</p>
                 </div>
                 <div className="user-device-type">
-                  <p>Android</p>
+                  <p>{data?.device || "Android"}</p>
                 </div>
               </div>
             )}
@@ -195,24 +287,27 @@ const Viewuser = () => {
               <div className="user-live">
                 <label htmlFor="user-live">
                   Live(Ban/Unban)
-                  <select name="user-live" id="user-live">
-                    <option value="ban">Ban</option>
-                    <option value="unban">Unban</option>
-                  </select>
+                  <label class="switch">
+                    <input type="checkbox"
+                    checked={data ? data.is_active_live : false}
+                    onChange={handleBanLive}
+                    />
+                    <span class="slider round"></span>
+                  </label>
                 </label>
               </div>
               <div className="user-deviceid-ban">
                 <label htmlFor="user-deviceban">
                   Device ID(Ban/Unban)
-                  <select name="user-deviceban" id="user-deviceban">
-                    <option value="ban">Ban</option>
-                    <option value="unban">Unban</option>
-                  </select>
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
                 </label>
               </div>
               <button className="remove-button" onClick={handleRemoveDP}>
-              Remove DP
-            </button>
+                Remove DP
+              </button>
             </div>
             {data && (
               <div key={data._id} className="user-values">
