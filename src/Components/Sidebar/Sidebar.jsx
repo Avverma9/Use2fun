@@ -194,7 +194,7 @@ const Agent = () => {
               <p>Agent Panel</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/agent-panel">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
@@ -202,8 +202,8 @@ const Agent = () => {
             <Link to="/approved-host-request">
               <p>Approved Host Request</p>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link to="/rejected-host-request">
               {" "}
               <img src={hostIcon} alt="icon" srcset="" />
@@ -211,7 +211,7 @@ const Agent = () => {
             <Link to="/rejected-host-request">
               <p>Rejected Host Request</p>
             </Link>
-          </li>
+          </li> */}
           {/* <li>
             <Link to="/recharge-dashboard">
               {" "}
@@ -1257,20 +1257,20 @@ const Salary = () => {
       <div {...getCollapseProps()}>
         <ul>
           <li>
-            <Link to="/salary-setup">
+            <Link to="/salary">
               {" "}
               <img src={salary} alt="icon" srcset="" />
             </Link>
-            <Link to="/salary-setup">
+            <Link to="/salary">
               <p>salary</p>
             </Link>
           </li>
           <li>
-            <Link to="/salary">
+            <Link to="/salary-setup">
               {" "}
               <img src={salary} alt="icon" srcset="" />
             </Link>
-            <Link to="/salary">
+            <Link to="/salary-setup">
               <p>Salary Setup</p>
             </Link>
           </li>

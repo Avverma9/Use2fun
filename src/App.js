@@ -231,8 +231,8 @@ function App() {
             <Route path="/agent-ranking"  element={<Ranking/>}/>
             <Route path="/agent-panel" element={<AgentPanel/>}/>
             <Route path="/agent/login" element={<AgentLogin/>}/>
-            <Route path="/salary-setup" element={<Salerysetup/>}/>
-            <Route path="/salary" element={<Setupsallery/>}/>
+            <Route path="/salary" element={<Salerysetup/>}/>
+            <Route path="/salary-setup" element={<Setupsallery/>}/>
             <Route path="/view-salary" element={<Viewsallary/>}/>
           </Routes>
         </div>

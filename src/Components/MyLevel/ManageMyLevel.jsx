@@ -46,13 +46,13 @@ const ManageMyLevel = () => {
                 <img src={item.images}/>
                 }</td>
               <td>
-                <select
+                {/* <select
                  >
                   <option value="">Action</option>
                   <option value="view">View</option>
                   <option value="accept">Accept</option>
                   <option value="reject">Reject</option>
-                </select>
+                </select> */}
               </td>
             </tr>
           ))}
@@ -82,7 +82,7 @@ const ManageMyLevel = () => {
             <th>Level</th>
             <th>ExpCount</th>
             <th>Image</th>
-            <th>Action</th>
+            {/* <th>Action</th> */}
           </tr>
         </thead>
         <tbody>{renderTableRows()}</tbody>

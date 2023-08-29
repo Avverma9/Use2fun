@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./SendCoins.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SendCoins = () => {
   const [adminUsers, setAdminUsers] = useState([]);
@@ -52,11 +54,13 @@ const SendCoins = () => {
         .then(response => response.json())
         .then(data => {
           console.log('Coins sent successfully:', data);
+          toast.success("Coin Send Successfully")
           setSelectedAdmin('');
           setCoins('');
         })
         .catch(error => {
           console.error('Error sending coins:', error);
+          toast.error("Error while sending Coins")
         });
     }
   };

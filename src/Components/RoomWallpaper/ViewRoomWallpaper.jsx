@@ -45,8 +45,8 @@ const ViewRoomWallpaper = () => {
         <td>
           <select>
             <option value="action">Action</option>
-            <option value="update">Update</option>
-            <option value="remove">Remove</option>
+            {/* <option value="update">Update</option>
+            <option value="remove">Remove</option> */}
           </select>
         </td>
       </tr>

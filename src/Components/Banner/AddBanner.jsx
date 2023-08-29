@@ -32,7 +32,7 @@ function AddBanner() {
 
     const formDataToSend = new FormData();  
     formDataToSend.append('link', formData.link);
-    formDataToSend.append('banner', formData.banner);
+    formDataToSend.append('images', formData.banner);
 
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/banner/add', {

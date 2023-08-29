@@ -231,7 +231,7 @@ const Mannageuser = () => {
                 </div>
               </td>
             </tr>
-          )) : "Data Loading..."}
+          )) : <h3>No data Available</h3>}
         </tbody>
       </table>
     </>
