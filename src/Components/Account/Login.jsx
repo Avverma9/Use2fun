@@ -54,9 +54,9 @@ const Login = () => {
         <>
             <h3>Admin Login</h3>
             <div
-                style={{ top: "0", display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                style={{boxShadow: "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset", top: "0", display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
 
-                <section className="container py-5">
+                <section className="container ">
                     <div className="row d-flex justify-content-center">
                         <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                             <form onSubmit={handleLogin}>
@@ -66,9 +66,10 @@ const Login = () => {
                                         type="email"
                                         id="email"
                                         className="form-control"
-                                        placeholder="Email address"
+                                        placeholder="admin@gmail.com"
                                         autoComplete="email"
                                         required
+
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
@@ -80,7 +81,7 @@ const Login = () => {
                                         type="text"
                                         id="password"
                                         className="form-control"
-                                        placeholder="Password"
+                                        placeholder="admin123"
                                         autoComplete="current-password"
                                         required
                                         value={password}
@@ -89,7 +90,7 @@ const Login = () => {
                                 </div>
 
                                 <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <button onClick={handleNavigate}>Forgot password?</button>
+                                    <button style={{border:"none"}} onClick={handleNavigate}>Forgot password?</button>
                                 </div>
 
                                 {/* Submit button */}

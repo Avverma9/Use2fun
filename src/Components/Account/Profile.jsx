@@ -6,7 +6,25 @@ import Education_icon from '../../assets/icons/Education-icon.png';
 import Location_icon from '../../assets/icons/Location-icon.png';
 import styles from './Profile.module.css';
 
-const Profile = ({ data }) => {
+const Profile = () => {
+ const [data,setData]=useState(null)
+
+ useEffect(() => {
+  fetch("https://use2fun.onrender.com/admin/get")
+    .then((response) => response.json())
+    .then((responseData) => {
+      if (responseData.data && responseData.data.length > 0) {
+        const userProfileData = responseData.data[0];
+        setData(userProfileData);
+        console.log(userProfileData)
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching profile data:", error);
+    });
+}, []);
+
+
   if (!data) {
     return <div>Loading...</div>;
   }

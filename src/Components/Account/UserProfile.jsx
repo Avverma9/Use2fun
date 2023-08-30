@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import styles from "./UserProfile.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserProfile = () => {
 
@@ -69,10 +71,14 @@ const UserProfile = () => {
 
       if (response.ok && responseData.status === 1) {
         console.log("Profile updated successfully!", responseData.message);
-        setMessage("Profile updated successfully!");
+        // setMessage("Profile updated successfully!");
+        // setData(responseData.updatedData);
+        window.location.reload()
+        toast.success("Data Edited")
       } else {
         console.error("Error updating profile:", responseData.message);
-        setMessage("Error updating profile. Please try again.");
+        // setMessage("Error updating profile. Please try again.");
+        toast.error("Error while updating data")
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -99,7 +105,7 @@ const UserProfile = () => {
 
   return (
     <div className={styles.container}>
-      <Profile data={data}/>
+      <Profile/>
       <div>
         <div className={styles.settings}>
           <p className={styles.label}>Settings</p>

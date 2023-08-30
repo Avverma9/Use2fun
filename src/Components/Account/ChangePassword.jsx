@@ -12,23 +12,23 @@ const ChangePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const [data,setData]= useState(null)
+  // const [data,setData]= useState(null)
 
 
-  useEffect(() => {
-    fetch("https://use2fun.onrender.com/admin/get")
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.data && responseData.data.length > 0) {
-          const userProfileData = responseData.data[0];
-          setData(userProfileData);
-          console.log(userProfileData)
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching profile data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://use2fun.onrender.com/admin/get")
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       if (responseData.data && responseData.data.length > 0) {
+  //         const userProfileData = responseData.data[0];
+  //         setData(userProfileData);
+  //         console.log(userProfileData)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching profile data:", error);
+  //     });
+  // }, []);
 
   const handleUpdatePassword = () => {
     if (newPassword !== confirmPassword) {
@@ -65,7 +65,7 @@ const ChangePassword = () => {
 
   return (
     <div className={styles.container}>
-      <Profile data={data} />
+      <Profile />
       <div className={styles.changepass_container}>
         <div className={styles.settings}>
           <p className={styles.heading}>Settings</p>
