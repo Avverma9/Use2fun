@@ -1291,18 +1291,25 @@ const Salary = () => {
 
 //Signout
 const Signout = () => {
+  const navigate = useNavigate()
+
+  const handleSignOut = () => {
+    localStorage.removeItem("MasterAdmintoken"); 
+    navigate("/login"); 
+
+
+    window.location.reload();
+  };
+
   return (
-    <>
-      <li>
-        <Link to="/">
-          {" "}
-          <img src={signout} alt="icon" srcset="" />
-        </Link>
-        <Link to="/">
-          <p> SignOut</p>
-        </Link>
-      </li>
-    </>
+    <li>
+      <Link to="/login" onClick={handleSignOut}>
+        <img src={signout} alt="icon" />
+      </Link>
+      <Link to="/login" onClick={handleSignOut}>
+        <p>Sign Out</p>
+      </Link>
+    </li>
   );
 };
 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Header from "./Components/Header/Header";
 import Mannageuser from "./Components/User/Mannageuser/Mannageuser";
@@ -79,161 +79,115 @@ import { useEffect } from "react";
 import Salerysetup from "./Components/Salarysetup/Salerysetup";
 import Setupsallery from "./Components/Salarysetup/Setupsallery";
 import Viewsallary from "./Components/Salarysetup/Viewsallary";
+import Login from "./Components/Account/Login";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
-function App() {
-  const [authenticated, setAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setAuthenticated(true);
-    }
-  }, []);
+
+
+
+function App() {
+
+  const token = localStorage.getItem("MasterAdmintoken");
+  const [isLoggedIn, setIsLoggedIn] = useState(Boolean(token));
+
+  const PrivateRoute = ({ children, ...rest }) => {
+    console.log("PrivateRoute isLoggedIn:", isLoggedIn);
+    return isLoggedIn ? children : <Navigate to="/login" />;
+  };
+
+
+
 
   return (
     <div className="app">
       <Router>
         <Header />
         <Sidebar />
-        <Welcome/>
-        <div
-          className="app_body p-5"
-          // contain routes and side navigation
-        >
+        <Welcome />
+        <div className="app_body p-5">
           <Routes>
-            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            {/* <Route path="/signIn" element={<SignIn />} /> */}
             {/* <Route path="/signout" element={<SignOutComp/>}/> */}
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/view-users" element={<Mannageuser />} />
+            <Route path="/view-users" element={<PrivateRoute><Mannageuser /></PrivateRoute>} />
+
             <Route path="/view-user/:id" element={<Viewuser />} />
             <Route path="/edit-user/:id" element={<Edituser />} />
             <Route path="/recieved-gift-history/:id" element={<Receivedgifts />} />
             <Route path="/send-gift-history/:id" element={<Sendgifts />} />
-            <Route
-              path="/mannage-purchased-coin-history/:id"
-              element={<Coinhistory />}
-            />
-            <Route
-              path="/mannage-live-user-history/:id"
-              element={<Liveuserhistory />}
-            />
-            <Route path="/top-users" element={<Topusers />} />
-            <Route path="/live-users" element={<Liveusers />} />
-            <Route path="/users-list" element={<Userslist />} />
-            <Route path="/push-message" element={<Pushmessage />} />
-
-            <Route path="/add-agency" element={<AddAgency />} />
-            <Route path="/view-agency" element={<ViewAgency />} />
-            <Route path="/add-admin" element={<AddAdmin />} />
-            <Route path="/view-admin" element={<ViewAdmin />} />
-            <Route path="/add-subadmin" element={<AddSubAdmin />} />
-            <Route path="/view-subadmin" element={<ViewSubAdmin />} />
-            <Route path="/add-appentry" element={<AddAppEntry />} />
-            <Route path="/view-appentry" element={<ViewAppEntry />} />
-            <Route path="/add-room-wallpaper" element={<AddRoomWallpaper />} />
-            <Route
-              path="/view-room-wallpaper"
-              element={<ViewRoomWallpaper />}
-            />
-            <Route path="/pending-host-request" element={<PendingHost />} />
-            <Route path="/approved-host-request" element={<ApprovedHost />} />
-            <Route path="/rejected-host-request" element={<RejectedHost />} />
+            <Route path="/mannage-purchased-coin-history/:id" element={<Coinhistory />} />
+            <Route path="/mannage-live-user-history/:id" element={<Liveuserhistory />} />
+            <Route path="/top-users" element={<PrivateRoute><Topusers /></PrivateRoute>} />
+            <Route path="/live-users" element={<PrivateRoute><Liveusers /></PrivateRoute>} />
+            <Route path="/users-list" element={<PrivateRoute><Userslist /></PrivateRoute>} />
+            <Route path="/push-message" element={<PrivateRoute><Pushmessage /></PrivateRoute>} />
+            <Route path="/add-agency" element={<PrivateRoute><AddAgency /></PrivateRoute>} />
+            <Route path="/view-agency" element={<PrivateRoute><ViewAgency /></PrivateRoute>} />
+            <Route path="/add-admin" element={<PrivateRoute><AddAdmin /></PrivateRoute>} />
+            <Route path="/view-admin" element={<PrivateRoute><ViewAdmin /></PrivateRoute>} />
+            <Route path="/add-subadmin" element={<PrivateRoute><AddSubAdmin /></PrivateRoute>} />
+            <Route path="/view-subadmin" element={<PrivateRoute><ViewSubAdmin /></PrivateRoute>} />
+            <Route path="/add-appentry" element={<PrivateRoute><AddAppEntry /></PrivateRoute>} />
+            <Route path="/view-appentry" element={<PrivateRoute><ViewAppEntry /></PrivateRoute>} />
+            <Route path="/add-room-wallpaper" element={<PrivateRoute><AddRoomWallpaper /></PrivateRoute>} />
+            <Route path="/view-room-wallpaper" element={<PrivateRoute><ViewRoomWallpaper /></PrivateRoute>} />
+            <Route path="/pending-host-request" element={<PrivateRoute><PendingHost /></PrivateRoute>} />
+            <Route path="/approved-host-request" element={<PrivateRoute><ApprovedHost /></PrivateRoute>} />
+            <Route path="/rejected-host-request" element={<PrivateRoute><RejectedHost /></PrivateRoute>} />
             <Route path="/view-host-info/:id" element={<ViewHostInfo />} />
-            <Route path="/add-frames" element={<AddFrames />} />
-            <Route path="/view-frames" element={<ViewFrames />} />
-            <Route path="/add-vehicle" element={<AddVehicle />} />
-            <Route path="/view-vehicle" element={<ViewVehicle />} />
-            <Route path="/extra-seat" element={<ExtraSeat />} />
-            <Route path="/specialid" element={<SpecialIdComp />} />
-            <Route path="/lock-room" element={<LockRoom />} />
-            <Route path="/add-banner" element={<AddBanner />} />
-            <Route path="/view-banner" element={<ViewBanner />} />
-            <Route path="/add-vip" element={<AddVip />} />
-            <Route path="/view-vip" element={<ViewVip />} />
-            <Route path="/add-svip" element={<AddSvip />} />
-            <Route path="/view-svip" element={<ViewSvip />} />
-            <Route path="/add-live-gifts" element={<AddLiveGifts />} />
-            <Route
-              path="/manage-gift-category"
-              element={<ManageGiftcategory />}
-            />
-            <Route path="/manage-gifts" element={<ManageGift />} />
+            <Route path="/add-frames" element={<PrivateRoute><AddFrames /></PrivateRoute>} />
+            <Route path="/view-frames" element={<PrivateRoute><ViewFrames /></PrivateRoute>} />
+            <Route path="/add-vehicle" element={<PrivateRoute><AddVehicle /></PrivateRoute>} />
+            <Route path="/view-vehicle" element={<PrivateRoute><ViewVehicle /></PrivateRoute>} />
+            <Route path="/extra-seat" element={<PrivateRoute><ExtraSeat /></PrivateRoute>} />
 
+            <Route path="/specialid" element={<PrivateRoute><SpecialIdComp /></PrivateRoute>} />
+            <Route path="/lock-room" element={<PrivateRoute><LockRoom /></PrivateRoute>} />
+            <Route path="/add-banner" element={<PrivateRoute><AddBanner /></PrivateRoute>} />
+            <Route path="/view-banner" element={<PrivateRoute><ViewBanner /></PrivateRoute>} />
+            <Route path="/add-vip" element={<PrivateRoute><AddVip /></PrivateRoute>} />
+            <Route path="/view-vip" element={<PrivateRoute><ViewVip /></PrivateRoute>} />
+            <Route path="/add-svip" element={<PrivateRoute><AddSvip /></PrivateRoute>} />
+            <Route path="/view-svip" element={<PrivateRoute><ViewSvip /></PrivateRoute>} />
+            <Route path="/add-live-gifts" element={<PrivateRoute><AddLiveGifts /></PrivateRoute>} />
+            <Route path="/manage-gift-category" element={<PrivateRoute><ManageGiftcategory /></PrivateRoute>} />
+            <Route path="/manage-gifts" element={<PrivateRoute><ManageGift /></PrivateRoute>} />
+            <Route path="/relationship" element={<PrivateRoute><RelationShip /></PrivateRoute>} />
+            <Route path="/addbubble" element={<PrivateRoute><AddBubble /></PrivateRoute>} />
+            <Route path="/chat-bubble" element={<PrivateRoute><ChatBubble /></PrivateRoute>} />
+            <Route path="/admin-coin-history" element={<PrivateRoute><AdminCoinHistory /></PrivateRoute>} />
+            <Route path="/admin-recharge-history" element={<PrivateRoute><AdminRechargeHistory /></PrivateRoute>} />
+            <Route path="/manage-mylevel" element={<PrivateRoute><ManageMyLevel /></PrivateRoute>} />
+            <Route path="/add-level" element={<PrivateRoute><AddLevel /></PrivateRoute>} />
+            <Route path="/manage-talent" element={<PrivateRoute><ManageTalentLevel /></PrivateRoute>} />
+            <Route path="/mange-report" element={<PrivateRoute><ManageReport /></PrivateRoute>} />
+            <Route path="/user-report" element={<PrivateRoute><UserReport /></PrivateRoute>} />
+            <Route path="/manage-problem-report" element={<PrivateRoute><ManageProblemReport /></PrivateRoute>} />
+            <Route path="/user-video-report" element={<PrivateRoute><UserVideoReport /></PrivateRoute>} />
+            <Route path="/user-profile" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
 
-             {/* //Commented routes ends  */}
+            <Route path="/manage-logo" element={<PrivateRoute><ManageLogo /></PrivateRoute>} />
+            <Route path="/manage-length" element={<PrivateRoute><ManageLength /></PrivateRoute>} />
+            <Route path="/manage-splash-image" element={<PrivateRoute><ManageSplashImage /></PrivateRoute>} />
+            <Route path="/transaction-history" element={<PrivateRoute><TransactionHistory /></PrivateRoute>} />
+            <Route path="/send-coins" element={<PrivateRoute><SendCoins /></PrivateRoute>} />
+            <Route path="/coin-seller" element={<PrivateRoute><CoinSeller /></PrivateRoute>} />
 
-
-
-
-            <Route path="/add-agency" element={<AddAgency/>} />
-            <Route path="/view-agency" element={<ViewAgency/>} />
-            <Route path="/add-admin" element={<AddAdmin/>} />
-            <Route path="/view-admin" element={<ViewAdmin/>} />
-            <Route path="/add-subadmin" element={<AddSubAdmin/>} />
-            <Route path="/view-subadmin" element={<ViewSubAdmin/>} />
-            <Route path="/add-appentry" element={<AddAppEntry/>} />
-            <Route path="/view-appentry" element={<ViewAppEntry/>} />
-            <Route path="/add-room-wallpaper" element={<AddRoomWallpaper/>} />
-            <Route path="/view-room-wallpaper" element={<ViewRoomWallpaper/>}/>
-            <Route path="/pending-host-request" element={<PendingHost/>}/>
-            <Route path="/approved-host-request" element={<ApprovedHost/>}/>
-            <Route path="/rejected-host-request" element={<RejectedHost/>}/>
-            <Route path="/view-host-info" element={<ViewHostInfo/>}/>
-            <Route path="/add-frames" element={<AddFrames/>}/>
-            <Route path="/view-frames" element={<ViewFrames/>}/>
-            <Route path="/add-vehicle" element={<AddVehicle/>}/>
-            <Route path="/view-vehicle" element={<ViewVehicle/>}/>
-            <Route path="/extra-seat" element={<ExtraSeat/>}/>
-            
-            <Route path="/specialid" element={<SpecialIdComp/>}/>
-            <Route path="/lock-room" element={<LockRoom/>}/>
-            <Route path="/add-banner" element={<AddBanner/>}/>
-            <Route path="/view-banner" element={<ViewBanner/>}/>
-            <Route path="/add-vip" element={<AddVip/>}/>
-            <Route path="/view-vip" element={<ViewVip/>}/>
-            <Route path="/add-svip" element={<AddSvip/>}/>
-            <Route path="/view-svip" element={<ViewSvip/>}/>
-            <Route path="/add-live-gifts" element={<AddLiveGifts/>}/>
-            <Route path="/manage-gift-category" element={<ManageGiftcategory/>}/>
-            <Route path="/manage-gifts" element={<ManageGift/>}/>
-          
-
-
-
-            <Route path="/relationship" element={<RelationShip/>}/>
-            <Route path="/addbubble" element={<AddBubble/>}/>
-            <Route path="/chat-bubble" element={<ChatBubble/>}/>
-            <Route path="/admin-coin-history" element={<AdminCoinHistory/>}/>
-            <Route path="/admin-recharge-history" element={<AdminRechargeHistory/>}/>
-            <Route path="/manage-mylevel" element={<ManageMyLevel/>}/>
-            <Route path="/add-level" element={<AddLevel/>}/>
-            <Route path="/manage-talent" element={<ManageTalentLevel/>}/>
-            <Route path="/mange-report" element={<ManageReport/>}/>
-            <Route path="/user-report" element={<UserReport/>}/> 
-            <Route path="/manage-problem-report" element={<ManageProblemReport/>}/>
-            <Route path="/user-video-report" element={<UserVideoReport/>}/>
-            <Route path="/user-profile" element={<UserProfile/>}/>
-            <Route path="/change-password" element={<ChangePassword/>}/> 
-            <Route path="/manage-logo" element={<ManageLogo/>}/>
-            <Route path="/manage-length" element={<ManageLength/>}/>
-            <Route path="/manage-splash-image" element={<ManageSplashImage/>}/>
-            <Route path="/transaction-history" element={<TransactionHistory/>}/>
-            <Route path="/send-coins" element={<SendCoins/>}/>
-            <Route path="/coin-seller" element={<CoinSeller/>}/>
-
-            <Route path="/offline-recharge-history" element={<OfflineRechargeHistory/>}/>
-            <Route path="/otp-recharge" element={<Otp/>}/>
-            <Route path="/recharge-dashboard" element={<RechargeDashboard/>}/>
-            <Route path="/diamond-account" element={<DiamondAccount/>}/>
-            <Route path="/profile" element={<Profilesee/>}/>
-            <Route path="/addTags" element={<AddTags/>}/>
-            <Route path="/agent-ranking"  element={<Ranking/>}/>
-            <Route path="/agent-panel" element={<AgentPanel/>}/>
-            <Route path="/agent/login" element={<AgentLogin/>}/>
-            <Route path="/salary" element={<Salerysetup/>}/>
-            <Route path="/salary-setup" element={<Setupsallery/>}/>
-            <Route path="/view-salary" element={<Viewsallary/>}/>
+            <Route path="/offline-recharge-history" element={<PrivateRoute><OfflineRechargeHistory /></PrivateRoute>} />
+            <Route path="/otp-recharge" element={<PrivateRoute><Otp /></PrivateRoute>} />
+            <Route path="/recharge-dashboard" element={<PrivateRoute><RechargeDashboard /></PrivateRoute>} />
+            <Route path="/diamond-account" element={<PrivateRoute><DiamondAccount /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profilesee /></PrivateRoute>} />
+            <Route path="/addTags" element={<PrivateRoute><AddTags /></PrivateRoute>} />
+            <Route path="/agent-ranking" element={<Ranking />} />
+            <Route path="/agent-panel" element={<AgentPanel />} />
+            <Route path="/agent/login" element={<AgentLogin />} />
+            <Route path="/salary" element={<PrivateRoute><Salerysetup /></PrivateRoute>} />
+            <Route path="/salary-setup" element={<PrivateRoute><Setupsallery /></PrivateRoute>} />
+            <Route path="/view-salary" element={<PrivateRoute><Viewsallary /></PrivateRoute>} />
           </Routes>
         </div>
       </Router>

@@ -1,73 +1,129 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import styles from "./UserProfile.module.css";
 
 const UserProfile = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [education, setEducation] = useState("");
-  const [location, setLocation] = useState("");
+
   const [message, setMessage] = useState("");
+  const [data,setData]= useState(null)
+  const [formData,setFormData]=useState({
+    username:"",
+    mobile:"",
+    email:"",
+    education:"",
+    location:"",
+    designation:"",
+    images:null
 
-  const handleEditProfile = () => {
-
-    const apiUrl = "YOUR_API_ENDPOINT";
-    const authToken = "YOUR_AUTH_TOKEN";
-
-    const data = {
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      designation: designation,
-      education: education,
-      location: location,
-    };
-
-    fetch(apiUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(data),
-    })
+  })
+  useEffect(() => {
+    fetch("https://use2fun.onrender.com/admin/get")
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Profile updated successfully!", data);
-        setMessage("Profile updated successfully!");
+      .then((responseData) => {
+        if (responseData.data && responseData.data.length > 0) {
+          const userProfileData = responseData.data[0];
+          setData(userProfileData);
+          console.log(userProfileData)
+          setFormData({
+            username: userProfileData.username,
+            mobile: userProfileData.mobile.toString(),
+            email: userProfileData.email,
+            education: userProfileData.education,
+            location: userProfileData.location,
+            designation: userProfileData.designation,
+            images: userProfileData.images[0],
+          });
+        }
       })
       .catch((error) => {
-        console.error("Error updating profile:", error);
-        setMessage("Error updating profile. Please try again.");
+        console.error("Error fetching profile data:", error);
       });
+  }, []);
+
+  const handleEditProfile = async () => {
+    const apiUrl = "https://use2fun.onrender.com/admin/update";
+    const authToken = localStorage.getItem("MasterAdmintoken");
+
+    const finalFormData = new FormData();
+    finalFormData.append("username", formData.username);
+    finalFormData.append("mobile", formData.mobile);
+    finalFormData.append("email", formData.email);
+    finalFormData.append("education", formData.education);
+    finalFormData.append("location", formData.location);
+    finalFormData.append("designation", formData.designation);
+    
+    if (formData.images) {
+      finalFormData.append("images", formData.images);
+    }
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: finalFormData,
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok && responseData.status === 1) {
+        console.log("Profile updated successfully!", responseData.message);
+        setMessage("Profile updated successfully!");
+      } else {
+        console.error("Error updating profile:", responseData.message);
+        setMessage("Error updating profile. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      setMessage("Error updating profile. Please try again.");
+    }
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      images: selectedImage?selectedImage: prevData.images,
+    }));
+  };
+
 
   return (
     <div className={styles.container}>
-      <Profile />
+      <Profile data={data}/>
       <div>
         <div className={styles.settings}>
           <p className={styles.label}>Settings</p>
-          <p className={styles.label}>Change password</p>
+          <p className={styles.label}>Edit Profile</p>
         </div>
         {message && <p className={styles.message}>{message}</p>}
         <div className={styles.inputcontainer}>
-          <label className={styles.inputlabel}>Name</label>
+          <label className={styles.inputlabel}>Username</label>
           <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={styles.inputfield}
-          />
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
+          className={styles.inputfield}
+          readOnly
+        />
         </div>
         <div className={styles.inputcontainer}>
           <label className={styles.inputlabel}>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             className={styles.inputfield}
           />
         </div>
@@ -75,8 +131,9 @@ const UserProfile = () => {
           <label className={styles.inputlabel}>Phone Number</label>
           <input
             type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={formData.mobile}
+            name="mobile"
+            onChange={handleInputChange}
             className={styles.inputfield}
           />
         </div>
@@ -84,8 +141,9 @@ const UserProfile = () => {
           <label className={styles.inputlabel}>Designation</label>
           <input
             type="text"
-            value={designation}
-            onChange={(e) => setDesignation(e.target.value)}
+            value={formData.designation}
+            name="designation"
+            onChange={handleInputChange}
             className={styles.inputfield}
           />
         </div>
@@ -93,8 +151,9 @@ const UserProfile = () => {
           <label className={styles.inputlabel}>Education</label>
           <input
             type="text"
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
+            value={formData.education}
+            name="education"
+            onChange={handleInputChange}
             className={styles.inputfield}
           />
         </div>
@@ -102,8 +161,18 @@ const UserProfile = () => {
           <label className={styles.inputlabel}>Location</label>
           <input
             type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={formData.location}
+            name="location"
+            onChange={handleInputChange}
+            className={styles.inputfield}
+          />
+        </div>
+        <div className={styles.inputcontainer}>
+        <label className={styles.inputlabel}>Image</label>
+        <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
             className={styles.inputfield}
           />
         </div>
