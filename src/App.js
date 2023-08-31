@@ -80,6 +80,7 @@ import Salerysetup from "./Components/Salarysetup/Salerysetup";
 import Setupsallery from "./Components/Salarysetup/Setupsallery";
 import Viewsallary from "./Components/Salarysetup/Viewsallary";
 import Login from "./Components/Account/Login";
+import NotFoundPage from "./Components/NotFound/NotFoundPage";
 // import SignOutComp from "./Components/SignOut/SignOutComp";
 
 
@@ -107,6 +108,7 @@ function App() {
         <Welcome />
         <div className="app_body p-5">
           <Routes>
+      <Route path="*" element={<NotFoundPage />} />
             <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/change-password" element={<ChangePassword />} />
@@ -188,6 +190,7 @@ function App() {
             <Route path="/salary" element={<PrivateRoute><Salerysetup /></PrivateRoute>} />
             <Route path="/salary-setup" element={<PrivateRoute><Setupsallery /></PrivateRoute>} />
             <Route path="/view-salary" element={<PrivateRoute><Viewsallary /></PrivateRoute>} />
+          
           </Routes>
         </div>
       </Router>

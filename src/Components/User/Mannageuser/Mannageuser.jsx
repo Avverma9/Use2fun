@@ -4,11 +4,15 @@ import Title from "../../common/Title";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import usePagination from "../../Customhook/usePaginate";
 
 
 const Mannageuser = () => {
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState([]);
+  const { currentPage, pageLimit, goToPage, changePageLimit } = usePagination();
+  const shouldShowPagination = data.length > 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +30,23 @@ const Mannageuser = () => {
 
     fetchData();
   }, []);
+
+  // Pagination 
+  const startIndex = (currentPage - 1) * pageLimit;
+  const endIndex = startIndex + pageLimit;
+
+  //Search
+  const filteredData = data.filter(user => {
+    const searchTerm = searchInput.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(searchTerm) ||
+      user.userId.toLowerCase().includes(searchTerm) ||
+      (user.email && user.email.toLowerCase().includes(searchTerm)) ||
+      (typeof user.mobile === "string" && user.mobile.toLowerCase().includes(searchTerm))
+    );
+  });
+
+  const visibleData = filteredData.slice(startIndex, endIndex);
 
   const fetchall = async () => {
     try {
@@ -49,11 +70,11 @@ const Mannageuser = () => {
       .then((response) => {
         if (response.status === 200) {
           console.log("User deleted successfully");
-          toast.success("Data deleted")          
+          toast.success("Data deleted")
           fetchall();
         } else {
           console.log("Error deleting user");
-          toast.error("Error while deleting data")    
+          toast.error("Error while deleting data")
         }
       })
       .catch((error) => {
@@ -97,7 +118,14 @@ const Mannageuser = () => {
       <div className="d-flex align-items-center gap-1 input-fields">
         <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Search</p>
-          <input type="text" name="search" id="search" className="p-1" />
+          <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
         </div>
         <div className="d-flex align-items-center gap-1">
           <p className="_sub-title">Start Date</p>
@@ -127,113 +155,144 @@ const Mannageuser = () => {
         </thead>
         <tbody>
           {
-          data?
-          data.map((user, index) => (
-            <tr key={user._id}>
-              <th scope="row">{index + 1}</th>
-              <td>
-                <img
-                  src={user?.images[0] || ""}
-                  alt="profile"
-                  style={{
-                    width: "40px",
-                    height: "50px",
-                  }}
-                />
-              </td>
-              <td>{user.name}</td>
-              <td>{user.userId}</td>
-              <td>{user.email? user.email :"No data"}</td>
-              <td>{user.mobile}</td>
-              <td>{user.coins}</td>
-              <td>{user.coins}</td>
-              <td>
-                <div className="user-status">{user.status}</div>
-              </td>
-              <td>
-                <div className="dropdown">
-                  <button
-                    className="action-btn dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <span>Action</span>
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
+            data ?
+              visibleData.map((user, index) => (
+                <tr key={user._id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>
+                    <img
+                      src={user?.images[0] || ""}
+                      alt="profile"
+                      style={{
+                        width: "40px",
+                        height: "50px",
+                      }}
+                    />
+                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.userId}</td>
+                  <td>{user.email ? user.email : "No data"}</td>
+                  <td>{user.mobile}</td>
+                  <td>{user.coins}</td>
+                  <td>{user.coins}</td>
+                  <td>
+                    <div className="user-status">{user.status}</div>
+                  </td>
+                  <td>
+                    <div className="dropdown">
                       <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "view")}
+                        className="action-btn dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
                       >
-                        View
+                        <span>Action</span>
                       </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "edit")}
-                      >
-                        Edit
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user && user._id, "delete")}
-                      >
-                        Delete
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() =>
-                          handleAction(user, "received-gift-history")
-                        }
-                      >
-                        Recieved Gift History
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "send-gift-history")}
-                      >
-                        Send Gift History
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "coin-history")}
-                      >
-                        Coin History
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "live-history")}
-                      >
-                        Live History
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleAction(user, "decline")}
-                      >
-                        Decline
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-          )) : <h3>No data Available</h3>}
+                      <ul className="dropdown-menu">
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "view")}
+                          >
+                            View
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "edit")}
+                          >
+                            Edit
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user && user._id, "delete")}
+                          >
+                            Delete
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() =>
+                              handleAction(user, "received-gift-history")
+                            }
+                          >
+                            Recieved Gift History
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "send-gift-history")}
+                          >
+                            Send Gift History
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "coin-history")}
+                          >
+                            Coin History
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "live-history")}
+                          >
+                            Live History
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => handleAction(user, "decline")}
+                          >
+                            Decline
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              )) : <h3>No data Available</h3>}
         </tbody>
       </table>
+      {/* //Pagination  */}
+      {shouldShowPagination && (
+      <div className="pagination">
+        <div className="pagination-controls">
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={endIndex >= data.length}
+          >
+            Next
+          </button>
+        </div>
+        <div className="page-limit-dropdown">
+          <select
+            value={pageLimit}
+            onChange={(e) => changePageLimit(Number(e.target.value))}
+          >
+            <option value={10}>10 per page</option>
+            <option value={20}>20 per page</option>
+            <option value={50}>50 per page</option>
+          </select>
+        </div>
+
+      </div>
+        )}
     </>
   );
 };

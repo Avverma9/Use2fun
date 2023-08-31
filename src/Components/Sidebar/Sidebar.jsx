@@ -1,5 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { hostIcon, userIcon } from "../../assets";
 // import hostIcon from "../../assets/icons/host.png"
 import agencyIcon from "../../assets/icons/agency.png";
@@ -1291,14 +1293,32 @@ const Salary = () => {
 
 //Signout
 const Signout = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    localStorage.removeItem("MasterAdmintoken"); 
-    navigate("/login"); 
+  const handleSignOut = async () => {
+    const apiUrl = "https://use2fun.onrender.com/admin/logout";
+    const authToken = localStorage.getItem("MasterAdmintoken");
 
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
 
-    window.location.reload();
+      if (response.ok) {
+        localStorage.removeItem("MasterAdmintoken");
+        window.location.reload()
+        navigate("/login");
+        toast.success("Logged out successfully");
+      } else {
+        toast.error("Error logging out");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+      toast.error("Error logging out");
+    }
   };
 
   return (
@@ -1330,48 +1350,58 @@ const Signout = () => {
 // };
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const isAgentLoginRoute = location.pathname === '/agent/login' || location.pathname === '/agent-panel' || location.pathname === '/agent-ranking';
+
+
   return (
     <div className="container-sidebar">
-      <div className="side_nav_header" onClick={() => navigate("/")}>
+      <div className="side_nav_header">
         <h5>Dashboard</h5>
       </div>
       <div className="side_nav_body">
         <ul>
-          {/* <Home /> */}
-          <User />
-          <Host />
-          <Agent />
-          <Agency />
-          <Admin />
-          <SubAdmin />
-          <AppEntry />
-          <Shop />
-          <Frames />
-          <Vehicle />
-          <LockRoom />
-          <ChatBubble />
-          <Relationship />
-          <SpecialId />
-          <ExtraSeat />
-          <Svip />
-          <Vip />
-          <Banner />
-          <Gift />
-          <CoinSeller />
-          <MasterAdmin />
-          <MyLevel />
-          <TheTalent />
-          <Tags/>
-          <Report />
-          <TransactionHistory />
-          <Recharge />
-          <Account />
-          <Salary/>
-          <Signout/>
+          {isAgentLoginRoute ? <Agent /> : (
+            <>
+              <User />
+              <Host />
+              <Agency />
+              <Admin />
+              <SubAdmin />
+              <AppEntry />
+              <Shop />
+              <Frames />
+              <Vehicle />
+              <LockRoom />
+              <ChatBubble />
+              <Relationship />
+              <SpecialId />
+              <ExtraSeat />
+              <Svip />
+              <Vip />
+              <Banner />
+              <Gift />
+              <CoinSeller />
+              <MasterAdmin />
+              <MyLevel />
+              <TheTalent />
+              <Tags/>
+              <Report />
+              <TransactionHistory />
+              <Recharge />
+              <Account />
+              <Salary/>
+              <Signout/>
+            </>
+          )}
         </ul>
       </div>
     </div>
   );
 };
+
 export default Sidebar;
+
+
+
+
