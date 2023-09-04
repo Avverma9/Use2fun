@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./ViewFrames.css";
+import styles from "./ViewFrames.module.css"
 import { useNavigate } from 'react-router-dom';
 
 const ViewFrames = () => {
@@ -31,12 +31,12 @@ const ViewFrames = () => {
 
 
   return (
-    <div className='viewframe-main'>
+    <div className={styles.viewframemain}>
       <h3>View Frames</h3>
-      <button className='add-frame-btn' onClick={handleNavigate}>Add Frame</button>
+      <button className={styles.addframebtn} onClick={handleNavigate}>Add Frame</button>
 
 
-      <table className="table">
+      <table >
         <thead>
           <tr>
             <th>Sr.</th>
@@ -53,13 +53,13 @@ const ViewFrames = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
-                  <img src={item.images[0]} alt="image" />
+                  <img className={styles.images} src={item.images[0]} alt="image" />
                 </td>
                 <td>{item.price}</td>
                 <td>{item.level}</td>
                 <td>{item.day}</td>
                 <td>
-                  <select className="viewframe-select">
+                  <select className={styles.viewframeselect}>
                     <option value="action">Action</option>
                   </select>
                 </td>

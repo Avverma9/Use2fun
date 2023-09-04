@@ -17,36 +17,37 @@
   
 
   .table th {
-    /* background-color: #f2f2f2; */
     padding: 8px;
     font-weight: bold;
     text-align: center;
   }
   
   .table td {
-    /* border: 1px solid #ccc; */
     padding: 8px;
     text-align: center;
     width: 70px;
   }
   
 .images{
-    width: 40px;
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
 }
 select{
     width: 130px;
 }
-.add-frame-btn{
+.addframebtn{
   background-color: #058D9E;
     color: white;
     border: none;
     cursor: pointer;
     padding: 10px;
 }
-.viewframe-select{
+.viewframeselect{
   border: 1px solid rgb(173, 173, 173);
   background: transparent;
 }
-.viewframe-main h3{
+.viewframemain h3{
   margin-bottom: 20px;
 }
+
