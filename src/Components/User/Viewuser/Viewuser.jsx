@@ -218,7 +218,7 @@ const Viewuser = () => {
                   </select>
                 </label>
               </div>
-              <div className="live-hotlist">
+              {/* <div className="live-hotlist">
                 <label htmlFor="live-hotlist">
                   Live Hotlist
                   <label class="switch">
@@ -226,7 +226,7 @@ const Viewuser = () => {
                     <span class="slider round"></span>
                   </label>
                 </label>
-              </div>
+              </div> */}
             </div>
             {data && (
               <div key={data._id} className="user-values">

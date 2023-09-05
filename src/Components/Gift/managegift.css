@@ -1,4 +1,4 @@
-.gift_table{
+/* .gift_table{
     width: 100%;
 }
 .gift_table tr{
@@ -9,4 +9,14 @@
     display: flex;
     width: 100%;
     justify-content: center;
+} */
+
+td{
+    align-items: center;
+    text-align: center;
+}
+
+.nabageGiftImg{
+    width: 40px;
+    height: 40px;
 }

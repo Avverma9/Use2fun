@@ -65,7 +65,7 @@ const ChangePassword = () => {
 
   return (
     <div className={styles.container}>
-      <Profile />
+      {/* <Profile /> */}
       <div className={styles.changepass_container}>
         <div className={styles.settings}>
           <p className={styles.heading}>Settings</p>

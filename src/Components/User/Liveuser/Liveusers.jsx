@@ -49,7 +49,7 @@ const Liveusers = () => {
             <th scope="col">Status</th>
             <th scope="col">Date/Time</th>
             <th scope="col">Live Time</th>
-            <th scope="col">Action</th>
+            {/* <th scope="col">Action</th> */}
           </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@ const Liveusers = () => {
                 <td>{userData.time || "no data available"}</td>
                 <td>{userData.livetime || "no data available"}</td>
                 <td>
-                  <div className="dropdown">
+                  {/* <div className="dropdown">
                     <button
                       className="action-btn dropdown-toggle"
                       type="button"
@@ -79,7 +79,7 @@ const Liveusers = () => {
                         <button className="dropdown-item">View</button>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </td>
               </tr>
             ))

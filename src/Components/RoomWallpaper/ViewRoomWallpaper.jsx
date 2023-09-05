@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import "./ViewRoomWallpaper.css";
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ViewRoomWallpaper = () => {
   const [data, setData] = useState(null)
-  const [selectedItem, setSelectedItem] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const navigate = useNavigate()
@@ -14,6 +15,8 @@ const ViewRoomWallpaper = () => {
     price: '',
     day: '',
   });
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedActions, setSelectedActions] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -24,6 +27,7 @@ const ViewRoomWallpaper = () => {
       const jsonData = await response.json();
       setData(jsonData.data);
       console.log("Fetched Data:", jsonData.data);
+      setSelectedActions(Array(jsonData.data.length).fill('action'));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -34,6 +38,11 @@ const ViewRoomWallpaper = () => {
 
 
   const handleDropdownChange = (index, action) => {
+    const updatedActions = [...selectedActions];
+    updatedActions[index] = action;
+    setSelectedActions(updatedActions);
+    setSelectedItem(index);
+
     switch (action) {
       case "update":
         setShowEditModal(true);
@@ -43,6 +52,7 @@ const ViewRoomWallpaper = () => {
         setShowRemoveModal(true);
         break;
       default:
+        setSelectedItem(null);
         break;
     }
   }
@@ -53,19 +63,26 @@ const ViewRoomWallpaper = () => {
       console.log(selectedItemData._id, "Selected Id");
 
       try {
-        const response = await fetch(`https://use2fun.onrender.com/admin/appEntry/delete/${selectedItemData._id}`, {
+        const response = await fetch(`https://use2fun.onrender.com/admin/wallpaper/delete/${selectedItemData._id}`, {
           method: 'DELETE',
         });
 
         if (!response.ok) {
-          throw new Error("Network problem");
+          toast.error("Error while deleting the data")
+        } else {
+          toast.success("Data successfully deleted")
         }
 
         const updatedData = [...data];
         updatedData.splice(selectedItem, 1);
         setData(updatedData);
+        const updatedActions = [...selectedActions];
+        updatedActions.splice(selectedItem, 1);
+        setSelectedActions(updatedActions);
+
 
         setShowRemoveModal(false);
+        setSelectedItem(null);
       } catch (error) {
         console.error("Error deleting data:", error);
       }
@@ -79,19 +96,22 @@ const ViewRoomWallpaper = () => {
     }
     formDataToSend.append('price', editedData.price);
     formDataToSend.append('day', editedData.day);
-
+  console.log(editedData._id)
     try {
-      const response = await fetch(`https://use2fun.onrender.com/admin/appEntry/update/${editedData._id}`, {
+      const response = await fetch(`https://use2fun.onrender.com/admin/wallpaper/update/${editedData._id}`, {
         method: 'PUT',
         body: formDataToSend,
       });
 
       if (!response.ok) {
-        throw new Error("Network problem");
+        toast.error("Error while updating the data")
+      } else {
+        toast.success("Data Successfully edited")
       }
 
       fetchData();
       setShowEditModal(false);
+      setSelectedItem(null);
     } catch (error) {
       console.error("Error updating data:", error);
     }
@@ -99,28 +119,44 @@ const ViewRoomWallpaper = () => {
 
   const handleCloseEditModal = () => {
     setShowEditModal(false);
-  }
+    setSelectedItem(null);
+    
+    if (selectedItem !== null) {
+      const updatedActions = [...selectedActions];
+      updatedActions[selectedItem] = 'action';
+      setSelectedActions(updatedActions);
+    }
+  };
 
   const handleCloseRemoveModal = () => {
     setShowRemoveModal(false);
-  }
+    setSelectedItem(null);
+
+    if (selectedItem !== null) {
+      const updatedActions = [...selectedActions];
+      updatedActions[selectedItem] = 'action';
+      setSelectedActions(updatedActions);
+    }
+  };
 
 
-  console.log(data, "data")
-
-  const handlePost = () => {
-    navigate('/add-room-wallpaper')
-  }
-
+  
   const handleEditFormChange = (e) => {
     const { name, value, type, files } = e.target;
     const newValue = type === 'file' ? files[0] : value;
-
+    
     setEditedData({
       ...editedData,
       [name]: newValue,
     });
   };
+
+  
+  console.log(data, "data")
+
+  const handlePost = () => {
+    navigate('/add-room-wallpaper')
+  }
 
   const renderTableRows = () => {
     if (data) {
@@ -134,7 +170,7 @@ const ViewRoomWallpaper = () => {
               <td>{item.price || "N/A"}</td>
               <td>{item.day || "N/A"} Weeks</td>
               <td>
-                <select className="selectbar" onChange={(e) => handleDropdownChange(index, e.target.value)}>
+              <select className="selectbar" value={selectedActions[index]} onChange={(e) => handleDropdownChange(index, e.target.value)}>
                   <option value="action">Action</option>
                   <option value="update">Update</option>
                   <option value="remove">Remove</option>
@@ -205,11 +241,11 @@ const ViewRoomWallpaper = () => {
               <Form.Group controlId="formBasicImage">
                 <Form.Label>Image</Form.Label>
                 <div className="mb-2">
-                  <img
+                  {/* <img
                     src={editedData.images instanceof Blob ? URL.createObjectURL(editedData.images) : ''}
                     alt="Image Preview"
                     style={{ width: '100px', height: '100px' }}
-                  />
+                  /> */}
                 </div>
                 <Form.Control
                   type="file"
