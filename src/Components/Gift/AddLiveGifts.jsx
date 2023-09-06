@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import "./AddLiveGifts.css";
 
 function AddLiveGifts() {
   const [coin, setCoin] = useState("");
@@ -9,26 +10,38 @@ function AddLiveGifts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("coin", coin);
-    data.append("name", name);
-    data.append("category_name", categoryName);
-    data.append("images", images);
+    if (!categoryName || !coin || !images.length) {
+      alert("Please fill in all required fields");
+      return;
+    }
 
-    const response = await fetch(
-      "https://use2fun.onrender.com/admin/gift/add",
-      {
-        method: "POST",
-        body: data,
+    const formDataToSend = new FormData();
+    formDataToSend.append("coin", coin);
+    formDataToSend.append("name", name);
+    formDataToSend.append("category_name", categoryName);
+    
+    for (let i = 0; i < images.length; i++) {
+      formDataToSend.append("images", images[i]);
+    }
+
+    try {
+      const response = await fetch(
+        "https://use2fun.onrender.com/admin/gift/add",
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        window.location.reload();
+      } else {
+        console.log("Error: " + response.status);
       }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      window.location.reload();
-    } else {
-      console.log("Error: " + response.status);
+    } catch (error) {
+      console.error("Error posting data:", error);
     }
   };
 
@@ -36,7 +49,7 @@ function AddLiveGifts() {
     setCoin("");
     setName("");
     setCategoryName("");
-    setImages("");
+    setImages([]);
     window.location.reload();
   };
 
@@ -46,14 +59,14 @@ function AddLiveGifts() {
         <h3>Add Live Gift</h3>
 
         <div className="innerdiv">
-          <label htmlFor="">Category List:</label> <br />
           <input
             className="input"
             type="text"
             name=""
             id=""
-            placeholder="Please Select category"
+            placeholder="Please add Gift"
             onChange={(e) => setCategoryName(e.target.value)}
+            value={categoryName}
           />
         </div>
         <div className="innerdiv">
@@ -65,10 +78,11 @@ function AddLiveGifts() {
             id=""
             placeholder="Title"
             onChange={(e) => setName(e.target.value)}
+            value={name}
           />
         </div>
         <div className="innerdiv">
-          <label htmlFor="">Coin* (days)*</label> <br />
+          <label htmlFor="">Coin*</label> <br />
           <input
             className="input"
             type="text"
@@ -76,6 +90,7 @@ function AddLiveGifts() {
             id=""
             placeholder="Coin"
             onChange={(e) => setCoin(e.target.value)}
+            value={coin}
           />
         </div>
         <div className="innerdiv">
@@ -89,24 +104,11 @@ function AddLiveGifts() {
             />
           </div>
         </div>
-        {/* <div className="innerdiv">
-          <label htmlFor="">Thumbnail* (MP4)</label>
-          <br />
-          <div className="input">
-            <input type="file" name="" id="" />
-          </div>
-        </div> */}
-        {/* <div className="innerdiv">
-          <label htmlFor="">Sound*</label> <br />
-          <div className="input">
-            <input type="file" name="" id="" />
-          </div>
-        </div> */}
         <div className="Button_div">
-          <button className="btn btn1" onClick={handleCancel}>
+          <button className="btn-btn1" onClick={handleCancel}>
             Cancel
           </button>
-          <button className="btn btn2" onClick={handleSubmit}>
+          <button className="btn-btn2" onClick={handleSubmit}>
             Submit
           </button>
         </div>
