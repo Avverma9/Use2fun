@@ -15,6 +15,7 @@ const ViewFrames = () => {
     price: '',
     level: '',
     day: '',
+    is_visible: false,
   });
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedActions, setSelectedActions] = useState([]);
@@ -31,7 +32,7 @@ const ViewFrames = () => {
       console.log("frame", jsonData.data)
       setSelectedActions(Array(jsonData.data.length).fill('action'));
     } catch (error) {
-      console.error("error fetching data" ,error)
+      console.error("error fetching data", error)
     }
   }
 
@@ -99,24 +100,25 @@ const ViewFrames = () => {
     } else {
       formDataToSend.append('images', editedData.previousImage);
     }
-  
+
     formDataToSend.append('price', editedData.price);
     formDataToSend.append('level', editedData.level);
     formDataToSend.append('day', editedData.day);
+    formDataToSend.append('is_visible', editedData.is_visible)
     console.log(editedData._id);
-  
+
     try {
       const response = await fetch(`https://use2fun.onrender.com/admin/frame/update/${editedData._id}`, {
         method: 'PUT',
         body: formDataToSend,
       });
-  
+
       if (!response.ok) {
         toast.error("Error while updating the data");
       } else {
         toast.success("Data Successfully edited");
       }
-  
+
       fetchData();
       setShowEditModal(false);
       setSelectedItem(null);
@@ -128,7 +130,7 @@ const ViewFrames = () => {
   const handleCloseEditModal = () => {
     setShowEditModal(false);
     setSelectedItem(null);
-    
+
     if (selectedItem !== null) {
       const updatedActions = [...selectedActions];
       updatedActions[selectedItem] = 'action';
@@ -149,9 +151,9 @@ const ViewFrames = () => {
 
 
   const handleEditFormChange = (e) => {
-    const { name, value, type, files } = e.target;
-    const newValue = type === 'file' ? files[0] : value;
-
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'file' ? e.target.files[0] : type === 'checkbox' ? checked : value;
+  
     setEditedData({
       ...editedData,
       [name]: newValue,
@@ -193,10 +195,10 @@ const ViewFrames = () => {
                 <td>{item.level}</td>
                 <td>{item.day}</td>
                 <td>
-                  <select  className={styles.viewframeselect} value={selectedActions[index]} onChange={(e) => handleDropdownChange(index, e.target.value)}>
-                  <option value="action">Action</option>
-                  <option value="update">Update</option>
-                  <option value="remove">Remove</option>
+                  <select className={styles.viewframeselect} value={selectedActions[index]} onChange={(e) => handleDropdownChange(index, e.target.value)}>
+                    <option value="action">Action</option>
+                    <option value="update">Update</option>
+                    <option value="remove">Remove</option>
                   </select>
                 </td>
               </tr>
@@ -208,7 +210,7 @@ const ViewFrames = () => {
           )}
         </tbody>
       </table>
-            {/* //Delete Modal  */}
+      {/* //Delete Modal  */}
       <Modal show={showRemoveModal} onHide={handleCloseRemoveModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
@@ -232,58 +234,69 @@ const ViewFrames = () => {
           <Modal.Title>Update Data</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
-              {/* Image */}
-              <Form.Group controlId="formBasicImage">
-                <Form.Label>Image</Form.Label>
-                <div className="mb-2">
-                  {/* <img
+          <Form>
+            {/* Image */}
+            <Form.Group controlId="formBasicImage">
+              <Form.Label>Image</Form.Label>
+              <div className="mb-2">
+                {/* <img
                     src={editedData.images instanceof Blob ? URL.createObjectURL(editedData.images) : ''}
                     alt="Image Preview"
                     style={{ width: '100px', height: '100px' }}
                   /> */}
-                </div>
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  name="images"
-                  onChange={handleEditFormChange}
-                />
-              </Form.Group>
-              {/* Price */}
-              <Form.Group controlId="formBasicDescription">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="price"
-                  placeholder="Enter Price"
-                  value={editedData.price}
-                  onChange={handleEditFormChange}
-                />
-              </Form.Group>
-              {/* level  */}
-              <Form.Group controlId="formBasicDescription">
-                <Form.Label>Level</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="level"
-                  placeholder="Enter level"
-                  value={editedData.level}
-                  onChange={handleEditFormChange}
-                />
-              </Form.Group>
-              {/* Duration */}
-              <Form.Group controlId="formBasicDescription">
-                <Form.Label>Duration</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="day"
-                  placeholder="Enter Duration"
-                  value={editedData.day}
-                  onChange={handleEditFormChange}
-                />
-              </Form.Group>
-            </Form>
+              </div>
+              <Form.Control
+                type="file"
+                accept="image/*"
+                name="images"
+                onChange={handleEditFormChange}
+              />
+            </Form.Group>
+            {/* Price */}
+            <Form.Group controlId="formBasicDescription">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                name="price"
+                placeholder="Enter Price"
+                value={editedData.price}
+                onChange={handleEditFormChange}
+              />
+            </Form.Group>
+            {/* level  */}
+            <Form.Group controlId="formBasicDescription">
+              <Form.Label>Level</Form.Label>
+              <Form.Control
+                type="number"
+                name="level"
+                placeholder="Enter level"
+                value={editedData.level}
+                onChange={handleEditFormChange}
+              />
+            </Form.Group>
+            {/* Duration */}
+            <Form.Group controlId="formBasicDescription">
+              <Form.Label>Duration</Form.Label>
+              <Form.Control
+                type="number"
+                name="day"
+                placeholder="Enter Duration"
+                value={editedData.day}
+                onChange={handleEditFormChange}
+              />
+            </Form.Group>
+
+            {/* Visible to user  */}
+            <Form.Group controlId="formBasicDescription">
+              <Form.Check
+                type="checkbox"
+                label="Show to user"
+                name="is_visible"
+                checked={editedData.is_visible}
+                onChange={handleEditFormChange}
+              />
+            </Form.Group>
+          </Form>
 
         </Modal.Body>
         <Modal.Footer>

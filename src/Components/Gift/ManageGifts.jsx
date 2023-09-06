@@ -63,7 +63,7 @@ function ManageGift() {
       console.log(selectedItemData._id, "Selected Id");
 
       try {
-        const response = await fetch(`https://use2fun.onrender.com/admin/appEntry/delete/${selectedItemData._id}`, {
+        const response = await fetch(`https://use2fun.onrender.com/admin/gift/delete/${selectedItemData._id}`, {
           method: 'DELETE',
         });
 
@@ -99,7 +99,7 @@ function ManageGift() {
     formDataToSend.append('coin', editedData.coin);
     console.log(editedData._id)
     try {
-      const response = await fetch(`https://use2fun.onrender.com/admin/appEntry/update/${editedData._id}`, {
+      const response = await fetch(`https://use2fun.onrender.com/admin/gift/update/${editedData._id}`, {
         method: 'PUT',
         body: formDataToSend,
       });
@@ -232,11 +232,11 @@ function ManageGift() {
               <Form.Group controlId="formBasicImage">
                 <Form.Label>Image</Form.Label>
                 <div className="mb-2">
-                  <img
+                  {/* <img
                     src={editedData.images instanceof Blob ? URL.createObjectURL(editedData.images) : ''}
                     alt="Image Preview"
                     style={{ width: '100px', height: '100px' }}
-                  />
+                  /> */}
                 </div>
                 <Form.Control
                   type="file"

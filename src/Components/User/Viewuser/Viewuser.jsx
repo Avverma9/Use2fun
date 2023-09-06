@@ -12,9 +12,10 @@ const Viewuser = () => {
   const { id } = useParams()
   const [badges, setBadges] = useState([]);
   const [previousIsActive, setPreviousIsActive] = useState(false);
-  const [liveBanData,setLiveBanData]=useState(false);
+  const [liveBanData, setLiveBanData] = useState(false);
+  const [selectedBadges, setSelectedBadges] = useState([]);
 
- 
+
 
 
 
@@ -27,11 +28,59 @@ const Viewuser = () => {
       const jsonData = await response.json();
       setBadges(jsonData.data);
       console.log("Fetched Badges:", jsonData.data);
+      setSelectedBadges(jsonData.data.badges || []);
     } catch (error) {
       console.error("Error fetching badges:", error);
     }
   };
 
+
+  const handleBadgeCheckboxChange = (badgeName) => {
+    setSelectedBadges((prevSelectedBadges) => {
+      if (prevSelectedBadges.includes(badgeName)) {
+        return prevSelectedBadges.filter((name) => name !== badgeName);
+      } else {
+        return [...prevSelectedBadges, badgeName];
+      }
+    });
+  };
+  
+  useEffect(() => {
+    if (data) {
+      const userBadges = data.badges || [];
+      setSelectedBadges(userBadges);
+    }
+  }, [data]);
+
+  console.log(selectedBadges, "SELECTED CHECKBOX")
+  
+
+  const handleUpdateBadges = async () => {
+    try {
+      const response = await fetch("https://use2fun.onrender.com/admin/user/badges", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: id,
+          badges: selectedBadges,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const updatedData = await response.json();
+      setData(updatedData.data);
+      console.log("User badges updated:", updatedData.data);
+      toast.success("Badges updated successfully");
+    } catch (error) {
+      console.error("Error updating badges:", error);
+      toast.error("Error updating badges");
+    }
+  };
 
   const handleRemoveDP = async () => {
     try {
@@ -207,17 +256,26 @@ const Viewuser = () => {
                   </label>
                 </label>
               </div>
-              <div className="user-badges">
-                <label htmlFor="user-badges">
-                  Badges
-                  <select name="user-badges" id="user-badges">
-                    <option value="badges">Select Badges</option>
-                    {badges?.map(badge => (
-                      <option key={badge._id} value={badge.name}>{badge.name}</option>
-                    ))}
-                  </select>
-                </label>
+              <div className="badgesdiv">
+                Badges
+                {/* <label>Badges</label> */}
+                <div className="user-badges">
+                {badges?.map(badge => (
+          <div key={badge._id}>
+            <input
+              type="checkbox"
+              id={`badge-${badge._id}`}
+              value={badge.name}
+              checked={selectedBadges.includes(badge.name)}
+              onChange={() => handleBadgeCheckboxChange(badge.name)}
+            />
+            <label htmlFor={`badge-${badge._id}`}>{badge.name}</label>
+                    </div>
+                  ))}
+                </div>
+                <button className="updateBadgebtn" onClick={handleUpdateBadges}>Update Badges</button>
               </div>
+
               {/* <div className="live-hotlist">
                 <label htmlFor="live-hotlist">
                   Live Hotlist
@@ -289,8 +347,8 @@ const Viewuser = () => {
                   Live(Ban/Unban)
                   <label class="switch">
                     <input type="checkbox"
-                    checked={data ? data.is_active_live : false}
-                    onChange={handleBanLive}
+                      checked={data ? data.is_active_live : false}
+                      onChange={handleBanLive}
                     />
                     <span class="slider round"></span>
                   </label>

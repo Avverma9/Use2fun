@@ -33,27 +33,27 @@ const AddFrames = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!formData.image){
+    if (!formData.image) {
       toast.error("Please add a Image")
       return
     }
 
-    if(!formData.thumbnail){
+    if (!formData.thumbnail) {
       toast.error("Please add a Thumbnail")
       return
     }
 
-    if(!formData.level){
+    if (!formData.level) {
       toast.error("Please add Level")
       return
     }
 
-    if(!formData.price){
+    if (!formData.price) {
       toast.error("Please add Price")
       return
     }
 
-    if(!formData.day){
+    if (!formData.day) {
       toast.error("Please add Validity")
       return
     }
@@ -72,6 +72,11 @@ const AddFrames = () => {
     formDataToSend.append('level', formData.level);
     formDataToSend.append('price', formData.price);
     formDataToSend.append('day', formData.day);
+
+    const checkboxElement = document.querySelector('input[type="checkbox"]');
+    const is_visible = checkboxElement.checked;
+  
+    formDataToSend.append('is_visible', is_visible);
 
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/frame/add', {
@@ -133,6 +138,11 @@ const AddFrames = () => {
           value={formData.day}
           onChange={handleInputChange}
         />
+
+        <label style={{ display: 'inline-flex', alignItems: 'center', marginRight: '500px' }}>
+          Show this to user?
+          <input type="checkbox" style={{ margin: '0', padding: '0' }} />
+        </label>
 
         <div className={styles.btn}>
           <button type="button" className={styles.cancelbtn}>Cancel</button>

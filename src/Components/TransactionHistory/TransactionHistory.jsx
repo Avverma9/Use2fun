@@ -38,7 +38,7 @@ const TransactionHistory = () => {
         <tr key={index}>
           <td>{transaction.sr}</td>
           <td>
-            <img className={styles.profile_img} src={transaction.image} alt="Profile-pic" />
+            <img className={styles.images} src={transaction.image} alt="Profile-pic" />
           </td>
           
             <td>{transaction.name}</td>
