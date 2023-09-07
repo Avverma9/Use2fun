@@ -29,7 +29,7 @@ const AgentPanel = () => {
   };
 
   const handleLogout = () => {
-    localStorage.setItem("AgentSignIn",false);
+   
     localStorage.removeItem("AgentLoginData");
     navigate("/agent/login");
   };

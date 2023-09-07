@@ -56,7 +56,7 @@ const AgentLogin = () => {
           toast.success("Login Successful");
           navigate("/agent-panel", { state: emailResponse.data });
         } else {
-          toast.error("Login Failed");
+          toast.error("Login Failed")
         }
       } catch (error) {
         console.error("API Request Error:", error);
