@@ -25,7 +25,7 @@ const ViewSubAdmin = () => {
         }
         const jsonData = await response.json();
           setData(jsonData.data); 
-          console.log("Fetched Data:", jsonData.data);
+          // console.log("Fetched Data:", jsonData.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,33 +71,29 @@ const ViewSubAdmin = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       return (
         <>
-        {dataArray.map((item, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>
-              { <img className="images" src={item.images[0] || {avatarImg}} alt='images' />}
-            </td>
-            <td>{item.userId ? item.userId.name : 'N/A'}</td>
-            <td>{item.userId || 'N/A'}</td>
-            <td>{item.email || "N/A"}</td>
-            <td>{ item.mobile || 'N/A'}</td>
-            <td>{item.coins || 'N/A'}</td>
-            <td>{item.role || "N/A"}</td>
-            <td>{item.status || 'N/A'}</td>
-            <td>
-              <select
-                className='select-viewsubadmin'
-                // onChange={() => handleUpdateClick(item)}
-                value={selectedUser === item ? 'update' : 'action'}
-              >
-                <option value="action">Action</option>
-                <option value="update">Update</option>
-                <option value="remove">Remove</option>
-              </select>
-            </td>
-          </tr>
-        ))}
-      </>
+          {dataArray.map((item, index) => {
+            const userDetails = item.userDetails[0];
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>
+                  {userDetails && userDetails.images[0] ? (
+                    <img className="images" src={userDetails.images[0]} alt="images" />
+                  ) : (
+                    <div>No Image</div>
+                  )}
+                </td>
+                <td>{userDetails ? userDetails.name : 'N/A'}</td>
+                <td>{item.userId || 'N/A'}</td>
+                <td>{item.email || "N/A"}</td>
+                <td>{item.mobile || 'N/A'}</td>
+                <td>{userDetails ? userDetails.coins : 'N/A'}</td>
+                <td>{item.role || "N/A"}</td>
+                <td>{userDetails.status || 'N/A'}</td>
+              </tr>
+            );
+          })}
+        </>
       );
     } else {
       return (
@@ -109,6 +105,7 @@ const ViewSubAdmin = () => {
       );
     }
   };
+  
 
   return (
     <div className="main">
@@ -138,7 +135,7 @@ const ViewSubAdmin = () => {
             <th>Total Coins</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Action</th>
+            {/* <th>Action</th> */}
           </tr>
         </thead>
         <tbody>{renderTableRows()}</tbody>

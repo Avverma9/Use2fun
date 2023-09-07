@@ -27,34 +27,34 @@ const UserVideoReport = () => {
 
   console.log(data, "data")
 
-  const tableData = [
-    { id: 1, UserName:"Janem",reportUserName:"xyx",report:"qwe",date:"12/65/44",video:"www.hgfff.com" },
+  // const tableData = [
+  //   { id: 1, UserName:"Janem",reportUserName:"xyx",report:"qwe",date:"12/65/44",video:"www.hgfff.com" },
 
-  ];
+  // ];
 
 
-  // const renderTableRows = () => {
-  //   return tableData.map((row) => (
-  //     <tr key={row.id}>
-  //       <td>{row.id}</td>
-  //       <td>{row.UserName}</td>
-  //       <td>{row.reportUserName}</td>
-  //       <td>{row.report}</td>
-  //       <td>{row.date}</td>
-  //       <td>{row.video}</td>
-  //       <td>
-  //         <select
-  //           // onChange={() => handleUpdateClick(row)}
-  //           // value={selectedUser === row ? 'update' : 'action'}
-  //         >
-  //           <option value="action">Action</option>
-  //           <option value="update">Update</option>
-  //           <option value="remove">Remove</option>
-  //         </select>
-  //       </td>
-  //     </tr>
-  //   ));
-  // };
+  const renderTableRows = () => {
+    return data.map((row) => (
+      <tr key={row.id}>
+        <td>{row.id}</td>
+        <td>{row.UserName}</td>
+        <td>{row.reportUserName}</td>
+        <td>{row.report}</td>
+        <td>{row.date}</td>
+        <td>{row.video}</td>
+        <td>
+          <select
+            // onChange={() => handleUpdateClick(row)}
+            // value={selectedUser === row ? 'update' : 'action'}
+          >
+            <option value="action">Action</option>
+            <option value="update">Update</option>
+            <option value="remove">Remove</option>
+          </select>
+        </td>
+      </tr>
+    ));
+  };
 
   return (
     <div className={styles.main}>
@@ -72,7 +72,7 @@ const UserVideoReport = () => {
             <th>Action</th>
           </tr>
         </thead>
-        {/* <tbody>{renderTableRows()}</tbody> */}
+        <tbody>{renderTableRows()}</tbody>
       </table>
 
 

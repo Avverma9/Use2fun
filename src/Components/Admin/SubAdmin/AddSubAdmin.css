@@ -49,6 +49,7 @@
 
 }
 .subadmin-btn{
+    margin-top: 40px;
     display: flex;
     gap: 20%;
 }
@@ -57,3 +58,7 @@ select{
     width: 35%;
     padding: 10px;
 }
+
+/* .selectadminSub{
+    width: 100%;
+} */

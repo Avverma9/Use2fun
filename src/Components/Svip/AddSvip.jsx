@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function AddSvip() {
+  const [loading, setLoading] = useState(false); 
   const [formData, setFormData] = useState({
     svip: null,
     thumbnail: null,
@@ -73,6 +74,7 @@ function AddSvip() {
 
 
     try {
+      setLoading(true); 
       const response = await fetch('https://use2fun.onrender.com/admin/svip/add', {
         method: 'POST',
         body: formDataToSend,
@@ -88,6 +90,8 @@ function AddSvip() {
       }
     } catch (error) {
       console.error('Error adding SVIP:', error);
+    }  finally {
+      setLoading(false); 
     }
   };
 
@@ -127,6 +131,7 @@ function AddSvip() {
         <button className='btn-btn1'>Cancel</button>
         <button  type="submit" className='btn-btn2'>Submit</button>
       </div>
+      {loading && <h2 className="loading">Uploading Please wait...</h2>} 
     </form>
   )
 }

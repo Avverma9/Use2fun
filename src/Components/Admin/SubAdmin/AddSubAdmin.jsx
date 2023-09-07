@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import "./AddSubAdmin.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 const AddSubAdmin = () => {
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [selectedAdmin, setSelectedAdmin] = useState('');
   const [formData, setFormData] = useState({
     userId: '',
     email: '',
@@ -12,6 +15,29 @@ const AddSubAdmin = () => {
     aadharFront: null,
     aadharBack: null,
   });
+
+
+    //Admin 
+    useEffect(() => {
+      fetch('https://use2fun.onrender.com/admin/adminUser/getall')
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 1) {
+            setAdminUsers(data.data);
+          } else {
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching admin users:', error);
+        });
+    }, []);
+
+
+    //handleAdmin change
+    const handleAdminChange = (e) => {
+      setSelectedAdmin(e.target.value);
+    };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -76,6 +102,7 @@ const AddSubAdmin = () => {
     formDataToSend.append('email', formData.email);
     formDataToSend.append('mobile', formData.mobile);
     formDataToSend.append('role', formData.role);
+    formDataToSend.append('admin', selectedAdmin);
 
     try {
       const response = await fetch('https://use2fun.onrender.com/admin/make/subAdminUser', {
@@ -132,7 +159,7 @@ const AddSubAdmin = () => {
         >
           <option value="">Select Role</option>
           <option value="subadmin">Subadmin</option>
-          <option value="admin">Admin</option>
+          {/* <option value="admin">Admin</option> */}
         </select>
 
         <label>AadharCard Front/ID-Proof</label>
@@ -148,6 +175,17 @@ const AddSubAdmin = () => {
           name="aadharBack"
           onChange={handleFileChange}
         />
+
+              {/* //Admin  */}
+              <label>Admin</label>
+        <select className="selectadminSub" name="admin" value={selectedAdmin} onChange={handleAdminChange}>
+          <option value="">Select an admin</option>
+          {adminUsers.map(admin => (
+            <option key={admin.userId} value={admin.userId}>
+              {admin.userDetails.map(user => user.name).join(', ')}
+            </option>
+          ))}
+        </select>
 
         <div className="subadmin-btn">
           <button type="button" className="cancelbtn">Cancel</button>

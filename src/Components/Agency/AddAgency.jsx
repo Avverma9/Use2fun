@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const AddAgency = () => {
   const [adminUsers, setAdminUsers] = useState([]);
   const [selectedAdmin, setSelectedAdmin] = useState('');
+  const [subadminUsers, setSubAdminUsers] = useState([]);
+  const [selectedsubAdmin, setSelectedsubAdmin] = useState('');
+
   const [formData, setFormData] = useState({
     userId: '',
     name: '',
@@ -16,7 +19,7 @@ const AddAgency = () => {
     aadhar_back: null,
   });
 
-
+  //Admin 
   useEffect(() => {
     fetch('https://use2fun.onrender.com/admin/adminUser/getall')
       .then(response => response.json())
@@ -31,8 +34,30 @@ const AddAgency = () => {
       });
   }, []);
 
+  //Subadmin
+  useEffect(() => {
+    fetch('https://use2fun.onrender.com/admin/subAdminUser/getall')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 1) {
+          setSubAdminUsers(data.data);
+        } else {
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching SubAdmin users:', error);
+      });
+  }, []);
+
+
+
+
   const handleAdminChange = (e) => {
     setSelectedAdmin(e.target.value);
+  };
+
+  const handleSubAdminChange = (e) => {
+    setSelectedsubAdmin(e.target.value);
   };
 
   const handleInputChange = (e) => {
@@ -106,6 +131,7 @@ const AddAgency = () => {
       formDataToSend.append('images', formData.aadhar_back);
     }
     formDataToSend.append('admin', selectedAdmin);
+    formDataToSend.append('subadmin', selectedsubAdmin)
     formDataToSend.append('userId', formData.userId);
     formDataToSend.append('name', formData.name);
     formDataToSend.append('mobile', formData.mobile);
@@ -152,15 +178,30 @@ const AddAgency = () => {
           onChange={handleInputChange}
         />
 
+        {/* //Admin  */}
         <label>Admin</label>
         <select className={styles.selectadmin} name="admin" value={selectedAdmin} onChange={handleAdminChange}>
           <option value="">Select an admin</option>
           {adminUsers.map(admin => (
             <option key={admin.userId} value={admin.userId}>
-                   {admin.userDetails.map(user => user.name).join(', ')}
+              {admin.userDetails.map(user => user.name).join(', ')}
             </option>
           ))}
         </select>
+
+
+         {/* Subadmin  */}
+        <label>SubAdmin</label>
+        <select className={styles.selectadmin} name="subadmin" value={selectedsubAdmin} onChange={handleSubAdminChange}>
+          <option value="">Select an subadmin</option>
+          {subadminUsers.map(subadmin => (
+            <option key={subadmin.userId} value={subadmin.userId}>
+              {subadmin.userDetails.map(user => user.name).join(', ')}
+            </option>
+          ))}
+        </select>
+
+        
 
         <label>Email*</label>
         <input

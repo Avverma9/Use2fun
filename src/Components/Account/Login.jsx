@@ -10,6 +10,11 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
+    if (isLoggedIn) {
+        return null; 
+    }
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -31,9 +36,9 @@ const Login = () => {
             const data = await response.json();
 
             if (data.status === 1) {
-                toast.success("Login Successfull")
+                toast.success("Login Successful")
                 localStorage.setItem('MasterAdmintoken', data.data.token);
-                setIsLoggedIn(true);
+                setIsLoggedIn(true); 
                 navigate('/');
                 window.location.reload();
             } else {

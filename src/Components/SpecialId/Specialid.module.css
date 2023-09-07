@@ -28,3 +28,25 @@
     width: 150px;
     margin-top: 20px;
 }
+
+.images{
+    width: 60px;
+    height: 60px;
+}
+select{
+    width: 130px;
+}
+.addframebtn{
+  background-color: #058D9E;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+.viewframemain{
+    margin-top: 40px;
+}
+
+

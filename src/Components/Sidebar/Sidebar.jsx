@@ -31,6 +31,7 @@ import signout from "../../assets/icons/signout.png"
 
 import { useCollapse } from "react-collapsed";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const User = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -1081,7 +1082,7 @@ const Report = () => {
               <p>User report</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/manage-problem-report">
               {" "}
               <img src={reportIcon} alt="icon" srcset="" />
@@ -1089,8 +1090,8 @@ const Report = () => {
             <Link to="/manage-problem-report">
               <p>Manage Problem report</p>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link to="/user-video-report">
               {" "}
               <img src={reportIcon} alt="icon" srcset="" />
@@ -1098,7 +1099,7 @@ const Report = () => {
             <Link to="/user-video-report">
               <p>User Video report</p>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </>
@@ -1352,6 +1353,18 @@ const Signout = () => {
 const Sidebar = () => {
   const location = useLocation();
   const isAgentLoginRoute = location.pathname === '/agent/login' || location.pathname === '/agent-panel' || location.pathname === '/agent-ranking';
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("MasterAdmintoken");
+
+    if (token) {
+      setShowSidebar(true);
+    }
+  }, []);
+
+  console.log(showSidebar, "SideBAr")
+
 
 
   return (
@@ -1363,42 +1376,46 @@ const Sidebar = () => {
         <ul>
           {isAgentLoginRoute ? <Agent /> : (
             <>
-              <User />
-              <Host />
-              <Agency />
-              <Admin />
-              <SubAdmin />
-              <AppEntry />
-              <Shop />
-              <Frames />
-              <Vehicle />
-              <LockRoom />
-              <ChatBubble />
-              <Relationship />
-              <SpecialId />
-              <ExtraSeat />
-              <Svip />
-              <Vip />
-              <Banner />
-              <Gift />
-              <CoinSeller />
-              <MasterAdmin />
-              <MyLevel />
-              <TheTalent />
-              <Tags/>
-              <Report />
-              <TransactionHistory />
-              <Recharge />
-              <Account />
-              <Salary/>
-              <Signout/>
+              {showSidebar && (
+                <>
+                  <User />
+                  <Host />
+                  <Agency />
+                  <Admin />
+                  <SubAdmin />
+                  <AppEntry />
+                  <Shop />
+                  <Frames />
+                  <Vehicle />
+                  <LockRoom />
+                  <ChatBubble />
+                  <Relationship />
+                  <SpecialId />
+                  <ExtraSeat />
+                  <Svip />
+                  <Vip />
+                  <Banner />
+                  <Gift />
+                  <CoinSeller />
+                  <MasterAdmin />
+                  <MyLevel />
+                  <TheTalent />
+                  <Tags/>
+                  <Report />
+                  <TransactionHistory />
+                  <Recharge />
+                  <Account />
+                  <Salary/>
+                  <Signout/>
+                </>
+              )}
             </>
           )}
         </ul>
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;
 
