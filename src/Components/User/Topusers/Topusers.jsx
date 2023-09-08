@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Topusers.css";
 import Title from "../../common/Title";
+import usePagination from "../../Customhook/usePaginate";
 
 const Topusers = () => {
   const [data, setData] = useState(null);
+  const { currentPage, pageLimit, goToPage, changePageLimit } = usePagination();
+  const shouldShowPagination = data && data.length > 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,28 +25,42 @@ const Topusers = () => {
     fetchData();
   }, []);
 
+
+  const startIndex = (currentPage - 1) * pageLimit;
+  const endIndex = startIndex + pageLimit;
+  const visibleData = data && data.slice(startIndex, endIndex);
+
+  const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const getRandomDays = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
   return (
     <>
-      <Title title="Hotlist User" />
+      <Title title="Hostlist User" />
       <button className="hotlist-btn">Add Hot List User</button>
-      <table className="table table-borderless mt-3">
+      <table className="">
         <thead>
           <tr>
-            <th scope="col">Sr. No</th>
+            <th scope="">Sr. No</th>
             <th scope="col">Image</th>
             <th scope="col">Username</th>
-            <th scope="col">Email</th>
+            <th scope="col">Task</th>
+            <th scope="col">Day</th>
             <th scope="col">Phone</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           {data !== null
-            ? Object.values(data).map((userData, i) => (
+            ? Object.values(visibleData).map((userData, i) => (
                 <tr key={userData._id}>
                   <th scope="row">{i + 1}</th>
                   <td>
-                    <img
+                    <img 
                       src={userData.images && userData.images[0]}
                       alt="profile"
                       style={{
@@ -53,16 +70,48 @@ const Topusers = () => {
                     />
                   </td>
                   <td>{userData.name}</td>
-                  <td>N/A</td>
+                  <td>{getRandomNumber(10, 120)} mins</td>
+                  <td>{getRandomDays(1,5)}</td>
                   <td>{userData.mobile}</td>
                   <td>
-                    <button className="remove-btn">Remove</button>
+                    <button className="remove-btn">Make Payment ?</button>
                   </td>
                 </tr>
               ))
             : "Data Loading..."}
         </tbody>
       </table>
+       {/* //Pagination  */}
+       {shouldShowPagination && (
+      <div className="pagination">
+        <div className="pagination-controls">
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={endIndex >= data.length}
+          >
+            Next
+          </button>
+        </div>
+        <div className="page-limit-dropdown">
+          <select
+            value={pageLimit}
+            onChange={(e) => changePageLimit(Number(e.target.value))}
+          >
+            <option value={10}>10 per page</option>
+            <option value={20}>20 per page</option>
+            <option value={50}>50 per page</option>
+          </select>
+        </div>
+
+      </div>
+        )}
     </>
   );
 };

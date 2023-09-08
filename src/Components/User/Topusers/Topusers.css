@@ -8,12 +8,24 @@
 }
 
 .remove-btn {
-  background-color: var(--white) !important;
-  color: var(--secondarytext) !important;
+  /* background-color: var(--white) !important;
+  color: var(--secondarytext) !important; */
+  color: white;
+  background-color: #BF00ED;
   border: 1px solid var(--darkborder) !important;
   padding: 4px 8px;
   font-size: 14px;
+  width: 180px;
 }
-.tbody, td, tfoot, th, thead, tr{
-  width: 30%;
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
 }

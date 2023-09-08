@@ -4,12 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import usePagination from '../Customhook/usePaginate';
 
 const ViewAgency = () => {
+  const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const navigate = useNavigate();
+  const { currentPage, pageLimit, goToPage, changePageLimit } = usePagination();
+  const shouldShowPagination = data && data.length > 10;
+
 
   const [editedData, setEditedData] = useState({
     name: '',
@@ -19,6 +24,25 @@ const ViewAgency = () => {
 
   const [selectedActions, setSelectedActions] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+
+
+
+    // Pagination 
+    const startIndex = (currentPage - 1) * pageLimit;
+    const endIndex = startIndex + pageLimit;
+  
+    //Search
+    const filteredData = data ? data.filter(user => {
+      const searchTerm = searchInput.toLowerCase();
+      return (
+        user.name.toLowerCase().includes(searchTerm) ||
+        user.userId.toLowerCase().includes(searchTerm) ||
+        (user.email && user.email.toLowerCase().includes(searchTerm)) ||
+        (typeof user.mobile === "string" && user.mobile.toLowerCase().includes(searchTerm))
+      );
+    }):[];
+  
+    const visibleData = filteredData.slice(startIndex, endIndex);
 
   const fetchData = async () => {
     try {
@@ -149,7 +173,7 @@ const ViewAgency = () => {
 
   const renderTableRows = () => {
     if (data) {
-      return data.map((item, index) => (
+      return visibleData.map((item, index) => (
         <tr key={item.id}>
           <td>{index + 1}</td>
           <td>
@@ -184,7 +208,14 @@ const ViewAgency = () => {
       <h3>View Agency</h3>
       <div className="filter">
         <label>Search</label>
-        <input type="text" />
+        <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
 
         <label>Start Date</label>
         <input type="date" />
@@ -210,6 +241,37 @@ const ViewAgency = () => {
         </thead>
         <tbody>{renderTableRows()}</tbody>
       </table>
+          {/* //Pagination  */}
+          {shouldShowPagination && (
+      <div className="pagination">
+        <div className="pagination-controls">
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={endIndex >= data.length}
+          >
+            Next
+          </button>
+        </div>
+        <div className="page-limit-dropdown">
+          <select
+            value={pageLimit}
+            onChange={(e) => changePageLimit(Number(e.target.value))}
+          >
+            <option value={10}>10 per page</option>
+            <option value={20}>20 per page</option>
+            <option value={50}>50 per page</option>
+          </select>
+        </div>
+
+      </div>
+        )}
 
       {/* //Delete Modal */}
       <Modal show={showRemoveModal} onHide={handleCloseRemoveModal}>
@@ -240,6 +302,7 @@ const ViewAgency = () => {
               <Form.Control
                 type="text"
                 placeholder="Name"
+                maxLength={20}
                 value={editedData.name}
                 onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
               />
@@ -250,6 +313,7 @@ const ViewAgency = () => {
               <Form.Control
                 type="text"
                 placeholder="Enter email"
+                maxLength={25}
                 value={editedData.email}
                 onChange={(e) => setEditedData({ ...editedData, email: e.target.value })}
               />

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import './ViewSubAdmin.css';
 import avatarImg from "../../../assets/icons/avatar.png"
+import usePagination from '../../Customhook/usePaginate';
 
 const ViewSubAdmin = () => {
+
+
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [data,setData]=useState(null)
@@ -15,6 +18,9 @@ const ViewSubAdmin = () => {
     agencyBan: false,
     dpApprove: false,
   });
+  const [searchInput, setSearchInput] = useState("");
+  const { currentPage, pageLimit, goToPage, changePageLimit } = usePagination();
+  const shouldShowPagination = data && data.length > 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +40,36 @@ const ViewSubAdmin = () => {
   
     fetchData();
   }, []);
+
+   // Pagination 
+   const startIndex = (currentPage - 1) * pageLimit;
+   const endIndex = startIndex + pageLimit;
+ 
+   //Search
+   const filteredData = data ? data.filter(user => {
+    const searchTerm = searchInput.toLowerCase();
+    const userDetails = user.userDetails || {}; // Ensure userDetails is an object
+  
+    if (userDetails) {
+      const name = userDetails.name || "";
+      const userId = user.userId || "";
+      const email = user.email || "";
+      const mobile = typeof user.mobile === "string" ? user.mobile : "";
+      
+      if (
+        name.toLowerCase().includes(searchTerm) ||
+        userId.toLowerCase().includes(searchTerm) ||
+        email.toLowerCase().includes(searchTerm) ||
+        mobile.toLowerCase().includes(searchTerm)
+      ) {
+        return true; // Return true if any condition is met
+      }
+    }
+  
+    return false; // Return false if none of the conditions are met
+  }) : [];
+  
+ 
 
   console.log(data, "data")
 
@@ -68,10 +104,11 @@ const ViewSubAdmin = () => {
 
   const renderTableRows = () => {
     if (data) {
-      const dataArray = Array.isArray(data) ? data : [data];
+      const dataArray = Array.isArray(filteredData) ? filteredData : [filteredData];
+      const visibleData = dataArray.slice(startIndex, endIndex);
       return (
         <>
-          {dataArray.map((item, index) => {
+          {visibleData.map((item, index) => {
             const userDetails = item.userDetails[0];
             return (
               <tr key={index}>
@@ -112,7 +149,14 @@ const ViewSubAdmin = () => {
       <h3>Manage SubAdmin</h3>
       <div className="filter">
         <label>Search</label>
-        <input type="text" />
+        <input
+            type="text"
+            name="search"
+            id="search"
+            className="p-1"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
 
         <label>Start Date</label>
         <input type="date" />
@@ -140,6 +184,38 @@ const ViewSubAdmin = () => {
         </thead>
         <tbody>{renderTableRows()}</tbody>
       </table>
+
+          {/* //Pagination  */}
+          {shouldShowPagination && (
+      <div className="pagination">
+        <div className="pagination-controls">
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button className="pagination-btn"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={endIndex >= data.length}
+          >
+            Next
+          </button>
+        </div>
+        <div className="page-limit-dropdown">
+          <select
+            value={pageLimit}
+            onChange={(e) => changePageLimit(Number(e.target.value))}
+          >
+            <option value={10}>10 per page</option>
+            <option value={20}>20 per page</option>
+            <option value={50}>50 per page</option>
+          </select>
+        </div>
+
+      </div>
+        )}
 
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>

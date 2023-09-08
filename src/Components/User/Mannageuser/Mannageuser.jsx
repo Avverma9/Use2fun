@@ -9,8 +9,8 @@ import usePagination from "../../Customhook/usePaginate";
 
 const Mannageuser = () => {
   const navigate = useNavigate();
-  const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const { currentPage, pageLimit, goToPage, changePageLimit } = usePagination();
   const shouldShowPagination = data.length > 10;
 
