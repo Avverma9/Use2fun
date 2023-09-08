@@ -1,24 +1,4 @@
-.add-btn-b{
-    background: rgb(177, 177, 177);
-    border: none;
-    padding: 5px;
-    margin-left: 10px;
-    font-weight: 400;
-    font-size: 12px;
-    width: 100px;
-}
-.cancel-btn-a{
-    background-color: #058D9E;
-    
-    border: none;
-    padding: 10px;
-    
-    color: white;
-    font-weight: 501;
-    width: 150px;
-    margin-right: 10px;
-    margin-top: 20px;
-}
+
 .submit-btn-b{
     border: none;
     padding: 10px;
@@ -29,19 +9,9 @@
     margin-top: 20px;
 }
 
-.images{
-    width: 60px;
-    height: 60px;
-}
+
 select{
     width: 130px;
-}
-.addframebtn{
-  background-color: #058D9E;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
 }
 
 
@@ -49,4 +19,44 @@ select{
     margin-top: 40px;
 }
 
+form > input  {
+    width: 35%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+}
 
+/* Define a CSS class for your table */
+.table-style {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Style the table headers */
+  .table-style th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+  }
+  
+
+  .table-style tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+
+  .table-style td {
+    padding: 10px;
+  }
+  
+  .table-style th,
+  .table-style td {
+    padding-right: 20px;
+  }
+  
+  .table-style th:last-child,
+  .table-style td:last-child {
+    padding-right: 40px;
+  }

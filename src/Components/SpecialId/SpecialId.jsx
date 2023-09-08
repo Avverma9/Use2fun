@@ -108,7 +108,12 @@ const SpecialIdComp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    if (!specialIdData.id || !specialIdData.price || !specialIdData.day) {
+      toast.error("All fields are required");
+      return;
+    }
+  
     try {
       const response = await fetch("https://use2fun.onrender.com/admin/specialId/add", {
         method: 'POST',
@@ -117,7 +122,7 @@ const SpecialIdComp = () => {
         },
         body: JSON.stringify(specialIdData),
       });
-
+  
       if (!response.ok) {
         toast.error("Error while adding special ID")
       } else {
@@ -127,11 +132,13 @@ const SpecialIdComp = () => {
           price: '',
           day: '',
         });
+        fetchData()
       }
     } catch (error) {
       console.error("Error adding special ID:", error);
     }
   };
+  
 
 
   const handleUpdateSubmit = async () => {
@@ -202,8 +209,8 @@ const SpecialIdComp = () => {
     <div>
          <div>
         <h2>Special ID</h2>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <form onSubmit={handleSubmit}>
+        <div >
+          <form style={{display:"flex",flexDirection:"column"}} onSubmit={handleSubmit}>
             <p>Special Id</p>
             <input
               type="text"
@@ -241,7 +248,7 @@ const SpecialIdComp = () => {
       <h3>View Special Id</h3>
 
 
-      <table className={styles.table}>
+      <table className={styles['table-style']}>
         <thead>
           <tr>
             <th>Sr.</th>
